@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
+using System.Text.Json.Serialization;
 using Lib.DataBases;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
@@ -16,6 +17,8 @@ public class Account : Entity, IValidatableObject
     [Required] public string? Name { get; set; }
     [Required] public string? MiddleName { get; set; }
     public byte[]? Image { get; set; }
+    
+    // [JsonIgnore, InvisibleItem] public List<Exercise> Exercises { get; set; }
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
@@ -34,6 +37,7 @@ public class Account : Entity, IValidatableObject
     }
 
     #region May be later
+
     //TODO:  Придумать апгрейд валидации)
 //     public IEnumerable<ValidationResult> Validate2(ValidationContext validationContext)
 //     {

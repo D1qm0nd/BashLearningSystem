@@ -14,9 +14,10 @@ public class CommandAttribute : Entity, IBashCommandAttribute
     [Key] public Guid AttributeId { get; set; }
     [Required] public string? Text { get; set; }
     [Required] public string? Description { get; set; }
-
+    [Required] public Guid CommandId { get; set; }
+    
     #region Navigate properties
-
+    
     [JsonIgnore, InvisibleItem] public Command Command { get; set; }
 
     #endregion

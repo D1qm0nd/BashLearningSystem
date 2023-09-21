@@ -10,23 +10,26 @@ public class BashLearningContext : BaseDataContext<BashLearningContext>, IReposi
     public DbSet<Account> Accounts { get; set; }
     public DbSet<Command> Commands { get; set; }
     public DbSet<CommandAttribute> CommandAttributes { get; set; }
+    public DbSet<Exercise> Exercises { get; set; }
+    public DbSet<ExercisesHistory> ExercisesHistory { get; set; }
+    public DbSet<Quest> Quests { get; set; }
+    public DbSet<Theme> Themes { get; set; }
+
     
-    private static string envConnectionStringPropertyName;
+    private string envConnectionStringPropertyName = "BashLearningDB";
 
     public BashLearningContext()
     {
-        
     }
     
     public BashLearningContext(DbContextOptions<BashLearningContext> options) : base(options)
     {
-        envConnectionStringPropertyName = "BashLearningDB"; 
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
-
+        
         var connectionString = Environment.GetEnvironmentVariable(envConnectionStringPropertyName);
 
         if (connectionString == null)
@@ -47,6 +50,16 @@ public class BashLearningContext : BaseDataContext<BashLearningContext>, IReposi
     {
         this.SaveChanges();
         return 0;
+    }
+
+    public void Migrate()
+    {
+        this.Database.Migrate();
+    }
+
+    public void Drop()
+    {
+        this.Database.EnsureDeleted();
     }
 }
 

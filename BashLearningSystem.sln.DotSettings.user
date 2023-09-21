@@ -1,0 +1,46 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=519abfba_002Dfcfa_002D41dc_002D98d9_002D5dd7e2c15241/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="AccountValidate" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::5E529A46-5F27-48B9-921A-B2C5D66530BC::net6.0::Tests.DataModels.Tests.AccountValidate&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=6e60fa56_002Db8b1_002D49ea_002D9c99_002D42bb8760449b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="AccountValidate #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;Or&gt;
+    &lt;TestAncestor&gt;
+      &lt;TestId&gt;NUnit3x::5E529A46-5F27-48B9-921A-B2C5D66530BC::net6.0::Tests.DataModels.Tests.AccountValidate&lt;/TestId&gt;
+      &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.Tests.Test1&lt;/TestId&gt;
+      &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.Tests.PostgresTest&lt;/TestId&gt;
+      &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.Tests.MigrateOrCreateDB&lt;/TestId&gt;
+      &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.Tests.DropDB&lt;/TestId&gt;
+      &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.InsertEntityUnitTests.AddAccount&lt;/TestId&gt;
+      &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.InsertEntityUnitTests.AddCommand&lt;/TestId&gt;
+      &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.InsertEntityUnitTests.AddTheme&lt;/TestId&gt;
+      &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.InsertEntityUnitTests.AddAttribute&lt;/TestId&gt;
+      &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.InsertEntityUnitTests.AddExercise&lt;/TestId&gt;
+      &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.InsertEntityUnitTests.AddQuest&lt;/TestId&gt;
+      &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.InsertEntityUnitTests.AddCommandAttribute&lt;/TestId&gt;
+      &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.InsertEntityUnitTests.AddExerciseHistory&lt;/TestId&gt;
+      &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.InsertEntityUnitTests.TestGetAccounts&lt;/TestId&gt;
+      &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.InsertEntityUnitTests.TestGetCommands&lt;/TestId&gt;
+      &lt;TestId&gt;NUnit3x::4CB25C6F-8F61-423F-8518-D496A1F2F49A::net6.0::Tests.Tests.Test1&lt;/TestId&gt;
+    &lt;/TestAncestor&gt;
+    &lt;ProjectFile&gt;898272B2-7D47-4A8E-BCE1-743BE997A0C8/f:InsertEntityUnitTests.cs&lt;/ProjectFile&gt;
+  &lt;/Or&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f0e1ff6a_002D6f4e_002D424f_002D9980_002D0d84326ca654/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="AccountValidate #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::5E529A46-5F27-48B9-921A-B2C5D66530BC::net6.0::Tests.DataModels.Tests.AccountValidate&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.Tests.Test1&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.Tests.MigrateOrCreateDB&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.Tests.DropDB&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.InsertEntityUnitTests.TestGetCommands&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.InsertEntityUnitTests.AddAccount&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.InsertEntityUnitTests._8_GetThemes&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.InsertEntityUnitTests._6_AddQuest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.InsertEntityUnitTests._9_Add10Themes&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.InsertEntityUnitTests._2_AddTheme&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.InsertEntityUnitTests._7_AddExerciseHistory&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.InsertEntityUnitTests._1_AddAccount&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::4CB25C6F-8F61-423F-8518-D496A1F2F49A::net6.0::Tests.Tests.Test1&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

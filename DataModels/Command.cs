@@ -13,9 +13,11 @@ public class Command : Entity, IBashCommand
     [Key] public Guid CommandId { get; set; }
     [Required] public string? Text { get; set; }
     [Required] public string? Description { get; set; }
+    [Required] public Guid ThemeId { get; set; }
 
-    [JsonIgnore, InvisibleItem] private List<CommandAttribute> Attributes { get; set; }
-
+    [JsonIgnore, InvisibleItem] public List<CommandAttribute> Attributes { get; set; }
+    [JsonIgnore,InvisibleItem] public Theme Theme { get; set; }
+    
     public string GetFullDescription()
     {
         var stringBuilder = new StringBuilder();

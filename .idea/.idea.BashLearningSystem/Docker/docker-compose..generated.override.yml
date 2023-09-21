@@ -1,0 +1,24 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  WebApplication:
+    build:
+      context: "/home/d1qm0nd/RiderProjects/BashLearningSystem/WebApp.LearningSystem"
+      dockerfile: "Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net6.0/WebApp.LearningSystem.dll"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_STATICWEBASSETS: "/app/bin/Debug/net6.0/WebApp.LearningSystem.staticwebassets.runtime.CT.json"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+      NUGET_PACKAGES: "/home/d1qm0nd/.nuget/packages"
+      NUGET_FALLBACK_PACKAGES: "/home/d1qm0nd/.nuget/packages"
+    image: "webapp_bash_learning:dev"
+    ports: []
+    volumes:
+    - "/home/d1qm0nd/.nuget/packages:/root/.nuget/fallbackpackages"
+    - "/home/d1qm0nd/RiderProjects/BashLearningSystem/WebApp.LearningSystem:/app:rw"
+    - "/home/d1qm0nd/RiderProjects/BashLearningSystem:/src:rw"
+    working_dir: "/app"

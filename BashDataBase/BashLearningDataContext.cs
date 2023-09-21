@@ -1,4 +1,6 @@
+using DataModels;
 using Lib.DataBases;
+using Microsoft.EntityFrameworkCore;
 
 namespace BashDataBase;
 
@@ -10,7 +12,6 @@ public class BashLearningDataContext : IDataContext
     {
         Repository = new BashLearningContext();
     }
-    
     public void Dispose()
     {
         throw new NotImplementedException();

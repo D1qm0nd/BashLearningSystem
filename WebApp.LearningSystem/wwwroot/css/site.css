@@ -1,0 +1,53 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+.main-body {
+    margin-bottom: 60px;
+    background-image: url('bashBackground1.jpeg'); 
+    background-size: 100% 100%; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed;
+    height: inherit;
+}
+
+.main-container {
+    width: 100%;
+    display: flex;
+    flex-flow: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    /*flex-basis: fit-content;*/
+}
+
+.navigation-bar {
+    border-radius: 10px;
+    border-color: gray;
+    border-width: 4px;
+    border-style: inset;
+    background: lightgray;
+    align-content: center;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.main-footer {
+    border-color: gray;
+    border-width: 4px;
+    border-style: inset;
+    height: 40px;
+    background: lightgray;
+    align-content: center;
+    vertical-align: bottom;
+}

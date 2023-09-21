@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lib.DataBases.Exceptions;
 
 namespace Lib.DataBases
 {
@@ -17,12 +18,18 @@ namespace Lib.DataBases
             {
                 if (property.PropertyType == typeof(DbSet<T>))
                 {
-                    return property.GetValue(this) as DbSet<T>;
+                    var prop = (property.GetValue(this) as DbSet<T>);
+                    return prop;
                 }
             }
             return null;
         }
+        
         public int SaveRepositoryChanges();
+
+        public void Migrate();
+
+        public void Drop();
     }
 
 
