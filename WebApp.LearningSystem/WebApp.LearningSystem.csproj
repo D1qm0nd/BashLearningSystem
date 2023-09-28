@@ -11,6 +11,7 @@
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
+      <Content Remove="wwwroot\SiteWallPaper.jpeg" />
     </ItemGroup>
 
     <ItemGroup>
@@ -85,6 +86,15 @@
       <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.min.js" />
       <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.min.map" />
       <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\LICENSE.txt" />
+
+
+
+
+
+
+
+
+
 
 
 

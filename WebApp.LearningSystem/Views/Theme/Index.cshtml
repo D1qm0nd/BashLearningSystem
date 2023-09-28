@@ -1,34 +1,21 @@
 @using DataModels
-@using Microsoft.EntityFrameworkCore
 @model WebApp.LearningSystem.BussinesModels.BusinessViewModel
 
 @{
-    ViewBag.Title = "Темы";
+    ViewBag.Title = "Теория";
     Layout = "_Layout";
-    var themes = Model.ContextModel.DataContext.Repository.GetEntity<Theme>()
-        .Include(theme => theme.Commands)
-        .ThenInclude(command => command.Attributes).ToList();
+    var theme = Model.ContextModel
+                    .DataContext.Repository.GetEntity<Theme>()
+                        .FirstOrDefault(e => e.ThemeId == Model.CurrentThemeId);
+        // .Include(theme => theme.Commands)
+        // .ThenInclude(command => command.Attributes)
+        // .ToList();
+    int? a = null;
 }
 
 <div>
-    @foreach (var theme in themes)
+    @foreach (var command in theme.Commands)
     {
-        <h1>@theme.Name : </h1>
-        @if (theme.Commands != null)
-        {
-            @foreach (var command in theme.Commands)
-            {
-                <h2>@command.Text - @command.Description</h2>
-                @if (command.Attributes != null)
-                {
-                    <hr/>
-                    foreach (var attr in command.Attributes)
-                    {
-                        <h3>@attr.Text : @attr.Description </h3>
-                        <hr/>
-                    }
-                }
-            }
-        }
+        <h1>@command.Text</h1>
     }
 </div>

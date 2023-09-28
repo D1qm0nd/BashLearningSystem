@@ -1,7 +1,5 @@
 ﻿@using DataModels;
-@using Humanizer
 @using Microsoft.EntityFrameworkCore
-@using WebApp.LearningSystem.BussinesModels
 @using System.Globalization
 @model WebApp.LearningSystem.BussinesModels.BusinessViewModel;
 
@@ -21,7 +19,7 @@
 <div class="cards-container" style="height: 200px; ">
     @foreach (var theme in themes)
     {
-        <form method="get" class="card">
+        <form method="get" class="card" id="@theme.ThemeId">
             @if (history != null)
             {
                 @if (history.FirstOrDefault(e => e.Account == Model.AuthorizationModel.Account
@@ -33,7 +31,9 @@
             <h2>@theme.Name</h2>
             <a>Количество команд: @theme.Commands.Count</a>
             <p>Изменено: @theme.UpdatedUTC.ToLocalTime().ToString(CultureInfo.GetCultureInfo("ru-RU"))</p>
-            <a class="card-hyper-text" asp-controller="Home" asp-action="ReadTheme">Читать</a>
+            <a class="card-hyper-text" asp-route-id="@theme.ThemeId" asp-controller="Theme" asp-action="ReadTheme">Читать</a>
+            @* <a class="card-hyper-text" href="Theme/{@theme.ThemeId}">Читать</a> *@
+            @* <button type="submit" asp-route-id="@theme.ThemeId" asp-controller="Home" asp-action="ReadTheme"></button> *@
         </form>
     }
 </div>

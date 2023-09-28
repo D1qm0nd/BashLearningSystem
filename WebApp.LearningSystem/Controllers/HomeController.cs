@@ -11,18 +11,18 @@ namespace WebApp.LearningSystem.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private BusinessViewModel _bussinesViewModel;
+    private BusinessViewModel _businessViewModel;
     
 
-    public HomeController(ILogger<HomeController> logger, BusinessViewModel bussinesModel)
+    public HomeController(ILogger<HomeController> logger, BusinessViewModel businessModel)
     {
         _logger = logger;
-        _bussinesViewModel = bussinesModel;
+        _businessViewModel = businessModel;
     }
 
     public IActionResult Index()
     {
-        return View(_bussinesViewModel);
+        return View(_businessViewModel);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -31,11 +31,4 @@ public class HomeController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
-    [HttpGet]
-    public IActionResult ReadTheme(Theme? theme)
-    {
-        var a = theme;
-        return new OkResult();
-        // return Redirect("/Home");
-    }
 }

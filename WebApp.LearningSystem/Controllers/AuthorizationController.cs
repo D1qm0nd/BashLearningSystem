@@ -26,7 +26,7 @@ namespace WebApp.LearningSystem.Controllers
         {
             _businessViewModel.AuthorizationModel.Account = _businessViewModel.ContextModel.DataContext.Repository
                 .GetEntity<Account>().FirstOrDefault(acc => acc.Login == login && acc.Password == password);
-            return Redirect("/Home");
+            return Redirect("../Home");
         }
 
         // public IActionResult Login()

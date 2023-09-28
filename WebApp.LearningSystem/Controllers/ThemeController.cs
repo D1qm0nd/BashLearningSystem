@@ -8,7 +8,6 @@ public class ThemeController : Controller
 {
     private BusinessViewModel _businessModel;
 
-
     // GET
 
     public ThemeController(BusinessViewModel model)
@@ -19,13 +18,14 @@ public class ThemeController : Controller
     [HttpGet]
     public IActionResult Index()
     {
-        return View(_businessModel);
+        return View();
     }
 
-    // TODO: Theme by id
-    // public IActionResult Index(uint id)
-    // {
-    //     _businessModel.ThemeId = id;
-    //     return View(_businessModel);
-    // }
+    [HttpGet("Theme/{id}")]
+    public IActionResult ReadTheme(Guid? id)
+    {
+        _businessModel.CurrentThemeId = id;
+        return View(_businessModel);
+    }
 }
+    

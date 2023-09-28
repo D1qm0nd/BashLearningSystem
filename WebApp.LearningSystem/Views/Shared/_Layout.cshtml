@@ -3,7 +3,7 @@
 @model WebApp.LearningSystem.BussinesModels.BusinessViewModel
 
 <!doctype html>
-<html lang="en" style="background: url('./arctic.jpg'); background-size: cover; background-repeat:no-repeat; background-attachment: fixed">
+<html lang="en" style="background: url('./arctic2.jpg'); background-size: cover; background-repeat:no-repeat; background-attachment: fixed">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -26,35 +26,6 @@
         <a class="layout-a" href="/Authorization">Вход</a>
     </nav>
 </header>
-@* <header class="header"> *@
-@*     <div class="nav"> *@
-@*         <ul class="menu-list menu-left"> *@
-@*             <li class="menu-item"> *@
-@*                 <a asp-controller="Home" asp-action="Index"> Главная </a> *@
-@*             </li> *@
-@*             <li class="menu-item"> *@
-@*                 <a asp-controller="Theme" asp-action="Index"> Темы </a> *@
-@*             </li> *@
-@*             @if ((Model.AuthorizationModel as IHaveAccount<Account>).isAuthorized) *@
-@*             { *@
-@*             <li class="menu-item"> *@
-@*                 <a>@Model.AuthorizationModel.Account.Name @Model.AuthorizationModel.Account.Surname</a> *@
-@*             </li> *@
-@*             } *@
-@*         </ul> *@
-@*         <a href="" class="logo"> *@
-@*             <img class="logo-img" src="~/Linux-Logo.png" alt="logo"> *@
-@*         </a> *@
-@*         <ul class="menu-list menu-right"> *@
-@*             <li class="menu-item"> *@
-@*                 <a  asp-controller="Register" asp-action="Index">Регистрация</a> *@
-@*             </li> *@
-@*             <li class="menu-item"> *@
-@*                 <a asp-controller="Authorization" asp-action="Index">Вход</a> *@
-@*             </li> *@
-@*         </ul> *@
-@*     </div> *@
-@* </header> *@
 <div class="container" >
     @RenderBody()
 </div>
