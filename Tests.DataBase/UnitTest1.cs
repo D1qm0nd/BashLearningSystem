@@ -15,6 +15,13 @@ public class Tests
     }
 
     [Test]
+    public void TestRepository()
+    {
+        var context = DbContextFactory<BashLearningDataContext>.CreateContext();
+        context.Repository.GetEntity<Theme>();
+    }
+
+    [Test]
     public void MigrateOrCreateDB()
     {
         var context = DbContextFactory<BashLearningDataContext>.CreateContext();
