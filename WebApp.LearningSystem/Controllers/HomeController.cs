@@ -1,7 +1,4 @@
 ﻿using System.Diagnostics;
-using BashDataBase;
-using DataModels;
-using Lib.DataBases;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.LearningSystem.BussinesModels;
 using WebApp.LearningSystem.Models;

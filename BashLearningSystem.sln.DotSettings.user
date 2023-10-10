@@ -4,7 +4,7 @@
     &lt;TestId&gt;NUnit3x::5E529A46-5F27-48B9-921A-B2C5D66530BC::net6.0::Tests.DataModels.Tests.AccountValidate&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=6e60fa56_002Db8b1_002D49ea_002D9c99_002D42bb8760449b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="AccountValidate #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=6e60fa56_002Db8b1_002D49ea_002D9c99_002D42bb8760449b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="AccountValidate #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;Or&gt;
     &lt;TestAncestor&gt;
       &lt;TestId&gt;NUnit3x::5E529A46-5F27-48B9-921A-B2C5D66530BC::net6.0::Tests.DataModels.Tests.AccountValidate&lt;/TestId&gt;
@@ -27,7 +27,7 @@
     &lt;ProjectFile&gt;898272B2-7D47-4A8E-BCE1-743BE997A0C8/f:InsertEntityUnitTests.cs&lt;/ProjectFile&gt;
   &lt;/Or&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f0e1ff6a_002D6f4e_002D424f_002D9980_002D0d84326ca654/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="AccountValidate #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f0e1ff6a_002D6f4e_002D424f_002D9980_002D0d84326ca654/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="AccountValidate #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;NUnit3x::5E529A46-5F27-48B9-921A-B2C5D66530BC::net6.0::Tests.DataModels.Tests.AccountValidate&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.Tests.Test1&lt;/TestId&gt;
@@ -43,5 +43,7 @@
     &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.InsertEntityUnitTests._1_AddAccount&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::4CB25C6F-8F61-423F-8518-D496A1F2F49A::net6.0::Tests.Tests.Test1&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.InsertEntityUnitTests._9_Add100CommandToLastTheme&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.InsertEntityUnitTests&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.Tests.TestRepository&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
