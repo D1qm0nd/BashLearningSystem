@@ -1,4 +1,5 @@
 # Веб-сайт для обучения работе в командной строке операционной системы Linux с возможностью  интерактивного  выполнения команд
+![penguin](https://github.com/D1qm0nd/BashLearningSystem/blob/main/WebApp.LearningSystem/wwwroot/Linux-Logo.png)
 - Диаграмма взаимодействий
 ``` mermaid
 sequenceDiagram
