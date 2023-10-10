@@ -1,30 +1,45 @@
-networks:
-  solution-bridge:
-    driver: bridge
+#networks:
+#  solution-bridge:
+#    driver: bridge
 
 services:
-  WebApplication:
-    image: ${DOCKER_REGISTRY-}webapp_bash_learning
+#  WebApplication:
+#    image: ${DOCKER_REGISTRY-}webapp_bash_learning
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    depends_on: 
+#      - PostgresDB
+#    ports: 
+#      - 14555:80
+    
+#    networks: 
+#      - solution-bridge
+#  
+  
+  server_application:
+    image: executor_image
+    container_name: executor
     build:
       context: .
-      dockerfile: Dockerfile
-    depends_on: 
-      - PostgresDB
-    ports: 
-      - 14555:80
-    
-    networks: 
-      - solution-bridge
+      dockerfile: ../BashExecutor/Dockerfile
+    restart: always
+    environment:
+      CURRENT_FOLDER: "/root"
+      COMMAND_EXECUTOR_PORT: "55555"
+    network_mode: host
+    ports:
+      - 55555
   
   PostgresDB:
-    image: postgres
+    image: postgres:14
     environment:
       POSTGRES_DB: BashLearningDB
       POSTGRES_USER: BashLearn
       POSTGRES_PASSWORD: BashLearn
-    restart: no
-    networks:
-      - solution-bridge
+    restart: always
+#    networks:
+#      - solution-bridge
     ports:
       - 5449:5432
     volumes:
