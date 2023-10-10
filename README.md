@@ -1,4 +1,4 @@
-# BashLearningSystem
+# Веб-сайт для обучения работе в командной строке операционной системы Linux с возможностью  интерактивного  выполнения команд
 ``` mermaid
 sequenceDiagram
     Actor User
