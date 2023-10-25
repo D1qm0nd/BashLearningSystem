@@ -35,8 +35,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "init_db", "init_db", "{B9D5
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InitialDataBase", "InitialDataBase\InitialDataBase.csproj", "{99B94A26-1DD6-47D9-82AE-CD04A10B8A4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp.LearningSystem", "WebApp.LearningSystem\WebApp.LearningSystem.csproj", "{F2BC882C-045B-4025-8C52-3BCCF8962AB5}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -100,9 +98,5 @@ Global
 		{99B94A26-1DD6-47D9-82AE-CD04A10B8A4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99B94A26-1DD6-47D9-82AE-CD04A10B8A4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99B94A26-1DD6-47D9-82AE-CD04A10B8A4B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F2BC882C-045B-4025-8C52-3BCCF8962AB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F2BC882C-045B-4025-8C52-3BCCF8962AB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F2BC882C-045B-4025-8C52-3BCCF8962AB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F2BC882C-045B-4025-8C52-3BCCF8962AB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

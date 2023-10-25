@@ -24,6 +24,7 @@ public class ThemeController : Controller
                 .ThenInclude(c => c.Attributes)
                     .FirstOrDefault(t => t.ThemeId == id);
         var view = View(_session);
+        view.ViewData["AccountData"] = _session?.Data?.FullName();
         view.ViewData["Theme"] = theme;
         view.ViewData["isAuthorized"] = _session.Data != null;
         return view;
