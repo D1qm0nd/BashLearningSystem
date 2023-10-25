@@ -16,6 +16,8 @@ public class Account : Entity, IValidatableObject
     [Required] public string? Surname { get; set; }
     [Required] public string? Name { get; set; }
     [Required] public string? MiddleName { get; set; }
+    
+    [Required] public bool isAdmin { get; set; }
     public byte[]? Image { get; set; }
     
     // [JsonIgnore, InvisibleItem] public List<Exercise> Exercises { get; set; }
@@ -35,6 +37,8 @@ public class Account : Entity, IValidatableObject
             errors.Add(new ValidationResult($"{nameof(MiddleName)} is incorrect"));
         return errors;
     }
+
+    public string FullName() => $"{this.Surname} {this.Name} {this.MiddleName}";
 
     #region May be later
 

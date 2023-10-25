@@ -1,13 +1,10 @@
 ﻿using System.Diagnostics;
 using System.Text;
-using CommandExecution.Enums;
 
 namespace CommandExecution;
 
 public class CommandExecutor
 {
-    public ExecutorSystem System { get; set; } = ExecutorSystem.UNIX;
-
     public string? _currentPath { get; init; }
     
     public CommandExecutor(string? currentPath=null)
@@ -19,28 +16,8 @@ public class CommandExecutor
     }
 
     public string ExecuteCommand(string command)
-    {
-        switch (System)
-        {
-            case ExecutorSystem.UNIX:
-                return ExecuteUnixCommand(command);
-            case ExecutorSystem.WINDOWS:
-                return ExecuteWindowsCommand();
-            case ExecutorSystem.MAC:
-                return ExecuteMacCommand();
-            default:
-                throw new InvalidOperationException();
-        }
-    }
-
-    private string ExecuteMacCommand()
-    {
-        throw new NotImplementedException();
-    }
-
-    private string ExecuteWindowsCommand()
-    {
-        throw new NotImplementedException();
+    { 
+        return ExecuteUnixCommand(command);
     }
 
     public string ExecuteUnixCommand(string command)

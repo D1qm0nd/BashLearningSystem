@@ -8,10 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// builder.Services.AddDbContext<BashLearningContext>(ServiceLifetime.Singleton);
+
 builder.Services.AddSingleton<BusinessViewModel>(
     new BusinessViewModel(
-        new AuthorizationModel(),
-        new ContextModel(DbContextFactory<BashLearningDataContext>.CreateContext())));
+        new AuthorizationModel(), 
+        new ContextModel(DbContextFactory<BashLearningContext>.CreateContext()))
+        );
 
 // builder.Services.AddTransient<BusinessViewModel>( (_) =>    
 //     new BusinessViewModel(

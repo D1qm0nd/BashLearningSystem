@@ -1,23 +1,24 @@
 # This is a generated file. Not intended for manual editing.
 services:
-  server_application:
+  WebApplication:
     build:
-      context: "/home/d1qm0nd/RiderProjects/BashLearningSystem/WebApp.LearningSystem"
-      dockerfile: "../BashExecutor/Dockerfile"
+      context: "/home/d1qm0nd/RiderProjects/BashLearningSystem/LearningSite.WebApp"
+      dockerfile: "Dockerfile"
       target: "base"
     command: []
     entrypoint:
     - "dotnet"
-    - "/app/bin/Debug/net6.0/BashExecutor.dll"
+    - "/app/bin/Debug/net6.0/LearningSite.WebApp.dll"
     environment:
-      DOTNET_ENVIRONMENT: "Development"
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_STATICWEBASSETS: "/app/bin/Debug/net6.0/LearningSite.WebApp.staticwebassets.runtime.CT.json"
       DOTNET_USE_POLLING_FILE_WATCHER: "true"
       NUGET_PACKAGES: "/home/d1qm0nd/.nuget/packages"
       NUGET_FALLBACK_PACKAGES: "/home/d1qm0nd/.nuget/packages"
-    image: "executor_image:dev"
+    image: "webapp_bash_learning:dev"
     ports: []
     volumes:
     - "/home/d1qm0nd/.nuget/packages:/root/.nuget/fallbackpackages"
-    - "/home/d1qm0nd/RiderProjects/BashLearningSystem/BashExecutor:/app:rw"
+    - "/home/d1qm0nd/RiderProjects/BashLearningSystem/LearningSite.WebApp:/app:rw"
     - "/home/d1qm0nd/RiderProjects/BashLearningSystem:/src:rw"
     working_dir: "/app"

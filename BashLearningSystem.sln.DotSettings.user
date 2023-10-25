@@ -1,4 +1,9 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3398ddec_002D718c_002D4007_002D9ff2_002D13f616f88418/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test1 #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::A2D23042-C916-42C8-9839-06104FB6B8B7::net6.0::Tests.Encrypting.Tests.Test1&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=519abfba_002Dfcfa_002D41dc_002D98d9_002D5dd7e2c15241/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="AccountValidate" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;NUnit3x::5E529A46-5F27-48B9-921A-B2C5D66530BC::net6.0::Tests.DataModels.Tests.AccountValidate&lt;/TestId&gt;
@@ -23,11 +28,22 @@
       &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.InsertEntityUnitTests.TestGetAccounts&lt;/TestId&gt;
       &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.InsertEntityUnitTests.TestGetCommands&lt;/TestId&gt;
       &lt;TestId&gt;NUnit3x::4CB25C6F-8F61-423F-8518-D496A1F2F49A::net6.0::Tests.Tests.Test1&lt;/TestId&gt;
+      &lt;TestId&gt;NUnit3x::A2D23042-C916-42C8-9839-06104FB6B8B7::net6.0::Tests.Encrypting.Tests.Test1&lt;/TestId&gt;
     &lt;/TestAncestor&gt;
     &lt;ProjectFile&gt;898272B2-7D47-4A8E-BCE1-743BE997A0C8/f:InsertEntityUnitTests.cs&lt;/ProjectFile&gt;
   &lt;/Or&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f0e1ff6a_002D6f4e_002D424f_002D9980_002D0d84326ca654/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="AccountValidate #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a7da741f_002D619a_002D4516_002Dab0d_002D491b890ba97a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;Or&gt;
+    &lt;TestAncestor&gt;
+      &lt;TestId&gt;NUnit3x::A2D23042-C916-42C8-9839-06104FB6B8B7::net6.0::Tests.Encrypting.Tests.Test1&lt;/TestId&gt;
+      &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.Tests.MigrateOrCreateDB&lt;/TestId&gt;
+    &lt;/TestAncestor&gt;
+    &lt;ProjectFile&gt;898272B2-7D47-4A8E-BCE1-743BE997A0C8/f:InsertEntityUnitTests.cs&lt;/ProjectFile&gt;
+    &lt;ProjectFile&gt;A2D23042-C916-42C8-9839-06104FB6B8B7/f:UnitTest1.cs&lt;/ProjectFile&gt;
+  &lt;/Or&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f0e1ff6a_002D6f4e_002D424f_002D9980_002D0d84326ca654/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="AccountValidate #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;NUnit3x::5E529A46-5F27-48B9-921A-B2C5D66530BC::net6.0::Tests.DataModels.Tests.AccountValidate&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.Tests.Test1&lt;/TestId&gt;
@@ -45,5 +61,13 @@
     &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.InsertEntityUnitTests._9_Add100CommandToLastTheme&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.InsertEntityUnitTests&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.Tests.TestRepository&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::A2D23042-C916-42C8-9839-06104FB6B8B7::net6.0::Tests.Encrypting.Tests.Test1&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::898272B2-7D47-4A8E-BCE1-743BE997A0C8::net6.0::Tests.DataBase.Tests.PostgresTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::A2D23042-C916-42C8-9839-06104FB6B8B7::net6.0::Tests.Encrypting.Tests.TestValues&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
-&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
+&lt;/SessionState&gt;</s:String>
+	
+	
+	
+	
+	</wpf:ResourceDictionary>

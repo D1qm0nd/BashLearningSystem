@@ -1,0 +1,25 @@
+@using DataModels
+@using Microsoft.EntityFrameworkCore
+@model ThemeViewModel
+
+@{
+    ViewBag.Title = "Теория";
+    Layout = "_Layout";
+    var theme = Model.Context.GetEntity<Theme>()
+        .Where(e => e.ThemeId == Model.Session.CurrentThemeId)
+        .Include(theme => theme.Commands)
+        .ThenInclude(command => command.Attributes).ToList().FirstOrDefault();
+}
+
+<div>
+    @foreach (var command in theme.Commands)
+    {
+        <h1>@command.Text - @command.Description</h1>
+        <hr/>
+        @foreach (var attr in command.Attributes)
+        {
+            <h2>@attr.Text - @attr.Description</h2>
+        }
+        <hr/>
+    }
+</div>

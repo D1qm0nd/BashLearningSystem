@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BashDataBase;
 
-public class BashLearningContext : BaseDataContext<BashLearningContext>, IRepository
+public class BashLearningContext : BaseDataContext<BashLearningContext>, IDataContext
 {
     public DbSet<Account> Accounts { get; set; }
     public DbSet<Command> Commands { get; set; }
@@ -14,7 +14,6 @@ public class BashLearningContext : BaseDataContext<BashLearningContext>, IReposi
     public DbSet<ExercisesHistory> ExercisesHistory { get; set; }
     public DbSet<Quest> Quests { get; set; }
     public DbSet<Theme> Themes { get; set; }
-
     
     private string envConnectionStringPropertyName = "BashLearningDB";
 
@@ -61,5 +60,6 @@ public class BashLearningContext : BaseDataContext<BashLearningContext>, IReposi
     {
         this.Database.EnsureDeleted();
     }
+
 }
 

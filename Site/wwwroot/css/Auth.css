@@ -1,0 +1,113 @@
+.authDiv {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.registerDiv {
+    display: flex;
+}
+
+.authForm {
+    max-width: 200px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+}
+
+.register-container {
+    margin: 0 auto;
+    max-width: 400px;
+    padding: 20px;
+    color: darkslateblue;
+    background-color: transparent;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.register-h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.auth-h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.register-form-group {
+    margin-bottom: 20px;
+}
+
+.register-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.register-button-container {
+    text-align: center;
+}
+
+.register-button-container button {
+    padding: 10px 20px;
+    background-color: deepskyblue;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.register-button-container button:hover {
+    background-color: blue;
+}
+
+.auth-container {
+    margin: 0 auto;
+    max-width: 400px;
+    padding: 20px;
+    color: darkslateblue;
+    background-color: transparent;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.auth-form-group {
+    margin-bottom: 20px;
+}
+
+auth-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.auth-button-container {
+    text-align: center;
+}
+
+.auth-button-container button {
+    padding: 10px 20px;
+    background-color: deepskyblue;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.auth-button-container button:hover {
+    background-color: blue;
+}

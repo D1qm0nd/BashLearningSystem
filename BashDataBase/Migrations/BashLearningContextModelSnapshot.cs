@@ -57,6 +57,9 @@ namespace BashDataBase.Migrations
                     b.Property<DateTime>("UpdatedUTC")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<bool>("isAdmin")
+                        .HasColumnType("boolean");
+
                     b.HasKey("AccountId");
 
                     b.ToTable("Accounts");
