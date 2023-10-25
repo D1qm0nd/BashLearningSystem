@@ -17,22 +17,22 @@ public class Tests
     [Test]
     public void TestRepository()
     {
-        var context = DbContextFactory<BashLearningDataContext>.CreateContext();
-        context.Repository.GetEntity<Theme>();
+        var context = DbContextFactory<BashLearningContext>.CreateContext() as IDataContext;
+        context.GetEntity<Theme>();
     }
 
     [Test]
     public void MigrateOrCreateDB()
     {
-        var context = DbContextFactory<BashLearningDataContext>.CreateContext();
-        context.Repository.Migrate();
+        var context = DbContextFactory<BashLearningContext>.CreateContext();
+        context.Migrate();
     }
 
     [Test]
     public void PostgresTest()
     {
-        var context = DbContextFactory<BashLearningDataContext>.CreateContext();
-        var acc = context.Repository.GetEntity<Account>().First();
+        var context = DbContextFactory<BashLearningContext>.CreateContext() as IDataContext;
+        var acc = context.GetEntity<Account>().First();
         acc.Image = new byte[] { 0, 12, 231, 132, 43, 22 };
         var query = acc.GetPostgresQuery();
     }
@@ -40,7 +40,7 @@ public class Tests
     [Test]
     public void DropDB()
     {
-        var context = DbContextFactory<BashLearningDataContext>.CreateContext();
-        context.Repository.Drop();
+        var context = DbContextFactory<BashLearningContext>.CreateContext();
+        context.Drop();
     }
 }

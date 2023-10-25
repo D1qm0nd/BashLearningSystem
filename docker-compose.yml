@@ -1,0 +1,51 @@
+version: "3.9"
+  
+#  ${DOCKER_REGISTRY-}
+services:
+  WebApplication:
+    image: webapp_bash_learning
+    build:
+      context: .
+      dockerfile: ./Site/Dockerfile
+    depends_on: 
+      - PostgresDB
+    environment:
+      ASPNETCORE_URLS: "http://+:12555"
+      BashLearningPrivateKey: "{\"Key\": [7,5,10,32,41],\"Alphabet\": \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!?@#$%^\u0026*()0123456789 \"}"
+      BashLearningDB: "host=localhost;Port=5432;Database=SystemDb;User Id=postgres;Password=postgres;"
+    network_mode: host
+
+#  server_application:
+#    image: ${DOCKER_REGISTRY-}executor_image
+#    container_name: executor
+#    build:
+#      context: .
+#      dockerfile: ../BashExecutor/Dockerfile
+#    restart: always
+#    environment:
+#      CURRENT_FOLDER: "/root"
+#      COMMAND_EXECUTOR_PORT: "55555"
+#    network_mode: host
+#    ports:
+#      - 55555
+   
+  PostgresDB:
+    image: postgres
+    environment:
+      POSTGRES_DB: SystemDb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    restart: always
+    network_mode: host
+    expose:
+      - 5449:5432
+    volumes:
+      - /home/
+        
+  db_init:
+    image: bash_learning_db_init
+    build:
+      context: .
+      dockerfile: InitialDataBase/Dockerfile
+    depends_on: 
+      - PostgresDB

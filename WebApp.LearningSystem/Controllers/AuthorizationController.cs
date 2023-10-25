@@ -20,7 +20,7 @@ namespace WebApp.LearningSystem.Controllers
 
         public IActionResult Login([Bind("Login")] string? login, [Bind("Password")] string? password)
         {
-            _businessViewModel.AuthorizationModel.Account = _businessViewModel.ContextModel.DataContext.Repository
+            _businessViewModel.AuthorizationModel.Account = _businessViewModel.ContextModel.DataContext
                 .GetEntity<Account>().FirstOrDefault(acc => acc.Login == login && acc.Password == password);
             return Redirect("../Home");
         }

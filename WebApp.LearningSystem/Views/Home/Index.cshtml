@@ -5,12 +5,12 @@
 
 @{
     ViewData["Title"] = "Home Page";
-    var themes = Model.ContextModel.DataContext.Repository.GetEntity<Theme>()
+    var themes = Model.ContextModel.DataContext.GetEntity<Theme>()
         .Include(nameof(Theme.Commands)).OrderBy(e => e.Name);
     IEnumerable<ExercisesHistory>? history = null;
     if (Model.AuthorizationModel.isAuthorized)
     {
-        history = Model.ContextModel.DataContext.Repository
+        history = Model.ContextModel.DataContext
             .GetEntity<ExercisesHistory>()
             .Include(nameof(ExercisesHistory.Exercise)).ToList();
     }

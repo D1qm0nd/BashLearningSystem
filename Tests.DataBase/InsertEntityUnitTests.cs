@@ -8,12 +8,12 @@ namespace Tests.DataBase;
 
 public class InsertEntityUnitTests
 {
-    private static BashLearningDataContext dataContext;
+    private static IDataContext dataContext;
 
     [SetUp]
     public void InitTests()
     {
-        dataContext = DbContextFactory<BashLearningDataContext>.CreateContext();
+        dataContext = BashLearningDbContextFactory.CreateContext();
     }
 
     #region Tests for Post
@@ -21,7 +21,7 @@ public class InsertEntityUnitTests
     [Test]
     public void _1_AddAccount()
     {
-        dataContext.Repository.GetEntity<Account>().Add(new Account()
+        dataContext.GetEntity<Account>().Add(new Account()
         {
             Name = "TestName", 
             Surname = "TestSurname", 
@@ -29,68 +29,68 @@ public class InsertEntityUnitTests
             Login = "TestLogin",
             Password = "TestPassword"
         });
-        dataContext.Repository.SaveRepositoryChanges();
+        dataContext.SaveRepositoryChanges();
     }
 
     [Test]
     public void _2_AddTheme()
     {
-        dataContext.Repository.GetEntity<Theme>().Add(new Theme() { Name = "TestTheme2" });
-        dataContext.Repository.SaveRepositoryChanges();
+        dataContext.GetEntity<Theme>().Add(new Theme() { Name = "TestTheme2" });
+        dataContext.SaveRepositoryChanges();
     }
 
     [Test]
     public void _3_AddCommand()
     {
-        var themeId = dataContext.Repository.GetEntity<Theme>()
+        var themeId = dataContext.GetEntity<Theme>()
             .OrderBy(e => e.CreatedUTC).Last().ThemeId;
-        dataContext.Repository.GetEntity<Command>().Add(new Command()
+        dataContext.GetEntity<Command>().Add(new Command()
             { Text = "TestCommand", Description = "TestDescriptions", ThemeId = themeId });
-        dataContext.Repository.SaveRepositoryChanges();
+        dataContext.SaveRepositoryChanges();
     }
 
     [Test]
     public void _4_AddCommandAttribute()
     {
-        var commandId = dataContext.Repository.GetEntity<Command>()
+        var commandId = dataContext.GetEntity<Command>()
             .OrderBy(e => e.CreatedUTC).Last().CommandId;
-        dataContext.Repository.GetEntity<CommandAttribute>().Add(new CommandAttribute()
+        dataContext.GetEntity<CommandAttribute>().Add(new CommandAttribute()
             { Text = "TestAttribute", Description = "TestDescription", CommandId = commandId });
-        dataContext.Repository.SaveRepositoryChanges();
+        dataContext.SaveRepositoryChanges();
     }
 
     [Test]
     public void _5_AddExercise()
     {
-        var theme = dataContext.Repository.GetEntity<Theme>()
+        var theme = dataContext.GetEntity<Theme>()
             .OrderBy(t => t.CreatedUTC).Last();
-        dataContext.Repository.GetEntity<Exercise>()
+        dataContext.GetEntity<Exercise>()
             .Add(new Exercise() { Name = "TestExercise", Text = "TestExercise" , ThemeId = theme.ThemeId});
-        dataContext.Repository.SaveRepositoryChanges();
+        dataContext.SaveRepositoryChanges();
     }
 
     [Test]
     public void _6_AddQuest()
     {
-        var exerciseId = dataContext.Repository.GetEntity<Exercise>()
+        var exerciseId = dataContext.GetEntity<Exercise>()
             .OrderBy(e => e.CreatedUTC).Last().ExerciseId;
-        var commandId = dataContext.Repository.GetEntity<Command>()
+        var commandId = dataContext.GetEntity<Command>()
             .OrderBy(e => e.CreatedUTC).Last().CommandId;
-        dataContext.Repository.GetEntity<Quest>().Add(new Quest()
+        dataContext.GetEntity<Quest>().Add(new Quest()
             { ExerciseId = exerciseId, Text = "TestQuest", Answer = "TestAnswer", CommandId = commandId });
-        dataContext.Repository.SaveRepositoryChanges();
+        dataContext.SaveRepositoryChanges();
     }
 
     [Test]
     public void _7_AddExerciseHistory()
     {
-        var accountId = dataContext.Repository.GetEntity<Account>()
+        var accountId = dataContext.GetEntity<Account>()
             .OrderBy(a => a.CreatedUTC).Last().AccountId;
-        var exerciseId = dataContext.Repository.GetEntity<Exercise>()
+        var exerciseId = dataContext.GetEntity<Exercise>()
             .OrderBy(e => e.CreatedUTC).Last().ExerciseId;
-        dataContext.Repository.GetEntity<ExercisesHistory>().Add(new ExercisesHistory()
+        dataContext.GetEntity<ExercisesHistory>().Add(new ExercisesHistory()
             { AccountId = accountId, ExerciseId = exerciseId, status = "In progress" });
-        dataContext.Repository.SaveRepositoryChanges();
+        dataContext.SaveRepositoryChanges();
     }
 
     #endregion

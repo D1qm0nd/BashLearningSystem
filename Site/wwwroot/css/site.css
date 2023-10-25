@@ -1,0 +1,16 @@
+html {
+  box-sizing: border-box;
+  /*background: url("~/Images/Background/arctic.jpg");*/
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}

@@ -1,0 +1,41 @@
+@using DataModels
+@model Session<Account>
+@{
+    if (Model != null)
+    {
+        if (Model.Data != null)
+            Layout = "AuthorizedLayout";
+        else Layout = "NotAuthorizedLayout";
+    }
+    var theme = ViewData["Theme"] as Theme; 
+}
+@* <html lang="en" style="background: url('./Images/Background/arctic.jpg'); background-size: cover; background-repeat:no-repeat; background-attachment: fixed"> *@
+@*     <link rel="stylesheet" href="~/css/theory_card.css"> *@
+@* </html> *@
+<div>
+    @if (theme == null) {
+        <p>Данная тема отсутствует</p>
+    }
+    else 
+    {
+        <p>@theme.Name</p>
+        @foreach (var command in theme.Commands)
+        {
+            <div class="theory_card">
+                <h2>@command.Text</h2>
+                <p>@command.Description</p>
+                @foreach (var attr in command.Attributes)
+                {
+                    <h2>@attr.Text</h2>
+                    <p>@attr.Description</p>
+                }
+                @* <h2>Пример использования</h2> *@
+                @* <ul> *@
+                @*     <li><a href="#">Пример 1</a></li> *@
+                @*     <li><a href="#">Пример 2</a></li> *@
+                @*     <li><a href="#">Пример 3</a></li> *@
+                @* </ul> *@
+            </div>
+        }
+    }
+</div>

@@ -5,7 +5,7 @@
     ViewBag.Title = "Теория";
     Layout = "_Layout";
     var theme = Model.ContextModel
-                    .DataContext.Repository.GetEntity<Theme>()
+                    .DataContext.GetEntity<Theme>()
                         .FirstOrDefault(e => e.ThemeId == Model.CurrentThemeId);
         // .Include(theme => theme.Commands)
         // .ThenInclude(command => command.Attributes)
