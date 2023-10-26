@@ -7,32 +7,36 @@
             Layout = "AuthorizedLayout";
         else Layout = "NotAuthorizedLayout";
     }
-    var theme = ViewData["Theme"] as Theme; 
+    var theme = ViewData["Theme"] as Theme;
 }
 <div>
-    @if (theme == null) {
+    @if (theme == null)
+    {
         <p>Данная тема отсутствует</p>
     }
-    else 
+    else
     {
-        <p>@theme.Name</p>
-        @foreach (var command in theme.Commands)
-        {
-            <div class="theory_card">
-                <h2>@command.Text</h2>
-                <p>@command.Description</p>
-                @foreach (var attr in command.Attributes)
-                {
-                    <h2>@attr.Text</h2>
-                    <p>@attr.Description</p>
-                }
-                @* <h2>Пример использования</h2> *@
-                @* <ul> *@
-                @*     <li><a href="#">Пример 1</a></li> *@
-                @*     <li><a href="#">Пример 2</a></li> *@
-                @*     <li><a href="#">Пример 3</a></li> *@
-                @* </ul> *@
-            </div>
-        }
+        <div class="container">
+            <p>@theme.Name</p>
+            @foreach (var command in theme.Commands)
+            {
+                <div class="theory_card">
+                    <h2 class="theory_command_header">@command.Text</h2>
+                    <p>@command.Description</p>
+                    @foreach (var attr in command.Attributes)
+                    {
+                        <hr/>
+                        <h3>@attr.Text</h3>
+                        <p>@attr.Description</p>
+                    }
+                    @* <h2>Пример использования</h2> *@
+                    @* <ul> *@
+                    @*     <li><a href="#">Пример 1</a></li> *@
+                    @*     <li><a href="#">Пример 2</a></li> *@
+                    @*     <li><a href="#">Пример 3</a></li> *@
+                    @* </ul> *@
+                </div>
+            }
+        </div>
     }
 </div>

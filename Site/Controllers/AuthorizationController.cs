@@ -45,4 +45,9 @@ public class AuthorizationController : Controller
     //     _businessViewModel.AuthorizationModel.Account = account;
     //     return Redirect("/Home");
     // }
+    public IActionResult Logout()
+    {
+        _session.Data = null;
+        return RedirectToAction("Index", "Home", _session);
+    }
 }

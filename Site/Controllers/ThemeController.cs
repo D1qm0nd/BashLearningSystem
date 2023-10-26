@@ -16,7 +16,7 @@ public class ThemeController : Controller
         _session = session;
     }
 
-    [HttpGet("Theory/{id}")]
+    [HttpGet("Theme/{id}")]
     public IActionResult Theory(Guid? id)
     {
         var theme = _context.Themes

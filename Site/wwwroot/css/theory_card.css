@@ -36,3 +36,7 @@ a {
 a:hover {
     text-decoration: none;
 }
+
+.theory_command_header {
+    color: snow;
+}

@@ -32,5 +32,7 @@ public class Tests
             Key = new[] { 7, 5, 10, 32, 41 },
             Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!?@#$%^&*()0123456789 ",
         });
+        //"{\"Key\":[7,5,10,32,41],\"Alphabet\":\"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!?@#$%^\u0026*()0123456789 \"}";
+
     }
 }

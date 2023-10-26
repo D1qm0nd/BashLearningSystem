@@ -1,7 +1,8 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3398ddec_002D718c_002D4007_002D9ff2_002D13f616f88418/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test1 #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3398ddec_002D718c_002D4007_002D9ff2_002D13f616f88418/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test1 #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;NUnit3x::A2D23042-C916-42C8-9839-06104FB6B8B7::net6.0::Tests.Encrypting.Tests.Test1&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::A2D23042-C916-42C8-9839-06104FB6B8B7::net6.0::Tests.Encrypting.Tests.TestValues&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=519abfba_002Dfcfa_002D41dc_002D98d9_002D5dd7e2c15241/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="AccountValidate" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
@@ -33,7 +34,7 @@
     &lt;ProjectFile&gt;898272B2-7D47-4A8E-BCE1-743BE997A0C8/f:InsertEntityUnitTests.cs&lt;/ProjectFile&gt;
   &lt;/Or&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a7da741f_002D619a_002D4516_002Dab0d_002D491b890ba97a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a7da741f_002D619a_002D4516_002Dab0d_002D491b890ba97a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;Or&gt;
     &lt;TestAncestor&gt;
       &lt;TestId&gt;NUnit3x::A2D23042-C916-42C8-9839-06104FB6B8B7::net6.0::Tests.Encrypting.Tests.Test1&lt;/TestId&gt;
