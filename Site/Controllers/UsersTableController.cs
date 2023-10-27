@@ -19,10 +19,9 @@ namespace Site.Controllers
         }
 
         // GET: UsersTable
-        [Route("Users")]
+        [Route("data/users")]
         public async Task<IActionResult> Index()
         {
-            var a = _session.Data;
             if (!isAdmin()) return KickAction();
 
             if (_context.Users != null)

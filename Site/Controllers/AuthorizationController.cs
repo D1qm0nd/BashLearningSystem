@@ -48,6 +48,6 @@ public class AuthorizationController : Controller
     public IActionResult Logout()
     {
         _session.Data = null;
-        return RedirectToAction("Index", "Home", _session);
+        return RedirectToAction("Index", "Home");
     }
 }
