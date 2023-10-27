@@ -1,9 +1,9 @@
 version: "3.9"
   
-#  ${DOCKER_REGISTRY-}
 services:
+
   WebApplication:
-    image: webapp_bash_learning
+    image: web_site
     container_name: site
     build:
       context: .
@@ -15,7 +15,7 @@ services:
       BashLearningPrivateKey: "{\"Key\":[7,5,10,32,41],\"Alphabet\":\"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!?@#$$%^\u0026*()0123456789 \"}"
       BashLearningDB: "host=localhost;Port=5432;Database=SystemDb;User Id=postgres;Password=postgres;"
     network_mode: host
-
+    
 #  server_application:
 #    image: ${DOCKER_REGISTRY-}executor_image
 #    container_name: executor
@@ -38,8 +38,6 @@ services:
       POSTGRES_PASSWORD: postgres
     restart: always
     network_mode: host
-#    expose:
-#      - 5449:5432
     volumes:
       - /home/
         

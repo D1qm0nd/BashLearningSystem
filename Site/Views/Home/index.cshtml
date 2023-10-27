@@ -1,17 +1,11 @@
 ﻿@using System.Globalization
-@using DataModels
-@model Session<Account>
+@using BashDataBaseModels
+@model Session<User>
 
 @{
     ViewData["Title"] = "Home Page";
-    if (Model != null)
-    {
-        if (Model.Data != null)
-            Layout = "AuthorizedLayout";
-        else Layout = "NotAuthorizedLayout";
-    }
     var themes = ViewData["ThemeList"] as List<Theme>;
-    var themesHistory = ViewData["ThemeHistory"] as List<ExercisesHistory>;
+    var themesHistory = ViewData["ThemeHistory"] as List<Read>;
 }
 @if (themes != null)
 {
@@ -21,7 +15,7 @@
             <form method="get" class="card" id="@theme.ThemeId">
                 @if (themesHistory != null)
                 {
-                    @if (themesHistory.FirstOrDefault(e => e.Exercise.ThemeId == theme.ThemeId) != null) ;
+                    @if (themesHistory.FirstOrDefault(read => read.ThemeId == theme.ThemeId) != null) ;
                     {
                         <img class="card-verifier" src="~/Images/verifyIcon.png" alt="verifyIcon">
                     }

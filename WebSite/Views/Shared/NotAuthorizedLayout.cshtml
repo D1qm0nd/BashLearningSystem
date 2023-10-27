@@ -4,24 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="~/css/Layout.css"/>
-    <link rel="stylesheet" href="~/css/card.css"/>
-    <link rel="stylesheet" href="~/css/Auth.css"/>
-    <link rel="stylesheet" href="~/css/theory_card.css"/>
+    <link rel="stylesheet" href="/css/Layout.css"/>
+    <link rel="stylesheet" href="/css/card.css"/>
+    <link rel="stylesheet" href="/css/Auth.css"/>
+    <link rel="stylesheet" href="/css/theory_card.css"/>
     <title>Document</title>
 </head>
 <body>
 <header class="layout-header">
-    <img src="~/Images/Logo/Logo.png" alt="Логотип" class="layout-logo">
-    <nav class="layout-navigation">
-        <a class="layout-a">
-            @ViewData["AccountData"]
-        </a>
-    </nav>
+    <img src="/Images/Logo/Logo.png" alt="Логотип" class="layout-logo">
     <nav class="layout-navigation">
         <a class="layout-a" href="/Home">Главная</a>
         <a class="layout-a" href="/Register">Регистрация</a>
-        <a class="layout-a" asp-controller="Authorization" asp-action="Logout">Выход</a>
+        <a class="layout-a" href="/Authorization"> Вход </a>
     </nav>
 </header>
 <div class="container">

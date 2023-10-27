@@ -1,4 +1,4 @@
-﻿using BashDataBase;
+﻿using BashLearningDB;
 using Lib.DataBases;
 
 namespace db_init
@@ -7,7 +7,9 @@ namespace db_init
     {
         public static void Main()
         {
-            DbContextFactory<BashLearningContext>.CreateContext().Migrate();
+            // new BashLearningContext().Drop();
+            new BashLearningContext().Migrate();
+            // DbContextFactory<BashLearningContext>.CreateContext().Migrate();
         }
     }
 }

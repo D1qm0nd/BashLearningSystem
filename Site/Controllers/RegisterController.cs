@@ -1,6 +1,7 @@
 using System.Text.Json;
-using BashDataBase;
-using DataModels;
+using BashDataBaseModels;
+using BashLearningDB;
+using BashLearningModelsValidate;
 using EncryptModule;
 using Microsoft.AspNetCore.Mvc;
 using Site;
@@ -12,9 +13,9 @@ namespace WebApp.LearningSystem.Controllers;
 public class RegisterController : Controller
 {
     private readonly BashLearningContext _context;
-    private readonly Session<Account> _session;
+    private readonly Session<User> _session;
 
-    public RegisterController(BashLearningContext context, Session<Account> session)
+    public RegisterController(BashLearningContext context, Session<User> session)
     {
         _session = session;
         _context = context;
@@ -30,7 +31,7 @@ public class RegisterController : Controller
 
 
     [HttpPost]
-    public IActionResult Index([Bind("Surname", "Name", "MiddleName", "Login", "Password")] Account account)
+    public IActionResult Index([Bind("Surname", "Name", "Middlename", "Login", "Password")] User user)
     {
         //TODO: Account existing check!!!
         // if (context.Repository.GetEntity<Account>().ToList().FirstOrDefault(account) == null)
@@ -44,10 +45,10 @@ public class RegisterController : Controller
         if (crypt_values == null)
             throw new ArgumentException("Check input data for correct");
         var cryptograph = new Cryptograph(key: crypt_values.Key, alphabet: crypt_values.Alphabet);
-        account.Password = cryptograph.Coding(account.Password); 
-        _context.Accounts.Add(account);
+        user.Password = cryptograph.Coding(user.Password);
+        _context.Register(new UserValidator(),user);
         _context.SaveRepositoryChanges();
-        _session.Data = account;
+        _session.Data = user;
         return new HomeController(null, _context, _session).Index();
         // }
     }

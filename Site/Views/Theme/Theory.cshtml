@@ -1,12 +1,6 @@
-@using DataModels
-@model Session<Account>
+@using BashDataBaseModels
+@model Session<BashDataBaseModels.User>
 @{
-    if (Model != null)
-    {
-        if (Model.Data != null)
-            Layout = "AuthorizedLayout";
-        else Layout = "NotAuthorizedLayout";
-    }
     var theme = ViewData["Theme"] as Theme;
 }
 <div>
