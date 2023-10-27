@@ -1,0 +1,55 @@
+.card {
+    margin: 5px;
+    width: 400px;
+    height: 500px;
+    background: linear-gradient(-45deg, lightblue, transparent);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+}
+
+.card h2 {
+    margin-bottom: 10px;
+    color: midnightblue;
+}
+
+.card p {
+    color: snow;
+}
+
+.cards-container {
+    height: 200px;
+    display: flex;
+    color: darkslateblue;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.card-hyper-text {
+    color: inherit;
+}
+
+.card-verifier {
+    height: 75px;
+    position: absolute;
+    margin-left: -220px;
+    margin-top: -40px;
+}
+
+.card-hyper-text:hover
+{
+    animation-name: HoverText;
+    animation-play-state: running;
+    animation-duration: 1s;
+    animation-fill-mode: backwards;
+    animation-timing-function: cubic-bezier(0,-0.02,.1,1.13)
+}
+
+@keyframes HoverText {
+    to {
+        font-size: 130%;
+        color: blueviolet;
+    }
+}

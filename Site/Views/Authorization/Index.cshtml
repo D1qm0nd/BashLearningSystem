@@ -1,14 +1,8 @@
 @using Microsoft.EntityFrameworkCore.Metadata.Internal
-@model Session<DataModels.Account>
+@model Session<BashDataBaseModels.User>
 
 @{
     ViewBag.Title = "Войти в систему";
-    if (Model != null)
-    {
-        if (Model.Data != null)
-            Layout = "AuthorizedLayout";
-        else Layout = "NotAuthorizedLayout";
-    }
 }
 <div class="auth-container">
         <h2 class="auth-h2">Вход пользователя</h2>

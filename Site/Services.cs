@@ -1,5 +1,5 @@
-using BashDataBase;
-using DataModels;
+using BashDataBaseModels;
+using BashLearningDB;
 
 namespace Site;
 
@@ -11,6 +11,6 @@ public static partial class Program
         builder.Services.AddControllersWithViews();
         builder.Services
             .AddDbContext<BashLearningContext>()
-            .AddSingleton(new Session<Account>());
+            .AddSingleton(new Session<User>());
     }
 }

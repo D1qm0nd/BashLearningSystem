@@ -1,16 +1,7 @@
-@using Microsoft.EntityFrameworkCore
-@using BashDataBase
-@using Lib.DataBases
-@model Session<DataModels.Account>
+@model Session<BashDataBaseModels.User>
 
 @{
     ViewBag.Title = "Регистрация";
-    if (Model != null)
-    {
-        if (Model.Data != null)
-            Layout = "AuthorizedLayout";
-        else Layout = "NotAuthorizedLayout";
-    }
 }
 
 <div class="register-container">

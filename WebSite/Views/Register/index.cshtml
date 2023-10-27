@@ -1,0 +1,43 @@
+@using Microsoft.EntityFrameworkCore
+@using BashDataBase
+@using Lib.DataBases
+@model Session<DataModels.Account>
+
+@{
+    ViewBag.Title = "Регистрация";
+    if (Model != null)
+    {
+        if (Model.Data != null)
+            Layout = "AuthorizedLayout";
+        else Layout = "NotAuthorizedLayout";
+    }
+}
+
+<div class="register-container">
+    <h2 class="register-h2">Регистрация пользователя</h2>
+    <form method="post">
+        <div class="register-form-group">
+            <label class="register-label" for="Login">Логин:</label>
+            <input type="text" id="Login" name="Login" required>
+        </div>
+        <div class="register-form-group">
+            <label class="register-label" for="Password">Пароль:</label>
+            <input type="password" id="Password" name="Password" required>
+        </div>
+        <div class="register-form-group">
+            <label for="Surname">Фамилия:</label>
+            <input type="text" id="Surname" name="Surname" required>
+        </div>
+        <div class="register-form-group">
+            <label for="Name">Имя:</label>
+            <input type="text" id="Name" name="Name" required>
+        </div>
+        <div class="register-form-group">
+            <label class="register-label" for="MiddleName">Отчество:</label>
+            <input type="text" id="MiddleName" name="MiddleName" required>
+        </div>
+        <div class="register-button-container">
+            <button type="submit" asp-action="Index">Зарегистрироваться</button>
+        </div>
+    </form>
+</div>

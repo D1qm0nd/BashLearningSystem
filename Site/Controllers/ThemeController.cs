@@ -1,5 +1,5 @@
-using BashDataBase;
-using DataModels;
+using BashDataBaseModels;
+using BashLearningDB;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,9 +8,9 @@ namespace Site.Controllers;
 public class ThemeController : Controller
 {
     private readonly BashLearningContext _context;
-    private readonly Session<Account> _session;
+    private readonly Session<User> _session;
 
-    public ThemeController(BashLearningContext context, Session<Account> session)
+    public ThemeController(BashLearningContext context, Session<User> session)
     {
         _context = context;
         _session = session;
