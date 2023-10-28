@@ -27,4 +27,31 @@ public abstract class PermissionNeededController : SessionNeededController
         return RedirectToAction("Index", "Home");
     }
 
+    public override ViewResult View()
+    {
+        var view = base.View();
+        view.ViewData["isAdmin"] = isAdmin();
+        return view;
+    }
+
+    public override ViewResult View(string? viewName)
+    {
+        var view = base.View(viewName);
+        view.ViewData["isAdmin"] = isAdmin();
+        return view;
+    }
+
+    public override ViewResult View(object? model)
+    {
+        var view = base.View(model);
+        view.ViewData["isAdmin"] = isAdmin();
+        return view;
+    }
+
+    public override ViewResult View(string? viewName, object? model)
+    {
+        var view = base.View(viewName, model);
+        view.ViewData["isAdmin"] = isAdmin();
+        return view;
+    }
 }

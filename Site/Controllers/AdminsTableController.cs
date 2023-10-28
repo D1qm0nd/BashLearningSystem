@@ -22,11 +22,8 @@ namespace Site.Controllers
         public async Task<IActionResult> Index()
         {
             if (!isAdmin()) return KickAction();
-
             var bashLearningContext = _context.Admins.Include(a => a.User);
-            var view = View(await bashLearningContext.ToListAsync());
-            view.ViewData["isAuthorized"] = _session.Data != null;
-            return view;
+            return View(await bashLearningContext.ToListAsync());
         }
 
         // GET: AdminsTableController/Details/5
@@ -47,9 +44,7 @@ namespace Site.Controllers
                 return NotFound();
             }
 
-            var view = View(admin);
-            view.ViewData["isAuthorized"] = _session.Data != null;
-            return view;
+            return View(admin);
         }
 
         // GET: AdminsTableController/Create
@@ -58,9 +53,7 @@ namespace Site.Controllers
             if (!isAdmin()) return KickAction();
 
             ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Login");
-            var view = View();
-            view.ViewData["isAuthorized"] = _session.Data != null;
-            return view;
+            return View();
         }
 
         // POST: AdminsTableController/Create
@@ -85,9 +78,7 @@ namespace Site.Controllers
 
             ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Login", admin.UserId);
             
-            var view = View(admin);
-            view.ViewData["isAuthorized"] = _session.Data != null;
-            return view;
+            return View(admin);
         }
 
         // GET: AdminsTableController/Edit/5
@@ -107,9 +98,7 @@ namespace Site.Controllers
             }
 
             ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Login", admin.UserId);
-            var view = View(admin);
-            view.ViewData["isAuthorized"] = _session.Data != null;
-            return view;
+            return View(admin);
         }
 
         // POST: AdminsTableController/Edit/5
@@ -131,6 +120,7 @@ namespace Site.Controllers
             {
                 try
                 {
+                    admin.CreatedUTC = admin.CreatedUTC.ToUniversalTime();
                     admin.UpdatedUTC = DateTime.UtcNow;
                     _context.Update(admin);
                     await _context.SaveChangesAsync();
@@ -172,9 +162,7 @@ namespace Site.Controllers
                 return NotFound();
             }
 
-            var view = View(admin);
-            view.ViewData["isAuthorized"] = _session.Data != null;
-            return view;
+            return View(admin);
         }
 
         // POST: AdminsTableController/Delete/5

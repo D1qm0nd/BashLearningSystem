@@ -110,7 +110,7 @@ namespace Site.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("UserId,Login,Password,Name,Surname,Middlename")] User user)
+        public async Task<IActionResult> Edit(Guid id, [Bind("UserId,Login,Password,Name,Surname,Middlename,CreatedUTC,UpdatedUTC")] User user)
         {
             if (!isAdmin()) return KickAction();
             if (id != user.UserId)
@@ -122,6 +122,7 @@ namespace Site.Controllers
             {
                 try
                 {
+                    user.CreatedUTC = user.CreatedUTC.ToUniversalTime();
                     user.UpdatedUTC = DateTime.UtcNow;
                     _context.Update(user);
                     await _context.SaveChangesAsync();

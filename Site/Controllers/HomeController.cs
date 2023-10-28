@@ -3,21 +3,18 @@ using BashDataBaseModels;
 using BashLearningDB;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Site.Controllers.Abstract;
 using Site.Models;
 
 namespace Site.Controllers;
 
-public class HomeController : Controller
+public class HomeController : PermissionNeededController
 {
     private readonly ILogger<HomeController> _logger;
-    private readonly BashLearningContext _context;
-    private readonly Session<User> _session;
 
-    public HomeController(ILogger<HomeController> logger, BashLearningContext context, Session<User> session)
+    public HomeController(ILogger<HomeController> logger, BashLearningContext context, Session<User> session) : base(context: context, session: session)
     {
         _logger = logger;
-        _context = context;
-        _session = session;
     }
 
     public IActionResult Index()
@@ -35,7 +32,6 @@ public class HomeController : Controller
         else
             view.ViewData["ThemeHistory"] = null;
         view.ViewData["ThemeList"] = themes;
-        view.ViewData["isAuthorized"] = _session.Data != null;
         return view;
     }
 

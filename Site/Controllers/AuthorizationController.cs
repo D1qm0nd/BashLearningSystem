@@ -3,27 +3,20 @@ using BashDataBaseModels;
 using BashLearningDB;
 using EncryptModule;
 using Microsoft.AspNetCore.Mvc;
+using Site.Controllers.Abstract;
 using Site.Exceptions;
 
 namespace Site.Controllers;
 
-public class AuthorizationController : Controller
+public class AuthorizationController : PermissionNeededController
 {
-    private readonly BashLearningContext _context;
-    private Session<User> _session;
-
-    public AuthorizationController(BashLearningContext context, Session<User> session)
+    public AuthorizationController(BashLearningContext context, Session<User> session) : base(context: context, session: session)
     {
-        _context = context;
-        _session = session;
     }
 
     public IActionResult Index()
     {
-        var view = View(_session);
-        view.ViewData["Context"] = _context;
-        view.ViewData["isAuthorized"] = _session.Data != null;
-        return view;
+        return View(_session);
     }
 
     public IActionResult Login([Bind("Login")] string? login, [Bind("Password")] string? password)

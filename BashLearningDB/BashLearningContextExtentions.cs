@@ -9,10 +9,11 @@ public static class BashLearningContextExtension
     {
         if (user == null)
             return false; 
-        return context.Admins
-            .Any(admin =>
+        var res = context.Admins
+            .FirstOrDefault(admin =>
                 admin.UserId == user.UserId
                 && admin.IsActual == true) != null;
+        return res;
     }
 
     public static bool Register(this BashLearningContext context, Validator<User> validator, User user)
