@@ -48,4 +48,12 @@
       <AdditionalFiles Include="Views\Register\index.cshtml" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\CommandsTable\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\CommandsTable\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\CommandsTable\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\CommandsTable\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\CommandsTable\Index.cshtml" />
+    </ItemGroup>
+
 </Project>

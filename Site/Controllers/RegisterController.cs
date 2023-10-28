@@ -6,27 +6,21 @@ using EncryptModule;
 using Microsoft.AspNetCore.Mvc;
 using Site;
 using Site.Controllers;
+using Site.Controllers.Abstract;
 using Site.Exceptions;
 
 namespace WebApp.LearningSystem.Controllers;
 
-public class RegisterController : Controller
+public class RegisterController : PermissionNeededController
 {
-    private readonly BashLearningContext _context;
-    private readonly Session<User> _session;
-
-    public RegisterController(BashLearningContext context, Session<User> session)
+    public RegisterController(BashLearningContext context, Session<User> session) : base(context: context, session: session)
     {
-        _session = session;
-        _context = context;
     }
 
     // GET
     public IActionResult Index()
     {
-        var view = View(_session);
-        view.ViewData["isAuthorized"] = _session.Data != null;
-        return view;
+        return View(_session);
     }
 
 

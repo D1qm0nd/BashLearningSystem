@@ -7,129 +7,122 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BashDataBaseModels;
 using BashLearningDB;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Site.Controllers.Abstract;
 
 namespace Site.Controllers
 {
-    public class ThemesTableController : PermissionNeededController
+    public class CommandsTableController : PermissionNeededController
     {
-        
-        public ThemesTableController(BashLearningContext context, Session<User> session) : base(context: context,
-            session: session)
+
+        public CommandsTableController(BashLearningContext context, Session<User> session) : base(context: context, session: session) 
         {
         }
 
-        // GET: ThemesTable
-        [Route("data/themes")]
+        // GET: CommandsTable
+        [Route("data/commands")]
         public async Task<IActionResult> Index()
         {
             if (!isAdmin()) return KickAction();
             
-            if (_context.Themes != null)
-            {
-                return View(await _context.Themes.ToListAsync());
-            }
-            else return Problem("Entity set 'BashLearningContext.Themes'  is null.");
+            var bashLearningContext = _context.Commands.Include(c => c.Theme);
+            return View(await bashLearningContext.ToListAsync());
         }
 
-        // GET: ThemesTable/Details/5
+        // GET: CommandsTable/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (!isAdmin()) return KickAction();
 
-            if (id == null || _context.Themes == null)
+            if (id == null || _context.Commands == null)
             {
                 return NotFound();
             }
 
-            var theme = await _context.Themes
-                .FirstOrDefaultAsync(m => m.ThemeId == id);
-            if (theme == null)
+            var command = await _context.Commands
+                .Include(c => c.Theme)
+                .FirstOrDefaultAsync(m => m.CommandId == id);
+            if (command == null)
             {
                 return NotFound();
             }
-    
-            return View(theme);
+
+            return View(command);
         }
 
-        // GET: ThemesTable/Create
+        // GET: CommandsTable/Create
         public IActionResult Create()
         {
             if (!isAdmin()) return KickAction();
 
+            ViewData["ThemeId"] = new SelectList(_context.Themes, "ThemeId", "Name");
             return View();
         }
 
-        // POST: ThemesTable/Create
+        // POST: CommandsTable/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ThemeId,Name")] Theme theme)
+        public async Task<IActionResult> Create([Bind("CommandId,Text,Description,ThemeId,CreatedUTC,UpdatedUTC")] Command command)
         {
             if (!isAdmin()) return KickAction();
-            
-            if (true)//(ModelState.IsValid)
+
+            if (true) //(ModelState.IsValid)
             {
-                theme.ThemeId = Guid.NewGuid();
-                theme.CreatedUTC = DateTime.UtcNow;
-                theme.UpdatedUTC = theme.CreatedUTC;
-                _context.Add(theme);
+                command.CommandId = Guid.NewGuid();
+                _context.Add(command);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-
-            var view = View(theme);
-            view.ViewData["isAuthorized"] = _session.Data != null;
-            return view;
+            ViewData["ThemeId"] = new SelectList(_context.Themes, "ThemeId", "Name", command.ThemeId);
+            return View(command);
         }
 
-        // GET: ThemesTable/Edit/5
+        // GET: CommandsTable/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (!isAdmin()) return KickAction();
 
-            if (id == null || _context.Themes == null)
+            if (id == null || _context.Commands == null)
             {
                 return NotFound();
             }
 
-            var theme = await _context.Themes.FindAsync(id);
-            if (theme == null)
+            var command = await _context.Commands.FindAsync(id);
+            if (command == null)
             {
                 return NotFound();
             }
-
-            return View(theme);
+            ViewData["ThemeId"] = new SelectList(_context.Themes, "ThemeId", "Name", command.ThemeId);
+            return View(command);
         }
 
-        // POST: ThemesTable/Edit/5
+        // POST: CommandsTable/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("ThemeId,Name,CreateUTC,UpdatedUTC")] Theme theme)
+        public async Task<IActionResult> Edit(Guid id, [Bind("CommandId,Text,Description,ThemeId,CreatedUTC")] Command command)
         {
             if (!isAdmin()) return KickAction();
 
-            if (id != theme.ThemeId)
+            if (id != command.CommandId)
             {
                 return NotFound();
             }
 
-            if (true)//(ModelState.IsValid)
+            if (true) //(ModelState.IsValid)
             {
                 try
                 {
-                    theme.CreatedUTC = theme.CreatedUTC.ToUniversalTime();
-                    theme.UpdatedUTC = DateTime.UtcNow;
-                    _context.Update(theme);
+                    command.CreatedUTC = command.CreatedUTC.ToUniversalTime();
+                    // command.UpdatedUTC = DateTime.UtcNow;
+                    _context.Update(command);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ThemeExists(theme.ThemeId))
+                    if (!CommandExists(command.CommandId))
                     {
                         return NotFound();
                     }
@@ -138,60 +131,57 @@ namespace Site.Controllers
                         throw;
                     }
                 }
-
                 return RedirectToAction(nameof(Index));
             }
-
-            var view = View(theme);
-            view.ViewData["isAuthorized"] = _session.Data != null;
-            return view;
+            ViewData["ThemeId"] = new SelectList(_context.Themes, "ThemeId", "Name", command.ThemeId);
+            return View(command);
         }
 
-        // GET: ThemesTable/Delete/5
+        // GET: CommandsTable/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (!isAdmin()) return KickAction();
 
-            if (id == null || _context.Themes == null)
+            if (id == null || _context.Commands == null)
             {
                 return NotFound();
             }
 
-            var theme = await _context.Themes
-                .FirstOrDefaultAsync(m => m.ThemeId == id);
-            if (theme == null)
+            var command = await _context.Commands
+                .Include(c => c.Theme)
+                .FirstOrDefaultAsync(m => m.CommandId == id);
+            if (command == null)
             {
                 return NotFound();
             }
 
-            return View(theme);
+            return View(command);
         }
 
-        // POST: ThemesTable/Delete/5
+        // POST: CommandsTable/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             if (!isAdmin()) return KickAction();
 
-            if (_context.Themes == null)
+            if (_context.Commands == null)
             {
-                return Problem("Entity set 'BashLearningContext.Themes'  is null.");
+                return Problem("Entity set 'BashLearningContext.Commands'  is null.");
             }
-
-            var theme = await _context.Themes.FindAsync(id);
-            if (theme != null)
+            var command = await _context.Commands.FindAsync(id);
+            if (command != null)
             {
-                _context.Themes.Remove(theme);
+                _context.Commands.Remove(command);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ThemeExists(Guid id)
+        private bool CommandExists(Guid id)
         {
-            return (_context.Themes?.Any(e => e.ThemeId == id)).GetValueOrDefault();
+          return (_context.Commands?.Any(e => e.CommandId == id)).GetValueOrDefault();
         }
     }
 }

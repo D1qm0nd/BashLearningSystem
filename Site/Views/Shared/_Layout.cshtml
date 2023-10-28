@@ -21,7 +21,7 @@
             <a class="layout-a" href="/Authorization"> Вход </a>
         </nav>
     </header>
-} 
+}
 else if ((bool)ViewData["isAuthorized"] == true)
 {
     <header class="layout-header">
@@ -32,6 +32,16 @@ else if ((bool)ViewData["isAuthorized"] == true)
             </a>
         </nav>
         <nav class="layout-navigation">
+            @if (ViewData["isAdmin"] != null)
+            {
+                @if ((bool)ViewData["isAdmin"] == true)
+                {
+                    <a class="layout-a" href="/data/users">Пользователи</a>
+                    <a class="layout-a" href="/data/admins">Администраторы</a>
+                    <a class="layout-a" href="/data/themes">Темы</a>
+                    <a class="layout-a" href="/data/commands">Команды</a>
+                }
+            }
             <a class="layout-a" href="/Home">Главная</a>
             @* <a class="layout-a" href="/Register">Регистрация</a> *@
             <a class="layout-a" asp-controller="Authorization" asp-action="Logout">Выход</a>

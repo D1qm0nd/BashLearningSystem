@@ -2,18 +2,15 @@ using BashDataBaseModels;
 using BashLearningDB;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Site.Controllers.Abstract;
 
 namespace Site.Controllers;
 
-public class ThemeController : Controller
+public class ThemeController : PermissionNeededController
 {
-    private readonly BashLearningContext _context;
-    private readonly Session<User> _session;
 
-    public ThemeController(BashLearningContext context, Session<User> session)
+    public ThemeController(BashLearningContext context, Session<User> session) : base(context: context, session:session)
     {
-        _context = context;
-        _session = session;
     }
 
     [HttpGet("Theme/{id}")]
@@ -26,7 +23,6 @@ public class ThemeController : Controller
         var view = View(_session);
         view.ViewData["AccountData"] = _session?.Data?.FullName();
         view.ViewData["Theme"] = theme;
-        view.ViewData["isAuthorized"] = _session.Data != null;
         return view;
     }
 }

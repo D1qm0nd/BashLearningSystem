@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Text.Json;
 using BashDataBaseModels;
 using BashLearningDB;
@@ -44,5 +45,13 @@ public class Tests
         user.Password = _cryptograph.Coding(user.Password);
         if (!_context.Register(new UserValidator(), user))
             Assert.Fail();
+    }
+
+    [Test]
+    public void isAdmin()
+    {
+        var user = _context.Users.First();
+        var res = _context.IsAdmin(user);
+        Console.WriteLine(res);
     }
 }

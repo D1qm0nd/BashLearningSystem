@@ -10,4 +10,32 @@ public abstract class SessionNeededController : Controller
     {
         _session = session;
     }
+    
+    public override ViewResult View()
+    {
+        var view = base.View();
+        view.ViewData["isAuthorized"] = _session.Data != null;
+        return view;
+    }
+
+    public override ViewResult View(string? viewName)
+    {
+        var view = base.View(viewName);
+        view.ViewData["isAuthorized"] = _session.Data != null;
+        return view;
+    }
+
+    public override ViewResult View(object? model)
+    {
+        var view = base.View(model);
+        view.ViewData["isAuthorized"] = _session.Data != null;
+        return view;
+    }
+
+    public override ViewResult View(string? viewName, object? model)
+    {
+        var view = base.View(viewName, model);
+        view.ViewData["isAuthorized"] = _session.Data != null;
+        return view;
+    }
 }
