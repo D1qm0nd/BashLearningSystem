@@ -11,10 +11,12 @@ public abstract class SessionNeededController : Controller
         _session = session;
     }
     
+    public bool isAuthorized() => _session.Data != null;
+    
     public override ViewResult View()
     {
         var view = base.View();
-        view.ViewData["isAuthorized"] = _session.Data != null;
+        view.ViewData["isAuthorized"] = isAuthorized();
         return view;
     }
 

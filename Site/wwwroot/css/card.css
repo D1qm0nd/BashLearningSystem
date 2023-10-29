@@ -1,7 +1,7 @@
 .card {
     margin: 5px;
     width: 400px;
-    height: 500px;
+    height: min-content;
     background: linear-gradient(-45deg, lightblue, transparent);
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -34,7 +34,7 @@
 .card-verifier {
     height: 75px;
     position: absolute;
-    margin-left: -220px;
+    margin-left: -240px;
     margin-top: -40px;
 }
 

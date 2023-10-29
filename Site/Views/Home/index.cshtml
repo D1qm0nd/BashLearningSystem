@@ -15,7 +15,8 @@
             <form method="get" class="card" id="@theme.ThemeId">
                 @if (themesHistory != null)
                 {
-                    @if (themesHistory.FirstOrDefault(read => read.ThemeId == theme.ThemeId) != null) ;
+                    var readed = themesHistory.FirstOrDefault(read => read.ThemeId == theme.ThemeId);
+                    if (readed != null)
                     {
                         <img class="card-verifier" src="~/Images/verifyIcon.png" alt="verifyIcon">
                     }
