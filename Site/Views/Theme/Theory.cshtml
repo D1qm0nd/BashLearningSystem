@@ -3,7 +3,8 @@
 @{
     var theme = ViewData["Theme"] as Theme;
 }
-<div>
+
+<div class="container">
     @if (theme == null)
     {
         <p>Данная тема отсутствует</p>
@@ -11,25 +12,44 @@
     else
     {
         <div class="container">
-            <p>@theme.Name</p>
+            @if ((bool)ViewData["isAuthorized"] == true)
+            {
+                if ((bool)ViewData["isRead"] == false)
+                {
+                    <form method="post">
+                        <button asp-route-id=@theme.ThemeId asp-controller="Theme" asp-action="MarkAsRead">Пометить прочитанным</button>
+                    </form>
+                }
+                else
+                {
+                    <form method="post">
+                        <button asp-route-id=@theme.ThemeId asp-controller="Theme" asp-action="MarkAsUnRead">Пометить не прочитанным</button>
+                    </form>
+                }
+            }
+        </div>
+        <h1 class="theory_theme_header">@theme.Name</h1>
+        <div class="theory_card">
             @foreach (var command in theme.Commands)
             {
-                <div class="theory_card">
-                    <h2 class="theory_command_header">@command.Text</h2>
+                <h2 class="theory_command_header">@command.Text</h2>
+                <div class="theory_description_container">
                     <p>@command.Description</p>
-                    @foreach (var attr in command.Attributes)
-                    {
-                        <hr/>
-                        <h3>@attr.Text</h3>
-                        <p>@attr.Description</p>
-                    }
-                    @* <h2>Пример использования</h2> *@
-                    @* <ul> *@
-                    @*     <li><a href="#">Пример 1</a></li> *@
-                    @*     <li><a href="#">Пример 2</a></li> *@
-                    @*     <li><a href="#">Пример 3</a></li> *@
-                    @* </ul> *@
                 </div>
+                @if (command.Attributes.Any())
+                {
+                    <div class="theory_attributes_container ">
+                        @foreach (var attr in command.Attributes)
+                        {
+                            <div class="theory_attribute_container">
+                                <h2 class="theory_attribute_header">@attr.Text</h2>
+                                <div class="theory_description_container">
+                                    <p>@attr.Description</p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
             }
         </div>
     }
