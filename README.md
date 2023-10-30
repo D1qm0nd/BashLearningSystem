@@ -28,20 +28,14 @@ sequenceDiagram
 - Диаграмма логической модели базы данных
 ``` mermaid
 classDiagram
-direction RL
-
-class Accounts {
-   text Login
-   text Password
-   text Surname
-   text Name
-   text MiddleName
-   bytea Image
+direction BT
+class Admins {
+   uuid UserId
+   boolean IsActual
    timestamp with time zone CreatedUTC
    timestamp with time zone UpdatedUTC
-   uuid AccountId
+   uuid AdminId
 }
-
 class Attributes {
    text Text
    text Description
@@ -50,7 +44,6 @@ class Attributes {
    timestamp with time zone UpdatedUTC
    uuid AttributeId
 }
-
 class Commands {
    text Text
    text Description
@@ -59,32 +52,19 @@ class Commands {
    timestamp with time zone UpdatedUTC
    uuid CommandId
 }
-
-class Exercises {
-   text Name
+class Questions {
    text Text
    uuid ThemeId
    timestamp with time zone CreatedUTC
    timestamp with time zone UpdatedUTC
-   uuid ExerciseId
-}
-
-class History {
-   uuid AccountId
-   uuid ExerciseId
-   text status
-   timestamp with time zone CreatedUTC
-   timestamp with time zone UpdatedUTC
-   uuid HistoryId
-}
-class Quests {
-   text Text
-   text Answer
-   uuid ExerciseId
-   uuid CommandId
-   timestamp with time zone CreatedUTC
-   timestamp with time zone UpdatedUTC
    uuid QuestionId
+}
+class Reads {
+   uuid ThemeId
+   uuid UserId
+   timestamp with time zone CreatedUTC
+   timestamp with time zone UpdatedUTC
+   uuid ReadId
 }
 class Themes {
    text Name
@@ -92,13 +72,90 @@ class Themes {
    timestamp with time zone UpdatedUTC
    uuid ThemeId
 }
+class Users {
+   text Login
+   text Password
+   text Name
+   text Surname
+   text Middlename
+   timestamp with time zone CreatedUTC
+   timestamp with time zone UpdatedUTC
+   uuid UserId
+}
 
+Admins  -->  Users : UserId
 Attributes  -->  Commands : CommandId
 Commands  -->  Themes : ThemeId
-Exercises  -->  Themes : ThemeId
-History  -->  Accounts : AccountId
-History  -->  Exercises : ExerciseId
-Quests  -->  Commands : CommandId
-Quests  -->  Exercises : ExerciseId
+Questions  -->  Themes : ThemeId
+Reads  -->  Themes : ThemeId
+Reads  -->  Users : UserId
 
+
+```
+#Отношения
+``` mermaid
+erDiagram 
+
+Admins {
+   uuid UserId
+   boolean IsActual
+   timestamp with time zone CreatedUTC
+   timestamp with time zone UpdatedUTC
+   uuid AdminId
+}
+
+Attributes {
+   text Text
+   text Description
+   uuid CommandId
+   timestamp with time zone CreatedUTC
+   timestamp with time zone UpdatedUTC
+   uuid AttributeId
+}
+
+Commands {
+   text Text
+   text Description
+   uuid ThemeId
+   timestamp with time zone CreatedUTC
+   timestamp with time zone UpdatedUTC
+   uuid CommandId
+}
+Questions {
+   text Text
+   uuid ThemeId
+   timestamp with time zone CreatedUTC
+   timestamp with time zone UpdatedUTC
+   uuid QuestionId
+}
+Reads {
+   uuid ThemeId
+   uuid UserId
+   timestamp with time zone CreatedUTC
+   timestamp with time zone UpdatedUTC
+   uuid ReadId
+}
+Themes {
+   text Name
+   timestamp with time zone CreatedUTC
+   timestamp with time zone UpdatedUTC
+   uuid ThemeId
+}
+Users {
+   text Login
+   text Password
+   text Name
+   text Surname
+   text Middlename
+   timestamp with time zone CreatedUTC
+   timestamp with time zone UpdatedUTC
+   uuid UserId
+}
+
+Admins  }o--||  Users : UserId
+Attributes  }o--||  Commands : CommandId
+Commands  }o--|{  Themes : ThemeId
+Questions  }o--|{  Themes : ThemeId
+Reads  }o--|{  Themes : ThemeId
+Reads  }o--|{ Users : UserId
 ```
