@@ -14,14 +14,11 @@ sequenceDiagram
     WebSite ->> DataLayer : Запрос данных о пользователе
     DataLayer ->> WebSite : Отправка данных о пользователе
     WebSite ->> WebSite : Расширение функционала пользователя
-    User -->> WebSite : Интерактивное прохождение практики
+    User -->> WebSite : Запрос на интерактивное выполение команды
     WebSite ->> Executor: Отправка команды
     Executor ->> Executor: Выполнение команды
     Executor ->> WebSite : Результат выполнения команды
-    WebSite ->> WebSite : Отображение результата выполненияЪ
-    User -->> WebSite: Посмотреть прогресс
-    WebSite ->> DataLayer : Получить прогресс пользователя
-    DataLayer ->> WebSite : Отправка данных
+    WebSite ->> WebSite : Отображение результата выполнения
 
 ```
 
