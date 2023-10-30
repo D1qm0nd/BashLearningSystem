@@ -5,15 +5,15 @@
 sequenceDiagram
     Actor User
     User ->> WebSite: Открытие страницы сайта
-    WebSite ->> DataLayer : Запрос данных для отображения
-    DataLayer ->> WebSite: Отправка данных для отображения
-    WebSite ->> WebSite: Отображение данных
+    WebSite ->> DataLayer : Запрос тем
+    DataLayer ->> WebSite: Отправка тем для отображения
+    WebSite ->> WebSite: Отображение тем
     User -->> WebSite : Регистрация на сайте
-    WebSite ->> DataLayer : Добавление пользователя
-    User -->> WebSite : Авторизация на сайте
+    WebSite ->> DataLayer : Регистрация пользователя
+    User -->> WebSite : Аутентификация на сайте
     WebSite ->> DataLayer : Запрос данных о пользователе
     DataLayer ->> WebSite : Отправка данных о пользователе
-    WebSite ->> WebSite : Расширение функционала пользователя
+    WebSite ->> WebSite : Авторизация пользователя
     User -->> WebSite : Запрос на интерактивное выполение команды
     WebSite ->> Executor: Отправка команды
     Executor ->> Executor: Выполнение команды
