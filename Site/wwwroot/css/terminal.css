@@ -1,0 +1,32 @@
+.terminal {
+    width: 500px;
+    display: flex;
+    flex-flow: column nowrap;
+    /* padding: 0px; */
+}
+
+.terminal-textarea {
+    width: inherit;
+    height: 250px;
+    border-color: gray;
+    border-width: 3px;
+    border-radius: 10px;
+    color: white;
+    font-size: 14pt;
+    background-color: black;
+    resize: none;
+    outline: none;
+    padding: 10px;
+}
+
+.terminal-execute-button {
+    width: inherit;
+    height: 40px;
+    color: black;
+    font-size: 16pt;
+    background-color: darkgray;
+    border-radius: 10px;
+    border-color: gray;
+    border-width: 3px;
+    padding: 0px 10px;
+}

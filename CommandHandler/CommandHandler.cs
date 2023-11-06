@@ -2,6 +2,7 @@
 using System.Net.Sockets;
 using System.Text;
 using CommandExecution;
+using Exceptions;
 using Sockets;
 
 namespace RemoteCommandHandler;
@@ -14,7 +15,12 @@ public class CommandHandler
     public CommandHandler()
     {
         var path = Environment.GetEnvironmentVariable("CURRENT_FOLDER");
+        if (path == null)
+            throw new EnvironmentVariableExistingException("path");
         Console.WriteLine($"path: {path}");
+        var bufferSizeEnv = Environment.GetEnvironmentVariable("BUFFER_SIZE");
+        if (bufferSizeEnv == null)
+            
         _commandExecutor = new(path);
         _commandListener = new UnixSocketListener(InitializeAction, HandleAction, 1024, 1000);
     }

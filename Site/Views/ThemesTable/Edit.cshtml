@@ -18,16 +18,16 @@
                 <input asp-for="Name" class="form-control"/>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            @* <div class="form-group" hidden="hidden"> *@
-            @*     <label asp-for="CreatedUTC" class="control-label"></label> *@
-            @*     <input asp-for="CreatedUTC" class="form-control"/> *@
-            @*     <span asp-validation-for="CreatedUTC" class="text-danger"></span> *@
-            @* </div> *@
-            @* <div class="form-group" hidden="hidden"> *@
-            @*     <label asp-for="UpdatedUTC" class="control-label"></label> *@
-            @*     <input asp-for="UpdatedUTC" class="form-control"/> *@
-            @*     <span asp-validation-for="UpdatedUTC" class="text-danger"></span> *@
-            @* </div> *@
+            <div class="form-group" hidden="hidden">
+                <label asp-for="CreatedUTC" class="control-label"></label>
+                <input asp-for="CreatedUTC" class="form-control"/>
+                <span asp-validation-for="CreatedUTC" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden="hidden">
+                <label asp-for="UpdatedUTC" class="control-label"></label>
+                <input asp-for="UpdatedUTC" class="form-control"/>
+                <span asp-validation-for="UpdatedUTC" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary"/>
             </div>

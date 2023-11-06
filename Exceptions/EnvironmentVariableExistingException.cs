@@ -1,6 +1,4 @@
-using System.Runtime.Serialization;
-
-namespace Site.Exceptions;
+﻿namespace Exceptions;
 
 public class EnvironmentVariableExistingException : Exception
 {

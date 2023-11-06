@@ -1,9 +1,24 @@
 @using BashDataBaseModels
+@using System.Reflection.Metadata
+@using Microsoft.JSInterop
+@using Site.Other
 @model Session<BashDataBaseModels.User>
 @{
     var theme = ViewData["Theme"] as Theme;
 }
 
+<script>
+    // document.getElementById('terminalButton').addEventListener('click', function () {
+    //     let console = document.getElementById('terminalConsole').value
+    //    
+    //     let text = console.value()
+    //     console.log(text)
+    // })
+    
+</script>
+@* @if ((bool)ViewData["isAuthorized"]){ *@
+@*         let a = document.getElementById("terminalButton") *@
+@*     } *@
 <div class="container">
     @if (theme == null)
     {
@@ -12,7 +27,7 @@
     else
     {
         <div class="container">
-            @if ((bool)ViewData["isAuthorized"] == true)
+            @if ((bool)ViewData["isAuthorized"])
             {
                 if ((bool)ViewData["isRead"] == false)
                 {
@@ -39,6 +54,7 @@
                 @if (command.Attributes.Any())
                 {
                     <div class="theory_attributes_container ">
+                        <h3 class="theory_attributes_header">Атрибуты</h3>
                         @foreach (var attr in command.Attributes)
                         {
                             <div class="theory_attribute_container">
@@ -52,5 +68,32 @@
                 }
             }
         </div>
+        @if ((bool)ViewData["isAuthorized"])
+        {
+            <form method="get" class="terminal">
+                <textarea class="terminal-textarea" id="terminalConsole" ></textarea>
+                <button class="terminal-execute-button" id="terminalButton" onclick="function sendCommand () {
+                        let terminal_console = document.getElementById('terminalConsole');
+                        let command=terminal_console.value;
+                        let ajax=$.ajax({
+                            url: `http://127.0.0.1:55555/BashExecutor/${command}`,
+                            method: 'get',
+                            dataType: 'text/json',
+                            data: command,
+                            success: function(data) {
+                                terminal_console.value=data;
+                                console.log(`Success: ${data}`)
+                            }
+                        })  
+                        ajax.onabort=function(data) {
+                        console.log(`Error: ${data}`)
+                        }
+                        // let answer=DotNet.invokeMethodAsync('Site', 'SendCommandExecuteRequestAsync')
+                        console.log(a)}">
+                    Execute
+                </button>
+                @* asp-action="SendCommandExecuteRequest" asp-controller="BashExecute" *@
+            </form>
+        }
     }
 </div>

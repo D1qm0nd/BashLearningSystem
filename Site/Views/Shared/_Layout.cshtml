@@ -1,7 +1,14 @@
 ﻿<!doctype html>
 
-<html lang="en" style="background: url('/Images/Background/arctic.jpg'); background-size: cover; background-repeat:no-repeat; background-attachment: fixed">
-@* <html lang="en" style="background: url('/Images/Background/rofl.gif'); background-size: cover; background-repeat:no-repeat; background-attachment: fixed"> *@
+
+@{
+    var image = "'/Images/Background/arctic.jpg'";
+    if (DateTime.Now.Day % 2 == 0)
+    {
+        image = "'/Images/Background/rofl.gif'";
+    }
+}
+<html lang="en" style="background: url(@image); background-size: cover; background-repeat:no-repeat; background-attachment: fixed">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -10,6 +17,8 @@
     <link rel="stylesheet" href="/css/card.css"/>
     <link rel="stylesheet" href="/css/Auth.css"/>
     <link rel="stylesheet" href="/css/theory_card.css"/>
+    <link rel="stylesheet" href="/css/terminal.css"/>
+
     <title>Document</title>
 </head>
 <body>
@@ -42,10 +51,10 @@ else if ((bool)ViewData["isAuthorized"] == true)
                     <a class="layout-a" href="/data/admins">Администраторы</a>
                     <a class="layout-a" href="/data/themes">Темы</a>
                     <a class="layout-a" href="/data/commands">Команды</a>
+                    <a class="layout-a" href="/data/attributes">Атрибуты</a>
                 }
             }
             <a class="layout-a" href="/Home">Главная</a>
-            @* <a class="layout-a" href="/Register">Регистрация</a> *@
             <a class="layout-a" asp-controller="Authorization" asp-action="Logout">Выход</a>
         </nav>
     </header>
