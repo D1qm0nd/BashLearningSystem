@@ -3,11 +3,11 @@ using BashDataBaseModels;
 using BashLearningDB;
 using BashLearningModelsValidate;
 using EncryptModule;
+using Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Site;
 using Site.Controllers;
 using Site.Controllers.Abstract;
-using Site.Exceptions;
 
 namespace WebApp.LearningSystem.Controllers;
 

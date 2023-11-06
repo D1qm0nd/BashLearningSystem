@@ -14,21 +14,22 @@ services:
       ASPNETCORE_URLS: "http://+:12555"
       BashLearningPrivateKey: "{\"Key\":[7,5,10,32,41],\"Alphabet\":\"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!?@#$$%^\u0026*()0123456789 \"}"
       BashLearningDB: "host=localhost;Port=5432;Database=SystemDb;User Id=postgres;Password=postgres;"
+      COMMAND_EXECUTOR_IPADDRESS: "127.0.0.1"
+      COMMAND_EXECUTOR_PORT: "55555"
     network_mode: host
     
-#  server_application:
-#    image: ${DOCKER_REGISTRY-}executor_image
-#    container_name: executor
-#    build:
-#      context: .
-#      dockerfile: ../BashExecutor/Dockerfile
-#    restart: always
-#    environment:
-#      CURRENT_FOLDER: "/root"
+  bash_executor:
+    image: ${DOCKER_REGISTRY-}executor_image
+    container_name: executor
+    build:
+      context: .
+      dockerfile: ./BashExecutorAPI/Dockerfile
+    restart: always
+    environment:
+      CURRENT_FOLDER: "/root"
+      ASPNETCORE_URLS: "http://+:55555"
 #      COMMAND_EXECUTOR_PORT: "55555"
-#    network_mode: host
-#    ports:
-#      - 55555
+    network_mode: host
    
   PostgresDB:
     image: postgres

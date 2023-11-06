@@ -53,7 +53,7 @@ namespace Site.Controllers
         // GET: AttributesTable/Create
         public IActionResult Create()
         {
-            ViewData["CommandId"] = new SelectList(_context.Commands, "CommandId", "Description");
+            ViewData["CommandId"] = new SelectList(_context.Commands, "CommandId", "Text");
             return View();
         }
 
@@ -69,6 +69,8 @@ namespace Site.Controllers
             if (true) //(ModelState.IsValid)
             {
                 commandAttribute.AttributeId = Guid.NewGuid();
+                commandAttribute.CreatedUTC = DateTime.UtcNow;
+                commandAttribute.UpdatedUTC = commandAttribute.CreatedUTC;
                 _context.Add(commandAttribute);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -114,6 +116,8 @@ namespace Site.Controllers
             {
                 try
                 {
+                    commandAttribute.CreatedUTC = commandAttribute.CreatedUTC.ToUniversalTime();
+                    commandAttribute.UpdatedUTC = DateTime.UtcNow;
                     _context.Update(commandAttribute);
                     await _context.SaveChangesAsync();
                 }

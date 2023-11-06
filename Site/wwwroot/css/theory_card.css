@@ -8,6 +8,7 @@ h1 {
     background: linear-gradient(45deg, lightskyblue, transparent);
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    border-radius: 30px;
 }
 
 p {
@@ -45,19 +46,25 @@ a:hover {
 
 .theory_description_container {
     padding-left: 10px;
-    color: darkblue;
+    color: snow;
     font-size: 14pt;
 }
 
 .theory_attribute_container {
-    color: darkblue;
+    color: snow;
+    padding: 10px;
+    background: linear-gradient(45deg, skyblue, transparent);
     font-size: 14pt;
+    margin-bottom: 10px;
+    border-radius: 20px;
 }
 
 .theory_attributes_container {
-    padding: 10px 10px;
-    background: linear-gradient(45deg, deepskyblue, transparent) ;
+    background: linear-gradient(45deg, whitesmoke, transparent);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px 10px;
+    /* background: white; */
+    border-radius: 30px;
 }
 
 .theory_theme_header {
@@ -80,5 +87,23 @@ a:hover {
 .theory_attribute_header {
     font-size: 16pt;
     margin: 0;
-    color: white;
+    color: snow;
+}
+
+.theory_attributes_header {
+    color: darkblue;
+    margin: 0;
+    padding: 5px;
+}
+
+.theory_questions_header {
+    color: snow;
+    margin: 0;
+    padding: 5px;
+}
+
+.theory_question_header {
+    font-size: 16pt;
+    margin: 0;
+    color: snow;
 }

@@ -69,7 +69,7 @@ ul {
 .layout-header {
     height: 40px;
     background: linear-gradient(145deg, transparent, deepskyblue);
-    padding: 2px 10px 0px 20px;
+    padding: 0px 10px 0px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;

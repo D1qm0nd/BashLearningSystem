@@ -29,6 +29,7 @@
       <ProjectReference Include="..\BashDataBaseModels\BashDataBaseModels.csproj" />
       <ProjectReference Include="..\BashLearningDB\BashLearningDB.csproj" />
       <ProjectReference Include="..\EncryptModule\EncryptModule.csproj" />
+      <ProjectReference Include="..\Exceptions\Exceptions.csproj" />
     </ItemGroup>
 
     <ItemGroup>

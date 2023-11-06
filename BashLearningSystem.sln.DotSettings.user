@@ -83,6 +83,7 @@
     &lt;TestId&gt;NUnit3x::F6C2A569-0152-4EAF-9025-117B17B7BD6F::net6.0::Tests.BashLearningDB.Tests.Register&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::F6C2A569-0152-4EAF-9025-117B17B7BD6F::net6.0::Tests.BashLearningDataBase.Tests.Register&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::F6C2A569-0152-4EAF-9025-117B17B7BD6F::net6.0::Tests.BashLearningDataBase.Tests.isAdmin&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::F6C2A569-0152-4EAF-9025-117B17B7BD6F::net6.0::Tests.BashLearningDataBase.Tests.MakeAdmin&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	

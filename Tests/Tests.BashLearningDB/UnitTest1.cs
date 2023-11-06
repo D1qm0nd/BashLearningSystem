@@ -54,4 +54,17 @@ public class Tests
         var res = _context.IsAdmin(user);
         Console.WriteLine(res);
     }
+
+    [Test]
+    public void MakeAdmin()
+    {
+        var login = "maxmaxmax";
+        var user = _context.Users.FirstOrDefault(e => e.Login == login);
+        if (user == null)
+            Assert.Fail();
+        _context.Admins.Add(new Admin() { UserId = user.UserId, IsActual = true });
+        if (_context.SaveChanges() == 1)
+            Assert.Pass();
+        else Assert.Fail();
+    }
 }

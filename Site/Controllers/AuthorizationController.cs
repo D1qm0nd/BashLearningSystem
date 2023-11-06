@@ -4,7 +4,7 @@ using BashLearningDB;
 using EncryptModule;
 using Microsoft.AspNetCore.Mvc;
 using Site.Controllers.Abstract;
-using Site.Exceptions;
+using Exceptions;
 
 namespace Site.Controllers;
 

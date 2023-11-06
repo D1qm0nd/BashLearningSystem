@@ -8,17 +8,19 @@ namespace Site.Controllers;
 
 public class ThemeController : PermissionNeededController
 {
+    
     public ThemeController(BashLearningContext context, Session<User> session) : base(context: context,
         session: session)
     {
     }
 
-    [Route("Theme/{id}")]
+    [HttpGet("Theme/{id}")]
     public IActionResult Theory(Guid? id)
     {
         var theme = _context.Themes
             .Include(t => t.Commands)
             .ThenInclude(c => c.Attributes)
+            .Include(t => t.Questions)
             .FirstOrDefault(t => t.ThemeId == id);
         var view = View(_session);
         // view.ViewData["AccountData"] = _session?.Data?.FullName();
@@ -74,7 +76,4 @@ public class ThemeController : PermissionNeededController
         _context.Reads.Remove(read);
         return (_context.SaveChangesAsync().Result == 1);
     }
-
-
-
 }
