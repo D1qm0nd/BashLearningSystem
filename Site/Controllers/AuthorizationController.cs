@@ -27,6 +27,7 @@ public class AuthorizationController : PermissionNeededController
         
         var crypt_values = JsonSerializer.Deserialize<CryptographValues>(env_val);
         var cryptograph = new Cryptograph(key: crypt_values.Key, alphabet: crypt_values.Alphabet);
+        login = cryptograph.Coding(login);
         password = cryptograph.Coding(password); 
         _session.Data = _context.Users.FirstOrDefault(user => user.Login == login && user.Password == password);
         return RedirectToAction("Index", "Home");

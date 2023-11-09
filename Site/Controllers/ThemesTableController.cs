@@ -66,7 +66,7 @@ namespace Site.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ThemeId,Name")] Theme theme)
+        public async Task<IActionResult> Create([Bind("ThemeId,Name,IsActual")] Theme theme)
         {
             if (!isAdmin()) return KickAction();
             
@@ -109,7 +109,7 @@ namespace Site.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("ThemeId,Name,CreateUTC,UpdatedUTC")] Theme theme)
+        public async Task<IActionResult> Edit(Guid id, [Bind("ThemeId,Name,IsActual,CreateUTC,UpdatedUTC")] Theme theme)
         {
             if (!isAdmin()) return KickAction();
 

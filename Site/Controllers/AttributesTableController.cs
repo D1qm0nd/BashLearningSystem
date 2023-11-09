@@ -62,7 +62,7 @@ namespace Site.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AttributeId,Text,Description,CommandId,CreatedUTC,UpdatedUTC")] CommandAttribute commandAttribute)
+        public async Task<IActionResult> Create([Bind("AttributeId,Text,Description,CommandId,IsActual,CreatedUTC,UpdatedUTC")] CommandAttribute commandAttribute)
         {
             if (!isAdmin()) return KickAction();
             
@@ -103,7 +103,7 @@ namespace Site.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("AttributeId,Text,Description,CommandId,CreatedUTC,UpdatedUTC")] CommandAttribute commandAttribute)
+        public async Task<IActionResult> Edit(Guid id, [Bind("AttributeId,Text,Description,IsActual,CommandId,CreatedUTC,UpdatedUTC")] CommandAttribute commandAttribute)
         {
             if (!isAdmin()) return KickAction();
 

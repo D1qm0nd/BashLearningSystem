@@ -1,5 +1,6 @@
 using BashDataBaseModels;
 using BashLearningDB;
+using Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Site.Controllers.Abstract;
@@ -8,7 +9,6 @@ namespace Site.Controllers;
 
 public class ThemeController : PermissionNeededController
 {
-    
     public ThemeController(BashLearningContext context, Session<User> session) : base(context: context,
         session: session)
     {
@@ -25,6 +25,14 @@ public class ThemeController : PermissionNeededController
         var view = View(_session);
         // view.ViewData["AccountData"] = _session?.Data?.FullName();
         view.ViewData["Theme"] = theme;
+        if (isAuthorized())
+        {
+            var executor_url = Environment.GetEnvironmentVariable("COMMAND_EXECUTOR_URL");
+            if (executor_url == null)
+                throw new EnvironmentVariableExistingException("COMMAND_EXECUTOR_URL");
+            view.ViewData["BashExecutorIP"] = executor_url;
+        }
+
         view.ViewData["isRead"] = _session.Data != null ? ReadRecordExist(_session.Data.UserId, (Guid)id) : false;
         return view;
     }
@@ -37,15 +45,15 @@ public class ThemeController : PermissionNeededController
     [HttpPost("Theme/{id}/mark-as-read")]
     public IActionResult MarkAsRead(Guid id)
     {
-        
         if (!isAuthorized()) return KickAction();
-        
-        if (!ReadRecordExist(_session.Data.UserId, id))   
+
+        if (!ReadRecordExist(_session.Data.UserId, id))
         {
             AddToRead(_session.Data.UserId, id);
             // _context.Reads.Add(new Read() { UserId = _session.Data.UserId, ThemeId = (Guid)id });
             // _context.SaveChangesAsync();
         }
+
         return KickAction();
         // return RedirectToAction("Theory", "Theme", id);
     }

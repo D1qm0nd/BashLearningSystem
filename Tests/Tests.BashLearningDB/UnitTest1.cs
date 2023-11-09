@@ -58,7 +58,7 @@ public class Tests
     [Test]
     public void MakeAdmin()
     {
-        var login = "maxmaxmax";
+        var login = _cryptograph.Coding("admin");
         var user = _context.Users.FirstOrDefault(e => e.Login == login);
         if (user == null)
             Assert.Fail();

@@ -86,15 +86,33 @@ ul {
     gap: 1px;
 }
 
+.layout-navigation-admin {
+    display: flex;
+    gap: 1px;
+}
+
 .layout-a {
     padding: 10px 20px;
-    background-color: transparent;
+    background: linear-gradient(-15deg, blue, #6565ff, skyblue);
     color: #fff;
     text-decoration: none;
     border-radius: 3px;
+    box-shadow: 2px 2px 3px 1px #5f676e;
     /*margin-right: 1px;*/
 }
 .layout-a:hover {
     background-color: mediumslateblue;
 }
 
+.layout-navigation-admin .layout-a {
+    padding: 10px 20px;
+    background: linear-gradient(-15deg, orangered, orange) ;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+    /*margin-right: 1px;*/
+}
+
+.layout-navigation-admin  .layout-a:hover {
+    background: linear-gradient(-15deg, orangered, orange, yellow);
+}
