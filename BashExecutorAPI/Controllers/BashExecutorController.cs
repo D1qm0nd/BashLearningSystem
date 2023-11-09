@@ -1,11 +1,13 @@
 using CommandExecution;
 using Exceptions;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BashExecutorAPI.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[EnableCors("MyPolicy")]
 public class BashExecutorController : ControllerBase
 {
     private static CommandExecutor _commandExecutor;
@@ -21,9 +23,31 @@ public class BashExecutorController : ControllerBase
         _logger = logger;
     }
 
-    [HttpGet("{command}")]
+    [HttpGet("Execute/{command}")]
     public string Execute(string command)
     {
-        return _commandExecutor.ExecuteCommand(command);
+        return ExecuteCommand(command);
+    }
+
+    [HttpPost("Execute")]
+    public string ExecuteFromBody([FromBody] string command)
+    {
+        return ExecuteCommand(command);
+    }
+
+    private string ExecuteCommand(string command)
+    {
+        _logger.LogInformation($"Executing {command}");
+        try
+        {
+            var res = _commandExecutor.ExecuteCommand(command);
+            _logger.LogInformation($"Result: {res}");
+            return res;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e.Message);
+            throw;
+        }
     }
 }

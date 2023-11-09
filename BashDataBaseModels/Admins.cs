@@ -10,6 +10,5 @@ public class Admin : Entity
 {
     [Key] public Guid AdminId { get; set; }
     [Required] public Guid UserId { get; set; }
-    [Required] public bool IsActual { get; set; }
     [JsonIgnore] public User User { get; set; }
 }

@@ -27,9 +27,7 @@ public class RegisterController : PermissionNeededController
     [HttpPost]
     public IActionResult Index([Bind("Surname", "Name", "Middlename", "Login", "Password")] User user)
     {
-        //TODO: Account existing check!!!
-        // if (context.Repository.GetEntity<Account>().ToList().FirstOrDefault(account) == null)
-        // {
+        
         var env_val = Environment.GetEnvironmentVariable("BashLearningPrivateKey");
         
         if (env_val == null)
@@ -38,12 +36,20 @@ public class RegisterController : PermissionNeededController
         var crypt_values = JsonSerializer.Deserialize<CryptographValues>(env_val);
         if (crypt_values == null)
             throw new ArgumentException("Check input data for correct");
+        
         var cryptograph = new Cryptograph(key: crypt_values.Key, alphabet: crypt_values.Alphabet);
+        
+        user.Login = cryptograph.Coding(user.Login);
         user.Password = cryptograph.Coding(user.Password);
+        
+        //TODO: Account existing check!!!
+        if (_context.Users.FirstOrDefault(u => u.Login == user.Login) != null)
+            return KickAction();
+
         _context.Register(new UserValidator(),user);
         _context.SaveRepositoryChanges();
         _session.Data = user;
-        return new HomeController(null, _context, _session).Index();
+        return RedirectToAction("Index","Home");
         // }
     }
 }

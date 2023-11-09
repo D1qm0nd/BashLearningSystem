@@ -10,7 +10,7 @@
     height: 250px;
     border-color: gray;
     border-width: 3px;
-    border-radius: 10px;
+    border-radius: 10px 10px 0px 0px;
     color: white;
     font-size: 14pt;
     background-color: black;
@@ -25,7 +25,7 @@
     color: black;
     font-size: 16pt;
     background-color: darkgray;
-    border-radius: 10px;
+    border-radius: 0px 0px 10px 10px;
     border-color: gray;
     border-width: 3px;
     padding: 0px 10px;

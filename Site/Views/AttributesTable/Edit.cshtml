@@ -1,44 +1,45 @@
-@model BashDataBaseModels.Command
+@model BashDataBaseModels.CommandAttribute
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
-<h1>Create</h1>
+<h1>Edit</h1>
 
-<h4>Command</h4>
-<hr/>
+<h4>CommandAttribute</h4>
+<hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="AttributeId" />
             <div class="form-group">
                 <label asp-for="Text" class="control-label"></label>
-                <input asp-for="Text" class="form-control"/>
+                <input asp-for="Text" class="form-control" />
                 <span asp-validation-for="Text" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control"/>
+                <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ThemeId" class="control-label"></label>
-                <select asp-for="ThemeId" class="form-control" asp-items="ViewBag.ThemeId"></select>
+                <label asp-for="CommandId" class="control-label"></label>
+                <select asp-for="CommandId" class="form-control" asp-items="ViewBag.CommandId"></select>
+                <span asp-validation-for="CommandId" class="text-danger"></span>
             </div>
             <div class="form-group" hidden="hidden">
                 <label asp-for="CreatedUTC" class="control-label"></label>
-                <input asp-for="CreatedUTC" class="form-control"/>
+                <input asp-for="CreatedUTC" class="form-control" />
                 <span asp-validation-for="CreatedUTC" class="text-danger"></span>
             </div>
             <div class="form-group" hidden="hidden">
                 <label asp-for="UpdatedUTC" class="control-label"></label>
-                <input asp-for="UpdatedUTC" class="form-control"/>
+                <input asp-for="UpdatedUTC" class="form-control" />
                 <span asp-validation-for="UpdatedUTC" class="text-danger"></span>
             </div>
-            
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary"/>
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -47,3 +48,4 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+

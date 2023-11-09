@@ -2,24 +2,23 @@ version: "3.9"
   
 services:
 
-  WebApplication:
+  site:
     image: web_site
     container_name: site
     build:
       context: .
       dockerfile: ./Site/Dockerfile
     depends_on: 
-      - PostgresDB
+      - db
     environment:
       ASPNETCORE_URLS: "http://+:12555"
       BashLearningPrivateKey: "{\"Key\":[7,5,10,32,41],\"Alphabet\":\"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!?@#$$%^\u0026*()0123456789 \"}"
       BashLearningDB: "host=localhost;Port=5432;Database=SystemDb;User Id=postgres;Password=postgres;"
-      COMMAND_EXECUTOR_IPADDRESS: "127.0.0.1"
-      COMMAND_EXECUTOR_PORT: "55555"
+      COMMAND_EXECUTOR_URL: "http://127.0.0.1:55555/BashExecutor/Execute/"
     network_mode: host
     
-  bash_executor:
-    image: ${DOCKER_REGISTRY-}executor_image
+  bash_executor_api:
+    image: executor_api_image
     container_name: executor
     build:
       context: .
@@ -31,7 +30,7 @@ services:
 #      COMMAND_EXECUTOR_PORT: "55555"
     network_mode: host
    
-  PostgresDB:
+  db:
     image: postgres
     environment:
       POSTGRES_DB: SystemDb
@@ -50,5 +49,5 @@ services:
     environment:
       BashLearningDB: "host=localhost;Port=5432;Database=SystemDb;User Id=postgres;Password=postgres;"
     depends_on: 
-      - PostgresDB
+      - db
     network_mode: host

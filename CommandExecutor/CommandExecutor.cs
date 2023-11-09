@@ -36,19 +36,19 @@ public class CommandExecutor
             sb.AppendLine(proc.StandardOutput.ReadLine());
         }
 
-        try
-        {
-            while (!proc.StandardError.EndOfStream)
-            {
-                sb.AppendLine(proc.StandardError.ReadLine());
-            }
-        }
-        catch (InvalidOperationException e)
-        {
-            Console.WriteLine(e);
-            if (e.Message != "StandardError has not been redirected.") throw;
-        }
-
+        // try
+        // {
+        //     if (proc.StandardError != null) 
+        //         while (!proc.StandardError.EndOfStream)
+        //         {
+        //             sb.AppendLine(proc.StandardError.ReadLine());
+        //         }
+        // }
+        // catch (InvalidOperationException e)
+        // {
+        //     Console.WriteLine(e);
+        //     if (e.Message != "StandardError has not been redirected.") throw;
+        // }
         return sb.ToString();
     }
 }

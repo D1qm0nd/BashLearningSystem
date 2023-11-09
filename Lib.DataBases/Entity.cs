@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -17,6 +18,8 @@ namespace Lib.DataBases
 
         #region Properties
 
+        [Required] public bool IsActual { get; set; }
+        
         [JsonIgnore]
         [DisplayName(nameof(CreatedUTC))]
         public virtual DateTime CreatedUTC
