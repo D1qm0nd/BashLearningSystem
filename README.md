@@ -25,6 +25,19 @@ sequenceDiagram
 
 ```
 
+```mermaid
+sequenceDiagram
+    actor Client
+    Client ->> Container-Distributor : Выделить контейнер под нового пользователя
+    Container-Distributor -> Allocated-Container : Выделить контейнер
+    Container-Distributor -->> Client : Вернуть id контейнера
+    Client -->> Container-Distributor : Выполнить команду {command} в выделенном контейнере {id}
+    Container-Distributor ->>  Allocated-Container : Передать команду на выаолнение в выделенный контейнер
+    Allocated-Container ->> Container-Distributor : Вернуть результат выполнения команды
+    Container-Distributor ->> Client : Вернуть результат выполнения команды
+
+```
+
 - Диаграмма логической модели базы данных
 ``` mermaid
 classDiagram
