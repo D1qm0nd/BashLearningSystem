@@ -116,3 +116,21 @@ ul {
 .layout-navigation-admin  .layout-a:hover {
     background: linear-gradient(-15deg, orangered, orange, yellow);
 }
+
+table {
+    max-width: inherit;
+    margin: 20px auto;
+    background: linear-gradient(45deg, lightskyblue, transparent);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 30px;
+}
+
+thead tr {
+    color: white;
+    background: linear-gradient(90deg, transparent, orange, transparent);
+}
+
+tr {
+    background: linear-gradient(90deg, transparent, snow, transparent);
+}

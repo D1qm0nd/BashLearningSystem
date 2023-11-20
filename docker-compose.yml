@@ -17,18 +17,18 @@ services:
       COMMAND_EXECUTOR_URL: "http://127.0.0.1:55555/BashExecutor/Execute/"
     network_mode: host
     
-  bash_executor_api:
-    image: executor_api_image
-    container_name: executor
-    build:
-      context: .
-      dockerfile: ./BashExecutorAPI/Dockerfile
-    restart: always
-    environment:
-      CURRENT_FOLDER: "/root"
-      ASPNETCORE_URLS: "http://+:55555"
-#      COMMAND_EXECUTOR_PORT: "55555"
-    network_mode: host
+#  bash_executor_api:
+#    image: executor_api_image
+#    container_name: executor
+#    build:
+#      context: .
+#      dockerfile: ./BashExecutorAPI/Dockerfile
+#    restart: always
+#    environment:
+#      CURRENT_FOLDER: "/root"
+#      ASPNETCORE_URLS: "http://+:55555"
+##      COMMAND_EXECUTOR_PORT: "55555"
+#    network_mode: host
    
   db:
     image: postgres
@@ -39,7 +39,7 @@ services:
     restart: always
     network_mode: host
     volumes:
-      - /home/
+      - /home/db
         
   db_init:
     image: bash_learning_db_init
@@ -51,3 +51,12 @@ services:
     depends_on: 
       - db
     network_mode: host
+
+#  container-distributor:
+#    image: container-distributor
+#    build:
+#      context: .
+#      dockerfile: ./ContainerDistributor/Dockerfile
+#    environment:
+#      ASPNETCORE_URLS: "http://+:44444"
+#    network_mode: host

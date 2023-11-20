@@ -13,6 +13,12 @@ public class Tests
     }
 
     [Test]
+    public void GenerateGUID()
+    {
+        Console.WriteLine(Guid.NewGuid());
+    }
+
+    [Test]
     public void Test1()
     {
         var sentence = "Hello world!";
