@@ -23,6 +23,7 @@ public class CommandExecutor
     public string ExecuteUnixCommand(string command)
     {
         Process proc = new Process();
+        throw new NotImplementedException("Вероятно в этом участке кода проблемма со сменой директории");
         proc.StartInfo.WorkingDirectory = _currentPath;
         proc.StartInfo.FileName = "bash";
         proc.StartInfo.Arguments = $"-c \"{command}\"";
