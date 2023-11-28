@@ -22,7 +22,7 @@ public abstract class PermissionNeededController : SessionNeededController
         return context.IsAdmin(session.Data);
     }
 
-    protected IActionResult KickAction()
+    protected virtual IActionResult KickAction()
     {
         return RedirectToAction("Index", "Home");
     }
