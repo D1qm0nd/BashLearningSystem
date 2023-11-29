@@ -41,7 +41,7 @@ public static class Program
 
         builder.Services.AddSingleton<DockerClient>(
             dockerClient);
-        builder.Services.AddSingleton<List<ContainerData>>(new List<ContainerData>());
+        builder.Services.AddSingleton<Dictionary<string, KeyValuePair<DateTime, MultiplexedStream>>>(new Dictionary<string, KeyValuePair<DateTime, MultiplexedStream>>());
 
         var delay = Environment.GetEnvironmentVariable("TRACKER_MINUTE_DELAY");
         var _delayMinutes = delay != null && int.TryParse(delay, out _) ? int.Parse(delay) : 1;
@@ -57,7 +57,7 @@ public static class Program
         var image = new ImageData(imageNameEnvValue, imageTagEnvValue);
 
         builder.Services.AddSingleton<ImageData>(image);
-
+        
         dockerClient.Images.CreateImageAsync(
             parameters: new ImagesCreateParameters
             {
@@ -66,7 +66,7 @@ public static class Program
             },
             authConfig: null,
             progress: new Progress<JSONMessage>(),
-            cancellationToken: new CancellationToken()).Wait();
+            cancellationToken: new CancellationToken()).WaitAsync(new CancellationToken()).Wait();
         return builder;
     }
 

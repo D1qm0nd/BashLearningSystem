@@ -120,17 +120,53 @@ ul {
 table {
     max-width: inherit;
     margin: 20px auto;
-    background: linear-gradient(45deg, lightskyblue, transparent);
+    background: linear-gradient(30deg, lightskyblue, snow, lightskyblue);
+    font-family: monospace;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    font-size: 16pt;
+    color: black;
+    border-top-left-radius: 30px;
     border-radius: 30px;
+
 }
 
 thead tr {
-    color: white;
-    background: linear-gradient(90deg, transparent, orange, transparent);
+    color: darkblue;
+    font-size: 20pt;
+    margin-bottom: 100px;
+}
+
+tbody {
 }
 
 tr {
-    background: linear-gradient(90deg, transparent, snow, transparent);
+}
+
+
+td {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+td a {
+    color: white;
+    background: orange;
+    border-radius: 9px;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+td a:hover {
+    animation: HoverAction;
+    animation-play-state: running;
+    animation-duration: 2s;
+    animation-fill-mode: backwards;
+    animation-timing-function: cubic-bezier(0,-0.02,.1,1.13)
+}
+
+@keyframes HoverAction {
+    to {
+        background: red;
+    }
 }
