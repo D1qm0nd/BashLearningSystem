@@ -1,16 +1,16 @@
 @model IEnumerable<BashDataBaseModels.Command>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Команды";
+    ViewData["Create"] = "Добавить";
 }
 
-<h1>Команды</h1>
+<a class="create" asp-action="Create">@ViewData["Create"]</a>
+<div class="table-container">
+    <h1 class="table-header">@ViewData["Title"]</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
+    <table class="table">
+        <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Text)
@@ -29,31 +29,33 @@
             </th>
             <th></th>
         </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Text)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Theme.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedUTC)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedUTC)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CommandId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CommandId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CommandId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Theme.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedUTC)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedUTC)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.CommandId">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.CommandId">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.CommandId">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

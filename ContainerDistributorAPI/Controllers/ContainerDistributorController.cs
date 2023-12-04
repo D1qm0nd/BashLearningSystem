@@ -13,21 +13,23 @@ public class ContainerDistributorApiController : ControllerBase //, IDisposable
     private readonly ILogger<ContainerDistributorApiController> _logger;
 
     private readonly DockerClient _dockerClient;
-    private Dictionary<string, KeyValuePair<DateTime, MultiplexedStream>> _containersInputOutputStreams;
     private readonly ImageData _image;
     private readonly Task TrackTask;
+    private readonly ContainerParametersAgent _containerParametersAgent;
+    private readonly ContainersLifeCycleObject _containersLifeCycleObject;
 
     public ContainerDistributorApiController(ILogger<ContainerDistributorApiController> logger,
-        Dictionary<string, KeyValuePair<DateTime, MultiplexedStream>> containersInputOutputStreams,
+        ContainersLifeCycleObject containersLifeCycleObject,
         DockerClient dockerClient,
-        ImageData image)
+        ImageData image, ContainerParametersAgent containerParametersAgent)
     {
         _logger = logger;
-        _containersInputOutputStreams = containersInputOutputStreams;
         _dockerClient = dockerClient;
         _image = image;
-        _containersInputOutputStreams = new();
+        _containerParametersAgent = containerParametersAgent;
+        _containersLifeCycleObject = containersLifeCycleObject;
         TrackTask = TrackContainers(1);
+        TrackTask.WaitAsync(new CancellationToken());
     }
 
     /// <summary>
@@ -42,15 +44,15 @@ public class ContainerDistributorApiController : ControllerBase //, IDisposable
             while (true)
             {
                 var toCloseAndRemove =
-                    _containersInputOutputStreams.Where(e =>
-                        e.Value.Key.AddMinutes(minuteDelay) <= DateTime.UtcNow);
-                Parallel.ForEachAsync(toCloseAndRemove, (pair, token) =>
+                    _containersLifeCycleObject.Where(e => e.Item3.AddMilliseconds(minuteDelay) <= DateTime.UtcNow).ToList();
+                Parallel.ForEachAsync(toCloseAndRemove, (item, _) =>
                 {
-                    _logger.LogInformation($"Dispose container: {pair.Key}");
-                    pair.Value.Value.Dispose();
-                    _containersInputOutputStreams.Remove(pair.Key);
+                    _containersLifeCycleObject.Remove(item);
+                    var res = RemoveContainer(item.Item1).Result;
+                    if (res) _logger.LogInformation($"Remove container {_image.Image}_{item.Item1} SUCCESS");
+                    else _logger.LogError($"Remove container {_image.Image}_{item.Item1} FAILED ");
                     return default;
-                }).Wait();
+                });
                 Thread.Sleep(10000);
             }
         });
@@ -58,41 +60,52 @@ public class ContainerDistributorApiController : ControllerBase //, IDisposable
 
     #region HTTP Methods
 
-    [HttpGet("[action]/generate-guid")]
+    [HttpGet("generate-guid")]
     public Guid GenerateGUID() => Guid.NewGuid();
 
-    [HttpGet("[action]/create-container-{user_id}")]
-    public async Task<string> CreateContainerForUser(Guid user_id)
+    [HttpPost("container-create")]
+    public async Task<CreateContainerResponse?> CreateContainerForUser([FromBody] Guid id)
     {
-        return await Task<string>.Factory.StartNew(() => CreateContainer(
-            id: user_id.ToString(),
-            cancellationToken: new CancellationToken()).Result.ID);
+        var containerResponse = await _dockerClient.Containers.CreateContainerAsync(
+            parameters: _containerParametersAgent.CreateParameters(_image,
+                id.ToString()));
+        if (containerResponse != null)
+            _containersLifeCycleObject.Add(new ContainerLifeCycleObject(id, containerResponse, DateTime.UtcNow));
+        else if (containerResponse == null)
+            _logger.LogError("Failed to create container for user {id}", id);
+        return containerResponse;
     }
 
-    [HttpPost("[action]/execute")]
-    public async Task<string> ExecuteCommandInContainer(string id, [FromBody] string command)
-    {
-        var containerId = $"{_image.Image}_{id}";
-        MultiplexedStream containerInputOutputStream =
-            _containersInputOutputStreams.FirstOrDefault(container => container.Key == containerId).Value.Value;
-        if (containerInputOutputStream == null)
-        {
-            _logger.LogInformation("Attach Container: {containerId}", containerId);
-            containerInputOutputStream = await AttachContainerAsync(containerId);
-            // _containersInputOutputStreams.Add(id,
-            //     new KeyValuePair<DateTime, MultiplexedStream>(DateTime.UtcNow, containerInputOutputStream));
-        }
+    private Task<MultiplexedStream> AttachContainerAsync(string containerId) =>
+        _dockerClient.Containers.AttachContainerAsync(
+            id: containerId,
+            parameters: _containerParametersAgent.AttachParameters(),
+            tty: true, //false - если true, то выводит то что ввели, но не выключает контейнер
+            cancellationToken: new CancellationToken());
 
-        using (containerInputOutputStream)
+    [HttpPost("container-execute")]
+    public async Task<ExecData?> ExecuteCommandInContainer([FromBody] ExecContainerCommand data)
+    {
+        if (!await ContainerExists(data.ID))
+            if (await CreateContainerForUser(data.ID) == null)
+            {
+                return null;
+            }
+        
+        var execResult = new ExecData(data.ID, data.Command);
+        var containerId = $"{_image.Image}_{data.ID}";
+
+        await StartContainer(data.ID);
+        _logger.LogInformation("Attach Container: {containerId}", containerId);
+        using (var containerInputOutputStream = await AttachContainerAsync(containerId))
         {
-            var sendCommand = Encoding.UTF8.GetBytes(command);
+            var sendCommand = Encoding.UTF8.GetBytes(data.Command);
 
             await containerInputOutputStream.WriteAsync(
                 buffer: sendCommand,
                 offset: 0,
                 count: sendCommand.Length,
                 cancellationToken: new CancellationToken());
-
 
             containerInputOutputStream.CloseWrite();
 
@@ -101,7 +114,7 @@ public class ContainerDistributorApiController : ControllerBase //, IDisposable
 
             while (!cancellationToken.IsCancellationRequested)
             {
-                var buffer = new byte[1024];
+                var buffer = new byte[4096];
                 var answ = await containerInputOutputStream.ReadOutputAsync(buffer, 0, buffer.Length,
                     cancellationToken);
                 switch (answ.Target)
@@ -111,10 +124,11 @@ public class ContainerDistributorApiController : ControllerBase //, IDisposable
                         break;
                     case MultiplexedStream.TargetStream.StandardOut:
                         _logger.LogInformation("READ OUTPUT");
-                        var answer = Encoding.UTF8.GetString(buffer).Trim('\0');
+                        var answer = Encoding.UTF8.GetString(buffer);
                         _logger.LogInformation("READ BUFFER: {answer}", answer);
                         sb.Append(answer);
                         break;
+
                     case MultiplexedStream.TargetStream.StandardError:
                         _logger.LogInformation("READ ERROR");
                         break;
@@ -122,13 +136,18 @@ public class ContainerDistributorApiController : ControllerBase //, IDisposable
 
                 if (answ.EOF) break;
             }
-
-            return sb.ToString();
+            execResult.Result = sb.ToString()
+                .Remove(0,1)
+                .Replace($"{'\u0000'}", "")
+                .Replace($"{'\u0001'}", "")
+                .Replace($"{'\u0004'}","")
+                .Replace($"{'\u0005'}","").Replace("\ufffd","");
+            return execResult;
         }
     }
 
-    [HttpPost("[action]/StartContainer-{id}")]
-    public async Task<string> StartContainer(string id)
+    [HttpPost("container-start")]
+    public async Task<bool> StartContainer([FromBody] Guid id)
     {
         _logger.LogInformation("Container {id} start", id);
         var res = await _dockerClient.Containers.StartContainerAsync(
@@ -137,59 +156,44 @@ public class ContainerDistributorApiController : ControllerBase //, IDisposable
             {
             },
             cancellationToken: new CancellationToken());
-        if (res)
+        if (res) _logger.LogInformation("Container {id} start [SUCCESS]", id);
+        else _logger.LogWarning("Container {id} start [FAILED]", id);
+        return res;
+    }
+
+    [HttpDelete("container-remove")]
+    public async Task<bool> RemoveContainer([FromBody] Guid id)
+    {
+        try
         {
-            _logger.LogInformation("Container {id} start [SUCCESS]", id);
-            return "started";
+            await _dockerClient.Containers.RemoveContainerAsync(
+                id: $"{_image.Image}_{id}",
+                parameters: new ContainerRemoveParameters(),
+                cancellationToken: new CancellationToken());
+            return true;
         }
-        else
+        catch
         {
-            _logger.LogWarning("Container {id} start [FAILED]", id);
-            return "container already running";
+            return false;
         }
     }
+
+    [HttpPost("container-exists")]
+    public async Task<bool> ContainerExists([FromBody] Guid id)
+    {
+        return _containersLifeCycleObject.Any(container => container.Item1 == id);
+    }
+
+    [HttpPost("container-stop")]
+    public async Task<bool> StopContainerAsync([FromBody] Guid id) => await _dockerClient.Containers
+        .StopContainerAsync(
+            $"{_image.Image}_{id}",
+            _containerParametersAgent.StopParameters(),
+            new CancellationToken());
 
     #endregion
 
     #region Methods
-
-    //TODO: сохранять где-то т.к. отвечает за жизненный цикл контенера, также продумать удаление после окончания жизненного цикла, и максимальное количество контенеров за раз
-    private async Task<MultiplexedStream> AttachContainerAsync(string id) =>
-        await _dockerClient.Containers.AttachContainerAsync(
-            id: id,
-            parameters: new ContainerAttachParameters
-            {
-                Stderr = true,
-                Stdin = true, //false - долго подключается, вероятна утечка памяти
-                Stdout = true,
-                Stream = true,
-                Logs = "1"
-            },
-            tty: false, //false - если true, то выводит то что ввели, но не выключает контейнер
-            cancellationToken: new CancellationToken());
-
-
-    private async Task<CreateContainerResponse> CreateContainer(string id, CancellationToken cancellationToken)
-    {
-        return await _dockerClient.Containers.CreateContainerAsync(
-            parameters: new CreateContainerParameters
-            {
-                Image = _image.ToString(),
-                Name = $"{_image.Image}_{id}",
-                Shell = new List<string> //без этого контейнер просто вырубится после запуска
-                {
-                    "tail -f /etc/hosname"
-                },
-                ArgsEscaped = true,
-                AttachStdin = true, //false - долго подключается, вероятна утечка памяти
-                AttachStdout = true,
-                AttachStderr = true,
-                StdinOnce = true, //true без этого не работает, а с этим падает после одной команды?
-                OpenStdin = true,
-                Tty = false, //false - если true, то выводит то что ввели, но не выключает контейнер
-            },
-            cancellationToken: cancellationToken);
-    }
 
     #endregion
 }

@@ -107,3 +107,59 @@ a:hover {
     margin: 0;
     color: snow;
 }
+
+
+.theme-mark-button-form {
+    align-self: start;
+    margin: 10px;
+}
+
+.theme-mark-button {
+    color: snow;
+    font-size: 11pt;
+    font-weight: bold;
+    padding: 6px;
+    border: 0;
+    border-radius: 10px;
+    font-family: monospace;
+}
+
+.read {
+    background: forestgreen;
+}
+
+.unread {
+    background: red;
+}
+
+.read:hover {
+    animation: ReadHover;
+    animation-play-state: running;
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0, -0.02, .1, 1.13)
+}
+
+.unread:hover {
+    animation: UnReadHover;
+    animation-play-state: running;
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0, -0.02, .1, 1.13)
+}
+
+@keyframes ReadHover{
+    to {
+        background: limegreen;
+    }
+}
+
+@keyframes UnReadHover{
+    to {
+        background: orange;
+    }
+}
+
+.theme-container {
+    width: 100%
+}
