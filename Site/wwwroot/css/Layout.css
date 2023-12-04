@@ -37,6 +37,11 @@ a {
     left: 0;
     right: 0;
     margin: 40px 20px auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
 }
 
 .footer {
@@ -93,48 +98,48 @@ ul {
 
 .layout-a {
     padding: 10px 20px;
-    background: linear-gradient(-15deg, blue, #6565ff, skyblue);
+    background: linear-gradient(-15deg, blue, #6565ff, deepskyblue);
     color: #fff;
     text-decoration: none;
     border-radius: 3px;
     box-shadow: 2px 2px 3px 1px #5f676e;
     /*margin-right: 1px;*/
 }
+
 .layout-a:hover {
-    background-color: mediumslateblue;
+    background: linear-gradient(-15deg, blue, #6565ff, skyblue);
+
 }
 
 .layout-navigation-admin .layout-a {
     padding: 10px 20px;
-    background: linear-gradient(-15deg, orangered, orange) ;
+    background: linear-gradient(-15deg, orangered, orange);
     color: #fff;
     text-decoration: none;
     border-radius: 3px;
     /*margin-right: 1px;*/
 }
 
-.layout-navigation-admin  .layout-a:hover {
+.layout-navigation-admin .layout-a:hover {
     background: linear-gradient(-15deg, orangered, orange, yellow);
 }
 
 table {
     max-width: inherit;
-    margin: 20px auto;
+    border-top: 1px black solid;
     background: linear-gradient(30deg, lightskyblue, snow, lightskyblue);
-    font-family: monospace;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
     padding: 20px;
     font-size: 16pt;
     color: black;
-    border-top-left-radius: 30px;
-    border-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
 
 }
 
 thead tr {
     color: darkblue;
     font-size: 20pt;
-    margin-bottom: 100px;
 }
 
 tbody {
@@ -162,7 +167,7 @@ td a:hover {
     animation-play-state: running;
     animation-duration: 2s;
     animation-fill-mode: backwards;
-    animation-timing-function: cubic-bezier(0,-0.02,.1,1.13)
+    animation-timing-function: cubic-bezier(0, -0.02, .1, 1.13)
 }
 
 @keyframes HoverAction {
@@ -170,3 +175,23 @@ td a:hover {
         background: red;
     }
 }
+
+.table-header {
+    text-align: center;
+    color: snow;
+    background: orange;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.table-container {
+    font-family: monospace;
+    margin: auto;
+} 
+
+.create {
+    margin: 10px;
+    font-family: monospace;
+    color: darkblue;    
+}
+

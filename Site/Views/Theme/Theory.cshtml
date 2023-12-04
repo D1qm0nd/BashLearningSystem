@@ -5,6 +5,8 @@
 @model Session<BashDataBaseModels.User>
 @{
     var theme = ViewData["Theme"] as Theme;
+    ViewData["MarkAsRead"] = "Пометить прочитанным";
+    ViewData["MarkAsUnRead"] = "Пометить не прочитанным";
 }
 
 <script>
@@ -19,30 +21,28 @@
 @* @if ((bool)ViewData["isAuthorized"]){ *@
 @*         let a = document.getElementById("terminalButton") *@
 @*     } *@
-<div class="container">
-    @if (theme == null)
+@if (theme == null)
+{
+    <p>Данная тема отсутствует</p>
+}
+else
+{
+    @if ((bool)ViewData["isAuthorized"])
     {
-        <p>Данная тема отсутствует</p>
+        if ((bool)ViewData["isRead"] == false)
+        {
+            <form class="theme-mark-button-form" method="post">
+                <button class="theme-mark-button read" asp-route-id=@theme.ThemeId asp-controller="Theme" asp-action="MarkAsRead">@ViewData["MarkAsRead"]</button>
+            </form>
+        }
+        else
+        {
+            <form class="theme-mark-button-form" method="post">
+                <button class="theme-mark-button unread" asp-route-id=@theme.ThemeId asp-controller="Theme" asp-action="MarkAsUnRead">@ViewData["MarkAsUnRead"]</button>
+            </form>
+        }
     }
-    else
-    {
-        <div class="container">
-            @if ((bool)ViewData["isAuthorized"])
-            {
-                if ((bool)ViewData["isRead"] == false)
-                {
-                    <form method="post">
-                        <button asp-route-id=@theme.ThemeId asp-controller="Theme" asp-action="MarkAsRead">Пометить прочитанным</button>
-                    </form>
-                }
-                else
-                {
-                    <form method="post">
-                        <button asp-route-id=@theme.ThemeId asp-controller="Theme" asp-action="MarkAsUnRead">Пометить не прочитанным</button>
-                    </form>
-                }
-            }
-        </div>
+    <div class="theme-container">
         <h1 class="theory_theme_header">@theme.Name</h1>
         <div class="theory_card">
             @foreach (var command in theme.Commands)
@@ -75,16 +75,15 @@
             <script src="/lib/jquery/dist/jquery.js"></script>
             <div class="terminal">
                 @{
-                    var ExecutorIP = (string)ViewData["BashExecutorIP"]; 
+                    var ExecutorIP = (string)ViewData["BashExecutorIP"];
                 }
                 <textarea class="terminal-textarea" id="terminalConsole" ></textarea>
                 <button class="terminal-execute-button"
                         id="terminalButton"
-                        onclick="sendCommandToExecute('@ExecutorIP')">
-                    Execute
+                        onclick="(execute('@ExecutorIP',{'id': '@Model.Id','command': getDataFromTerminal()}))">
+                    ExecuteMod
                 </button>
-                @* asp-action="SendCommandExecuteRequest" asp-controller="BashExecute" *@
             </div>
         }
-    }
-</div>
+    </div>
+}

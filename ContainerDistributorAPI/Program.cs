@@ -11,6 +11,7 @@ public static class Program
     {
         var builder = WebApplication.CreateBuilder(args).ConfigureServices();
         var app = builder.Build().ConfigureHTTP();
+        app.UseCors("MyPolicy");
         app.Run();
     }
 
@@ -23,6 +24,14 @@ public static class Program
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+        
+        builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+        {
+            builder
+                .AllowAnyMethod()
+                .AllowAnyOrigin()
+                .AllowAnyHeader();
+        }));
 
         DockerClient dockerClient;
         if (OperatingSystem.IsLinux() || OperatingSystem.IsMacOS())
@@ -41,7 +50,8 @@ public static class Program
 
         builder.Services.AddSingleton<DockerClient>(
             dockerClient);
-        builder.Services.AddSingleton<Dictionary<string, KeyValuePair<DateTime, MultiplexedStream>>>(new Dictionary<string, KeyValuePair<DateTime, MultiplexedStream>>());
+        builder.Services.AddSingleton<ContainersLifeCycleObject>(
+            new ContainersLifeCycleObject());
 
         var delay = Environment.GetEnvironmentVariable("TRACKER_MINUTE_DELAY");
         var _delayMinutes = delay != null && int.TryParse(delay, out _) ? int.Parse(delay) : 1;
@@ -57,16 +67,44 @@ public static class Program
         var image = new ImageData(imageNameEnvValue, imageTagEnvValue);
 
         builder.Services.AddSingleton<ImageData>(image);
-        
-        dockerClient.Images.CreateImageAsync(
-            parameters: new ImagesCreateParameters
+
+        builder.Services.AddSingleton(new ContainerParametersAgent((image, id) => new CreateContainerParameters
             {
-                FromImage = image.Image,
-                Tag = image.Tag
-            },
-            authConfig: null,
-            progress: new Progress<JSONMessage>(),
-            cancellationToken: new CancellationToken()).WaitAsync(new CancellationToken()).Wait();
+                Image = image.ToString(),
+                Name = $"{image.Image}_{id}",
+                Shell = new List<string> //без этого контейнер просто вырубится после запуска
+                {
+                    "tail -f /etc/hosname"
+                },
+                ArgsEscaped = true,
+                AttachStdin = true, //false - долго подключается, вероятна утечка памяти
+                AttachStdout = true,
+                AttachStderr = true,
+                StdinOnce = true, //true - без этого не работает, а с этим падает после одной команды?
+                OpenStdin = true,
+                Tty = false, //false - если true, то выводит то что ввели, но не выключает контейнер
+            }, () => new ContainerAttachParameters
+            {
+                Stderr = true,
+                Stdin = true, //false - долго подключается 
+                Stdout = true,
+                Stream = true,
+                Logs = "1"
+            }, () => new ContainerStopParameters
+            {
+                WaitBeforeKillSeconds = null
+            }
+        ));
+        
+        // dockerClient.Images.CreateImageAsync(
+        //     parameters: new ImagesCreateParameters
+        //     {
+        //         FromImage = image.Image,
+        //         Tag = image.Tag
+        //     },
+        //     authConfig: null,
+        //     progress: new Progress<JSONMessage>(),
+        //     cancellationToken: new CancellationToken()).WaitAsync(new CancellationToken()).Wait();
         return builder;
     }
 
