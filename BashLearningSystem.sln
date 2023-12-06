@@ -10,10 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5F83E643
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.DataModels", "Tests.DataModels\Tests.DataModels.csproj", "{5E529A46-5F27-48B9-921A-B2C5D66530BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandHandler", "CommandHandler\CommandHandler.csproj", "{A1A41663-3F69-4BB0-99E0-63ECF8C5C47E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandExecutor", "CommandExecutor\CommandExecutor.csproj", "{B70269DC-A1AC-468C-9449-D079AF9681A8}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker-compose", "docker-compose", "{1DCC35BA-F368-483E-B192-DD070B6ED17A}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
@@ -38,8 +34,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.BashLearningDB", "Tests\Tests.BashLearningDB\Tests.BashLearningDB.csproj", "{F6C2A569-0152-4EAF-9025-117B17B7BD6F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exceptions", "Exceptions\Exceptions.csproj", "{F876337D-839D-4E7B-A7A7-A2ED3035CD8A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BashExecutorAPI", "BashExecutorAPI\BashExecutorAPI.csproj", "{E19AA572-2AE5-4288-B96F-5F55AFA69A5B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContainerDistributorAPI", "ContainerDistributorAPI\ContainerDistributorAPI.csproj", "{856E9509-B9BB-42BC-B703-885E85CF39CE}"
 EndProject
@@ -95,14 +89,6 @@ Global
 		{5E529A46-5F27-48B9-921A-B2C5D66530BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E529A46-5F27-48B9-921A-B2C5D66530BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E529A46-5F27-48B9-921A-B2C5D66530BC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A1A41663-3F69-4BB0-99E0-63ECF8C5C47E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A1A41663-3F69-4BB0-99E0-63ECF8C5C47E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A1A41663-3F69-4BB0-99E0-63ECF8C5C47E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A1A41663-3F69-4BB0-99E0-63ECF8C5C47E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B70269DC-A1AC-468C-9449-D079AF9681A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B70269DC-A1AC-468C-9449-D079AF9681A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B70269DC-A1AC-468C-9449-D079AF9681A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B70269DC-A1AC-468C-9449-D079AF9681A8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0C92D590-0FF5-40BB-A272-ACA841D87A7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0C92D590-0FF5-40BB-A272-ACA841D87A7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C92D590-0FF5-40BB-A272-ACA841D87A7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -139,10 +125,6 @@ Global
 		{F876337D-839D-4E7B-A7A7-A2ED3035CD8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F876337D-839D-4E7B-A7A7-A2ED3035CD8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F876337D-839D-4E7B-A7A7-A2ED3035CD8A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E19AA572-2AE5-4288-B96F-5F55AFA69A5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E19AA572-2AE5-4288-B96F-5F55AFA69A5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E19AA572-2AE5-4288-B96F-5F55AFA69A5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E19AA572-2AE5-4288-B96F-5F55AFA69A5B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{856E9509-B9BB-42BC-B703-885E85CF39CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{856E9509-B9BB-42BC-B703-885E85CF39CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{856E9509-B9BB-42BC-B703-885E85CF39CE}.Release|Any CPU.ActiveCfg = Release|Any CPU

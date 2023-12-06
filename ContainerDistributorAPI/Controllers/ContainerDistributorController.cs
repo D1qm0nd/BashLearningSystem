@@ -8,54 +8,24 @@ namespace ContainerDistributorAPI.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class ContainerDistributorApiController : ControllerBase , IDisposable
+public class ContainerDistributorApiController : ControllerBase
 {
     private readonly ILogger<ContainerDistributorApiController> _logger;
 
     private readonly DockerClient _dockerClient;
     private readonly ImageData _image;
-    private readonly Task TrackTask;
+    private readonly EnvironmentVariables _environmentVariables;
     private readonly ContainerParametersAgent _containerParametersAgent;
-    private readonly ContainersLifeCycleObject _containersLifeCycleObject;
 
     public ContainerDistributorApiController(ILogger<ContainerDistributorApiController> logger,
-        ContainersLifeCycleObject containersLifeCycleObject,
         DockerClient dockerClient,
-        ImageData image, ContainerParametersAgent containerParametersAgent)
+        ImageData image, ContainerParametersAgent containerParametersAgent, EnvironmentVariables environmentVariables)
     {
         _logger = logger;
         _dockerClient = dockerClient;
         _image = image;
         _containerParametersAgent = containerParametersAgent;
-        _containersLifeCycleObject = containersLifeCycleObject;
-        TrackTask = TrackContainers(1);
-        TrackTask.WaitAsync(new CancellationToken());
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="delay">in minutes</param>
-    private async Task TrackContainers(double delay = 0.0)
-    {
-        await Task.Factory.StartNew(action: () =>
-        {
-            var minuteDelay = 1000.0 * 60.0 * delay;
-            while (true)
-            {
-                var toCloseAndRemove =
-                    _containersLifeCycleObject.Where(e => e.Item3.AddMilliseconds(minuteDelay) <= DateTime.UtcNow).ToList();
-                Parallel.ForEachAsync(toCloseAndRemove, (item, _) =>
-                {
-                    _containersLifeCycleObject.Remove(item);
-                    var res = RemoveContainer(item.Item1).Result;
-                    if (res) _logger.LogInformation($"Remove container {_image.Image}_{item.Item1} SUCCESS");
-                    else _logger.LogError($"Remove container {_image.Image}_{item.Item1} FAILED ");
-                    return default;
-                });
-                Thread.Sleep(10000);
-            }
-        });
+        _environmentVariables = environmentVariables;
     }
 
     #region HTTP Methods
@@ -69,9 +39,7 @@ public class ContainerDistributorApiController : ControllerBase , IDisposable
         var containerResponse = await _dockerClient.Containers.CreateContainerAsync(
             parameters: _containerParametersAgent.CreateParameters(_image,
                 id.ToString()));
-        if (containerResponse != null)
-            _containersLifeCycleObject.Add(new ContainerLifeCycleObject(id, containerResponse, DateTime.UtcNow));
-        else if (containerResponse == null)
+        if (containerResponse == null)
             _logger.LogError("Failed to create container for user {id}", id);
         return containerResponse;
     }
@@ -83,30 +51,41 @@ public class ContainerDistributorApiController : ControllerBase , IDisposable
             tty: true, //false - если true, то выводит то что ввели, но не выключает контейнер
             cancellationToken: new CancellationToken());
 
+    [HttpPost("container-restart")]
+    public async Task RestartContainer([FromBody] Guid id) =>
+        await _dockerClient.Containers.RestartContainerAsync($"{_image.Image}_{id}",
+            _containerParametersAgent.RestartParameters(), new CancellationToken());
+
+
     [HttpPost("container-execute")]
     public async Task<ExecData?> ExecuteCommandInContainer([FromBody] ExecContainerCommand data)
     {
-        if (!await ContainerExists(data.ID))
-            if (await CreateContainerForUser(data.ID) == null)
-            {
-                return null;
-            }
-        
+        try
+        {
+            await RestartContainer(data.ID);
+        }
+        catch (Exception e)
+        {
+            await CreateContainerForUser(data.ID);
+            await StartContainer(data.ID);
+        }
+
         var execResult = new ExecData(data.ID, data.Command);
         var containerId = $"{_image.Image}_{data.ID}";
+
 
         await StartContainer(data.ID);
         _logger.LogInformation("Attach Container: {containerId}", containerId);
         using (var containerInputOutputStream = await AttachContainerAsync(containerId))
         {
-            var sendCommand = Encoding.UTF8.GetBytes($"clear && {data.Command}");
+            var sendCommand = Encoding.UTF8.GetBytes($"{data.Command}");
 
             await containerInputOutputStream.WriteAsync(
                 buffer: sendCommand,
                 offset: 0,
                 count: sendCommand.Length,
                 cancellationToken: new CancellationToken());
-
+            
             containerInputOutputStream.CloseWrite();
 
             var cancellationToken = new CancellationToken();
@@ -114,7 +93,7 @@ public class ContainerDistributorApiController : ControllerBase , IDisposable
 
             while (!cancellationToken.IsCancellationRequested)
             {
-                var buffer = new byte[4096];
+                var buffer = new byte[_environmentVariables.BufferSize];
                 var answ = await containerInputOutputStream.ReadOutputAsync(buffer, 0, buffer.Length,
                     cancellationToken);
                 switch (answ.Target)
@@ -128,20 +107,30 @@ public class ContainerDistributorApiController : ControllerBase , IDisposable
                         _logger.LogInformation("READ BUFFER: {answer}", answer);
                         sb.Append(answer);
                         break;
-
                     case MultiplexedStream.TargetStream.StandardError:
                         _logger.LogInformation("READ ERROR");
                         break;
                 }
-
                 if (answ.EOF) break;
             }
+
             execResult.Result = sb.ToString()
-                .Remove(0,1)
+                .Remove(0, 1)
                 .Replace($"{'\u0000'}", "")
                 .Replace($"{'\u0001'}", "")
-                .Replace($"{'\u0004'}","")
-                .Replace($"{'\u0005'}","").Replace("\ufffd","");
+                .Replace($"{'\u0004'}", "")
+                .Replace($"{'\u0005'}", "")
+                .Replace("\ufffd", "")
+                .Replace("\a", "")
+                .Replace("\b", "")
+                .Replace("\v", "");
+            try
+            {
+                await RemoveContainer(data.ID);
+            }
+            catch
+            {
+            }
             return execResult;
         }
     }
@@ -168,7 +157,7 @@ public class ContainerDistributorApiController : ControllerBase , IDisposable
         {
             await _dockerClient.Containers.RemoveContainerAsync(
                 id: $"{_image.Image}_{id}",
-                parameters: new ContainerRemoveParameters(),
+                parameters: _containerParametersAgent.RemoveParameters(),
                 cancellationToken: new CancellationToken());
             return true;
         }
@@ -176,12 +165,6 @@ public class ContainerDistributorApiController : ControllerBase , IDisposable
         {
             return false;
         }
-    }
-
-    [HttpPost("container-exists")]
-    public async Task<bool> ContainerExists([FromBody] Guid id)
-    {
-        return _containersLifeCycleObject.Any(container => container.Item1 == id);
     }
 
     [HttpPost("container-stop")]
@@ -192,20 +175,4 @@ public class ContainerDistributorApiController : ControllerBase , IDisposable
             new CancellationToken());
 
     #endregion
-
-    #region Methods
-
-    #endregion
-
-    public void Dispose()
-    {
-        Parallel.ForEachAsync(_containersLifeCycleObject, (container, _) =>
-        {
-            _dockerClient.Containers.RemoveContainerAsync(container.Item2.ID,
-                _containerParametersAgent.RemoveParameters());
-            return default;
-        }); 
-        _dockerClient.Dispose();
-        TrackTask.Dispose();
-    }
 }
