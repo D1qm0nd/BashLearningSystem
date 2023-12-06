@@ -1,6 +1,5 @@
 bin/
 obj/
-/WebApp.LearningSystem/wwwroot/lib/
 /packages/
 riderModule.iml
 /_ReSharper.Caches/

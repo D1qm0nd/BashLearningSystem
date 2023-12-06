@@ -1,12 +1,12 @@
 @model BashDataBaseModels.User
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Добавить";
 }
 
-<h1>Create</h1>
+<h1>Создать</h1>
 
-<h4>User</h4>
+<h4>Пользователь</h4>
 <hr/>
 <div class="row">
     <div class="col-md-4">
@@ -42,23 +42,13 @@
                     <input class="form-check-input" asp-for="IsActual"/> @Html.DisplayNameFor(model => model.IsActual)
                 </label>
             </div>
-            @* <div class="form-group"> *@
-            @*     <label asp-for="CreatedUTC" class="control-label"></label> *@
-            @*     <input asp-for="CreatedUTC" class="form-control" /> *@
-            @*     <span asp-validation-for="CreatedUTC" class="text-danger"></span> *@
-            @* </div> *@
-            @* <div class="form-group"> *@
-            @*     <label asp-for="UpdatedUTC" class="control-label"></label> *@
-            @*     <input asp-for="UpdatedUTC" class="form-control" /> *@
-            @*     <span asp-validation-for="UpdatedUTC" class="text-danger"></span> *@
-            @* </div> *@
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary"/>
+                <input type="submit" value="Добавить" class="btn btn-primary"/>
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Вернуться к списку</a>
 </div>

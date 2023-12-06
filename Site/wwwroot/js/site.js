@@ -17,13 +17,6 @@ const sendHttpRequest = (method, url, data) => {
     return promise;
 };
 
-const getData = (url) => {
-    sendHttpRequest("GET", url).then(responseData => {
-        console.log(responseData);
-        return responseData;
-    });
-}
-
 const sendData = (method, url, body, action) => {
     sendHttpRequest(method, url, body).then(responseData => {
         action(responseData.result);

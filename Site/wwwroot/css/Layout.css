@@ -187,11 +187,38 @@ td a:hover {
 .table-container {
     font-family: monospace;
     margin: auto;
-} 
+}
 
 .create {
     margin: 10px;
     font-family: monospace;
-    color: darkblue;    
+    color: darkblue;
 }
 
+.btn.btn-primary {
+    font-size: 20pt;
+    font-family: monospace;
+    font-weight: bold;
+    color: white;
+    border-radius: 10px;
+    background: linear-gradient(15deg, blue, snow);
+    padding: 1pt 5pt 1pt 5pt;
+}
+
+
+.btn.btn-danger {
+    font-size: 20pt;
+    font-family: monospace;
+    font-weight: bold;
+    color: white;
+    border-radius: 10px;
+    background: linear-gradient(15deg, blue, snow);
+    padding: 1pt 5pt 1pt 5pt;
+}
+
+.form-control {
+    padding: 1pt 5pt 1pt 5pt;
+    font-weight: bold;
+    font-family: monospace;
+    border-radius: 10px;
+}

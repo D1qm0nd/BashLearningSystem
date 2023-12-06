@@ -56,7 +56,7 @@ public class Tests
     }
 
     [Test]
-    public void MakeAdmin()
+    public void CreateBaseAdmin()
     {
         var login = _cryptograph.Coding("admin");
         var user = _context.Users.FirstOrDefault(e => e.Login == login);

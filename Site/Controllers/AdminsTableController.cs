@@ -48,6 +48,7 @@ namespace Site.Controllers
         }
 
         // GET: AdminsTableController/Create
+
         public IActionResult Create()
         {
             if (!isAdmin()) return KickAction();
