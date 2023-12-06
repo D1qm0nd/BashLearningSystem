@@ -1,5 +1,5 @@
 .terminal {
-    width: 500px;
+    width: 700px;
     display: flex;
     flex-flow: column nowrap;
     /* padding: 0px; */
@@ -7,7 +7,7 @@
 
 .terminal-textarea {
     width: inherit;
-    height: 250px;
+    height: 350px;
     border-color: gray;
     border-width: 3px;
     border-radius: 10px 10px 0px 0px;

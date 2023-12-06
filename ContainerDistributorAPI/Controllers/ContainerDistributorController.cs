@@ -8,7 +8,7 @@ namespace ContainerDistributorAPI.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class ContainerDistributorApiController : ControllerBase //, IDisposable
+public class ContainerDistributorApiController : ControllerBase , IDisposable
 {
     private readonly ILogger<ContainerDistributorApiController> _logger;
 
@@ -99,7 +99,7 @@ public class ContainerDistributorApiController : ControllerBase //, IDisposable
         _logger.LogInformation("Attach Container: {containerId}", containerId);
         using (var containerInputOutputStream = await AttachContainerAsync(containerId))
         {
-            var sendCommand = Encoding.UTF8.GetBytes(data.Command);
+            var sendCommand = Encoding.UTF8.GetBytes($"clear && {data.Command}");
 
             await containerInputOutputStream.WriteAsync(
                 buffer: sendCommand,
@@ -196,4 +196,16 @@ public class ContainerDistributorApiController : ControllerBase //, IDisposable
     #region Methods
 
     #endregion
+
+    public void Dispose()
+    {
+        Parallel.ForEachAsync(_containersLifeCycleObject, (container, _) =>
+        {
+            _dockerClient.Containers.RemoveContainerAsync(container.Item2.ID,
+                _containerParametersAgent.RemoveParameters());
+            return default;
+        }); 
+        _dockerClient.Dispose();
+        TrackTask.Dispose();
+    }
 }
