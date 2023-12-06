@@ -93,18 +93,11 @@ public static class Program
             }, () => new ContainerStopParameters
             {
                 WaitBeforeKillSeconds = null
+            },
+            () => new ContainerRemoveParameters
+            {
             }
         ));
-        
-        // dockerClient.Images.CreateImageAsync(
-        //     parameters: new ImagesCreateParameters
-        //     {
-        //         FromImage = image.Image,
-        //         Tag = image.Tag
-        //     },
-        //     authConfig: null,
-        //     progress: new Progress<JSONMessage>(),
-        //     cancellationToken: new CancellationToken()).WaitAsync(new CancellationToken()).Wait();
         return builder;
     }
 

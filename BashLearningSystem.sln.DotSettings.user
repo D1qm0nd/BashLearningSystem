@@ -57,9 +57,12 @@
   &lt;/Or&gt;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9e0a72ba_002Dce2b_002D4d21_002D84e0_002D9dfe5b9a44ed/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CreateUbuntuContainer" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;NUnit3x::0C348C5C-A08A-4482-97BA-9BACA60A6A2E::net6.0::Docker.DotNet.BashLearningTests.Tests&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
+  &lt;Or&gt;
+    &lt;TestAncestor&gt;
+      &lt;TestId&gt;NUnit3x::0C348C5C-A08A-4482-97BA-9BACA60A6A2E::net6.0::Docker.DotNet.BashLearningTests.Tests&lt;/TestId&gt;
+    &lt;/TestAncestor&gt;
+    &lt;Project Location="/home/d1qm0nd/RiderProjects/TrapTech.Docker.DotNet/test/Docker.DotNet.Tests" Presentation="&amp;lt;DockerAPI&amp;gt;\&amp;lt;test&amp;gt;\&amp;lt;Docker.DotNet.Tests&amp;gt;" /&gt;
+  &lt;/Or&gt;
 &lt;/SessionState&gt;</s:String>
 	
 	
