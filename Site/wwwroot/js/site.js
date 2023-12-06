@@ -1,4 +1,8 @@
-﻿const sendHttpRequest = (method, url, data) => {
+﻿var lastRequest = ""
+
+const getConsole = () => document.getElementById("terminalConsole")
+
+const sendHttpRequest = (method, url, data) => {
     const promise = new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
         xhr.open(method, url);
@@ -20,46 +24,34 @@ const getData = (url) => {
     });
 }
 
-const sendData = (method, url, body) => {
+const sendData = (method, url, body, action) => {
     sendHttpRequest(method, url, body).then(responseData => {
-        updateTerminal(responseData.result);
+        action(responseData.result);
         return responseData;
     });
 };
 
-const create = (url, id) => {
-    sendData("POST", `${url}-create`, id)
-}
-
-const start = (url, id) => {
-    sendData("POST", `${url}-start`, id)
-}
-
-const stop = (url, id) => {
-    sendData("POST", `${url}-stop`, id)
-}
-
-const execute = (url, data) => {
+const execute = (url, id) => {
+    let command = getDataFromTerminal().replace(lastRequest,"")
+    let data = {'id': id,'command': command}
     if (data.command != "")
-        sendData("POST", `${url}-execute`, data)
+        sendData("POST", `${url}-execute`, data, (data) => {
+            lastRequest += `${command}\n${data}\n`
+            updateTerminal(lastRequest)
+        })
+}
+
+const textEdit = (e) => {
+    if (getDataFromTerminal().length < lastRequest.length)
+        updateTerminal(lastRequest)
 }
 
 const getDataFromTerminal = () => {
-    let console = document.getElementById('terminalConsole');
-    return console.value;
+    return getConsole().value;
 }
 
 const updateTerminal = (data) => {
     console.log(`responce: ${data}`)
-    let _console = document.getElementById("terminalConsole");
     console.log(`update console text`)
-    _console.value = data;
-}
-
-const remove = (url, id) => {
-    sendData("DELETE", `${url}-remove`, id)
-}
-
-const exists = (url, id) => {
-    sendData("POST", `${url}-exists`, id)
+    getConsole().value = data;
 }

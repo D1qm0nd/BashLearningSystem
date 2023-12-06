@@ -52,19 +52,10 @@ public static class Program
             dockerClient);
         builder.Services.AddSingleton<ContainersLifeCycleObject>(
             new ContainersLifeCycleObject());
+        var envVariables = new EnvironmentVariables();
+        builder.Services.AddSingleton<EnvironmentVariables>(envVariables);
 
-        var delay = Environment.GetEnvironmentVariable("TRACKER_MINUTE_DELAY");
-        var _delayMinutes = delay != null && int.TryParse(delay, out _) ? int.Parse(delay) : 1;
-
-        var imageNameEnvValue = Environment.GetEnvironmentVariable("IMAGE");
-        if (imageNameEnvValue == null)
-            throw new EnvironmentVariableExistingException("IMAGE");
-
-        var imageTagEnvValue = Environment.GetEnvironmentVariable("IMAGE_TAG");
-        if (imageTagEnvValue == null)
-            throw new EnvironmentVariableExistingException("IMAGE_TAG");
-
-        var image = new ImageData(imageNameEnvValue, imageTagEnvValue);
+        var image = new ImageData(envVariables.ImageName, envVariables.ImageTag);
 
         builder.Services.AddSingleton<ImageData>(image);
 
@@ -78,15 +69,15 @@ public static class Program
                 },
                 ArgsEscaped = true,
                 AttachStdin = true, //false - долго подключается, вероятна утечка памяти
-                AttachStdout = true,
-                AttachStderr = true,
+                AttachStdout = true, //true
+                AttachStderr = true, //true
                 StdinOnce = true, //true - без этого не работает, а с этим падает после одной команды?
                 OpenStdin = true,
                 Tty = false, //false - если true, то выводит то что ввели, но не выключает контейнер
             }, () => new ContainerAttachParameters
             {
                 Stderr = true,
-                Stdin = true, //false - долго подключается 
+                Stdin = true, 
                 Stdout = true,
                 Stream = true,
                 Logs = "1"
@@ -96,6 +87,14 @@ public static class Program
             },
             () => new ContainerRemoveParameters
             {
+            },
+            () => new ContainerRestartParameters
+            {
+            },
+            () => new ContainerLogsParameters
+            {
+                ShowStderr = true,
+                ShowStdout = true
             }
         ));
         return builder;

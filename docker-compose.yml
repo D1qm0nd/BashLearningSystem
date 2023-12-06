@@ -14,7 +14,7 @@ services:
       ASPNETCORE_URLS: "http://+:12555"
       BashLearningPrivateKey: "{\"Key\":[7,5,10,32,41],\"Alphabet\":\"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!?@#$$%^\u0026*()0123456789 \"}"
       BashLearningDB: "host=localhost;Port=5432;Database=SystemDb;User Id=postgres;Password=postgres;"
-      COMMAND_EXECUTOR_URL: "http://localhost:55555/ContainerDistributorApi/container-"
+      COMMAND_EXECUTOR_URL: "http://localhost:55555/ContainerDistributorApi/container"
     network_mode: host
     
 #  bash_executor_api:
