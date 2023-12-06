@@ -5,7 +5,8 @@ using Lib.DataBases;
 
 namespace DataModels;
 
-[Table("History"), Serializable]
+[Table("History")]
+[Serializable]
 public class ExercisesHistory : Entity
 {
     [Key] public Guid HistoryId { get; set; }
@@ -19,7 +20,6 @@ public class ExercisesHistory : Entity
     [Required]
     public string status { get; set; }
 
-    [JsonIgnore, InvisibleItem] public Account Account { get; set; }
-    [JsonIgnore, InvisibleItem] public Exercise Exercise { get; set; }
-
+    [JsonIgnore] [InvisibleItem] public Account Account { get; set; }
+    [JsonIgnore] [InvisibleItem] public Exercise Exercise { get; set; }
 }

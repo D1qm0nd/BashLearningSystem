@@ -7,20 +7,20 @@
 <h1>Edit</h1>
 
 <h4>Command</h4>
-<hr />
+<hr/>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="CommandId" />
+            <input type="hidden" asp-for="CommandId"/>
             <div class="form-group">
                 <label asp-for="Text" class="control-label"></label>
-                <input asp-for="Text" class="form-control" />
+                <input asp-for="Text" class="form-control"/>
                 <span asp-validation-for="Text" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
+                <input asp-for="Description" class="form-control"/>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -30,16 +30,16 @@
             </div>
             <div class="form-group" hidden="hidden">
                 <label asp-for="CreatedUTC" class="control-label"></label>
-                <input asp-for="CreatedUTC" class="form-control" />
+                <input asp-for="CreatedUTC" class="form-control"/>
                 <span asp-validation-for="CreatedUTC" class="text-danger"></span>
             </div>
             <div class="form-group" hidden="hidden">
                 <label asp-for="UpdatedUTC" class="control-label"></label>
-                <input asp-for="UpdatedUTC" class="form-control" />
+                <input asp-for="UpdatedUTC" class="form-control"/>
                 <span asp-validation-for="UpdatedUTC" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary"/>
             </div>
         </form>
     </div>
@@ -48,4 +48,3 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-

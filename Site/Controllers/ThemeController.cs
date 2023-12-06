@@ -9,8 +9,8 @@ namespace Site.Controllers;
 
 public class ThemeController : PermissionNeededController
 {
-    public ThemeController(BashLearningContext context, Session<User> session) : base(context: context,
-        session: session)
+    public ThemeController(BashLearningContext context, Session<User> session) : base(context,
+        session)
     {
     }
 
@@ -47,13 +47,9 @@ public class ThemeController : PermissionNeededController
     {
         if (!isAuthorized()) return KickAction();
 
-        if (!ReadRecordExist(_session.Data.UserId, id))
-        {
-            AddToRead(_session.Data.UserId, id);
-            // _context.Reads.Add(new Read() { UserId = _session.Data.UserId, ThemeId = (Guid)id });
-            // _context.SaveChangesAsync();
-        }
-
+        if (!ReadRecordExist(_session.Data.UserId, id)) AddToRead(_session.Data.UserId, id);
+        // _context.Reads.Add(new Read() { UserId = _session.Data.UserId, ThemeId = (Guid)id });
+        // _context.SaveChangesAsync();
         return KickAction();
         // return RedirectToAction("Theory", "Theme", id);
     }
@@ -62,10 +58,7 @@ public class ThemeController : PermissionNeededController
     public IActionResult MarkAsUnRead(Guid id)
     {
         if (!isAuthorized()) return KickAction();
-        if (ReadRecordExist(_session.Data.UserId, id))
-        {
-            RemoveFromRead(_session.Data.UserId, id);
-        }
+        if (ReadRecordExist(_session.Data.UserId, id)) RemoveFromRead(_session.Data.UserId, id);
 
         return KickAction();
     }
@@ -73,7 +66,7 @@ public class ThemeController : PermissionNeededController
     public bool AddToRead(Guid UserId, Guid ThemeId)
     {
         _context.Reads.Add(new Read() { UserId = UserId, ThemeId = ThemeId });
-        return (_context.SaveChangesAsync().Result == 1);
+        return _context.SaveChangesAsync().Result == 1;
     }
 
     public bool RemoveFromRead(Guid UserId, Guid ThemeId)
@@ -82,6 +75,6 @@ public class ThemeController : PermissionNeededController
         if (read == null)
             return false;
         _context.Reads.Remove(read);
-        return (_context.SaveChangesAsync().Result == 1);
+        return _context.SaveChangesAsync().Result == 1;
     }
 }

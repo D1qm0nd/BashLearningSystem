@@ -12,14 +12,14 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
+        <Content Include="..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\TrapTech.Docker.DotNet\src\Docker.DotNet\Docker.DotNet.csproj" />
-      <ProjectReference Include="..\Exceptions\Exceptions.csproj" />
+        <ProjectReference Include="..\..\TrapTech.Docker.DotNet\src\Docker.DotNet\Docker.DotNet.csproj"/>
+        <ProjectReference Include="..\Exceptions\Exceptions.csproj"/>
     </ItemGroup>
 
 </Project>

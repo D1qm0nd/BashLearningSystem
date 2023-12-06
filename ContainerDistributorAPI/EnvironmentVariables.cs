@@ -6,7 +6,7 @@ public class EnvironmentVariables
 {
     public string PrivateKey { get; private set; }
     public int DelayMinutes { get; private set; }
-    
+
     public string ImageName { get; private set; }
     public string ImageTag { get; private set; }
     public int BufferSize { get; private set; }

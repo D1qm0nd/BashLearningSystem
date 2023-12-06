@@ -15,10 +15,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\..\TrapTech.Docker.DotNet\src\Docker.DotNet.BasicAuth\Docker.DotNet.BasicAuth.csproj" />
-      <ProjectReference Include="..\..\..\..\TrapTech.Docker.DotNet\src\Docker.DotNet.SSH\Docker.DotNet.SSH.csproj" />
-      <ProjectReference Include="..\..\..\..\TrapTech.Docker.DotNet\src\Docker.DotNet.X509\Docker.DotNet.X509.csproj" />
-      <ProjectReference Include="..\..\..\..\TrapTech.Docker.DotNet\src\Docker.DotNet\Docker.DotNet.csproj" />
+        <ProjectReference Include="..\..\..\..\TrapTech.Docker.DotNet\src\Docker.DotNet.BasicAuth\Docker.DotNet.BasicAuth.csproj"/>
+        <ProjectReference Include="..\..\..\..\TrapTech.Docker.DotNet\src\Docker.DotNet.SSH\Docker.DotNet.SSH.csproj"/>
+        <ProjectReference Include="..\..\..\..\TrapTech.Docker.DotNet\src\Docker.DotNet.X509\Docker.DotNet.X509.csproj"/>
+        <ProjectReference Include="..\..\..\..\TrapTech.Docker.DotNet\src\Docker.DotNet\Docker.DotNet.csproj"/>
     </ItemGroup>
 
 </Project>

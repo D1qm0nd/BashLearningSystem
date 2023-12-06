@@ -7,7 +7,8 @@ using Lib.DataBases;
 
 namespace DataModels;
 
-[Table("Commands"), Serializable]
+[Table("Commands")]
+[Serializable]
 public class Command : Entity, IBashCommand
 {
     [Key] public Guid CommandId { get; set; }
@@ -15,9 +16,9 @@ public class Command : Entity, IBashCommand
     [Required] public string? Description { get; set; }
     [Required] public Guid ThemeId { get; set; }
 
-    [JsonIgnore, InvisibleItem] public List<CommandAttribute> Attributes { get; set; }
-    [JsonIgnore,InvisibleItem] public Theme Theme { get; set; }
-    
+    [JsonIgnore] [InvisibleItem] public List<CommandAttribute> Attributes { get; set; }
+    [JsonIgnore] [InvisibleItem] public Theme Theme { get; set; }
+
     public string GetFullDescription()
     {
         var stringBuilder = new StringBuilder();
@@ -29,17 +30,17 @@ public class Command : Entity, IBashCommand
     public string GetAttributesDescription()
     {
         if (Attributes == null || Attributes?.FirstOrDefault() == null)
-            return String.Empty;
+            return string.Empty;
 
         var stringBuilder = new StringBuilder();
         stringBuilder.AppendLine($"Attributes:");
-        foreach (var attribute in Attributes)
-        {
-            stringBuilder.AppendLine($"\t{attribute.GetDescription()}");
-        }
+        foreach (var attribute in Attributes) stringBuilder.AppendLine($"\t{attribute.GetDescription()}");
 
         return stringBuilder.ToString();
     }
 
-    public string GetDescription() => Description;
+    public string GetDescription()
+    {
+        return Description;
+    }
 }

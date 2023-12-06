@@ -12,7 +12,8 @@ public class HomeController : PermissionNeededController
 {
     private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger, BashLearningContext context, Session<User> session) : base(context: context, session: session)
+    public HomeController(ILogger<HomeController> logger, BashLearningContext context, Session<User> session) : base(
+        context, session)
     {
         _logger = logger;
     }
@@ -30,7 +31,10 @@ public class HomeController : PermissionNeededController
             view.ViewData["ThemeHistory"] = history;
         }
         else
+        {
             view.ViewData["ThemeHistory"] = null;
+        }
+
         view.ViewData["ThemeList"] = themes;
         return view;
     }
@@ -42,4 +46,3 @@ public class HomeController : PermissionNeededController
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
-

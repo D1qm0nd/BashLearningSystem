@@ -13,5 +13,4 @@ public class Read : Entity
     [Required] public Guid UserId { get; set; }
     [JsonIgnore] public Theme? Theme { get; set; }
     [JsonIgnore] public User? User { get; set; }
-
 }

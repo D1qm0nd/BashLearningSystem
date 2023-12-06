@@ -12,7 +12,7 @@ public class Command : Entity
     [Required] public string Text { get; set; }
     [Required] public string Description { get; set; }
     [JsonIgnore] public List<CommandAttribute> Attributes { get; set; }
-    
+
     [Required] public Guid ThemeId { get; set; }
     [JsonIgnore] public Theme Theme { get; set; }
 }

@@ -8,7 +8,7 @@ public static class BashLearningContextExtension
     public static bool IsAdmin(this BashLearningContext context, User? user)
     {
         if (user == null)
-            return false; 
+            return false;
         var res = context.Admins
             .FirstOrDefault(admin =>
                 admin.UserId == user.UserId
@@ -25,7 +25,4 @@ public static class BashLearningContextExtension
         context.SaveChanges();
         return true;
     }
-
-    
-    
 }

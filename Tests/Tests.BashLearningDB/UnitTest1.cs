@@ -1,11 +1,9 @@
 using System;
 using System.Linq;
-using System.Text.Json;
 using BashDataBaseModels;
 using BashLearningDB;
 using BashLearningModelsValidate;
 using EncryptModule;
-using Newtonsoft.Json;
 using NUnit.Framework;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
@@ -26,7 +24,7 @@ public class Tests
             var cryptographyValues = JsonSerializer.Deserialize<CryptographValues>(variable);
             if (cryptographyValues == null)
                 throw new ArgumentException();
-            _cryptograph = new Cryptograph(cryptographyValues.Key,cryptographyValues.Alphabet);
+            _cryptograph = new Cryptograph(cryptographyValues.Key, cryptographyValues.Alphabet);
         }
     }
 

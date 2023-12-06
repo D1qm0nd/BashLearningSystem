@@ -16,11 +16,11 @@ public class BashLearningContext : DbContext, IDataContext
     public DbSet<CommandAttribute> Attributes { get; set; }
     public DbSet<Question> Questions { get; set; }
     public DbSet<Read> Reads { get; set; }
-    
+
     public BashLearningContext()
     {
     }
-    
+
     public BashLearningContext(DbContextOptions<BashLearningContext> options) : base(options)
     {
     }
@@ -28,7 +28,7 @@ public class BashLearningContext : DbContext, IDataContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
-        
+
         var connectionString = Environment.GetEnvironmentVariable(envConnectionStringPropertyName);
 
         if (connectionString == null)
@@ -42,23 +42,21 @@ public class BashLearningContext : DbContext, IDataContext
         {
             throw new IncorrectConnectionStringException();
         }
-
     }
 
     public int SaveRepositoryChanges()
     {
-        this.SaveChanges();
+        SaveChanges();
         return 0;
     }
 
     public void Migrate()
     {
-        this.Database.Migrate();
+        Database.Migrate();
     }
 
     public void Drop()
     {
-        this.Database.EnsureDeleted();
+        Database.EnsureDeleted();
     }
-
 }

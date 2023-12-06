@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lib.DataBases
+namespace Lib.DataBases;
+
+public class InvisibleItemAttribute : Attribute
 {
-    public class InvisibleItemAttribute : Attribute
+    public InvisibleItemAttribute() : base()
     {
-        public InvisibleItemAttribute() : base()
-        {
-            
-        }
     }
 }

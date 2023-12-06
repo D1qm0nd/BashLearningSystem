@@ -8,53 +8,53 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
-      <Content Update="Views\Theme\Images\Background\arctic.jpg">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      </Content>
-      <Content Update="Views\Theme\Images\Logo\Logo.png">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      </Content>
-      <Content Update="Views\Theme\Images\verifyIcon.png">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      </Content>
+        <Content Include="..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
+        <Content Update="Views\Theme\Images\Background\arctic.jpg">
+            <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+            <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        </Content>
+        <Content Update="Views\Theme\Images\Logo\Logo.png">
+            <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+            <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        </Content>
+        <Content Update="Views\Theme\Images\verifyIcon.png">
+            <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+            <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        </Content>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\BashDataBaseModels\BashDataBaseModels.csproj" />
-      <ProjectReference Include="..\BashLearningDB\BashLearningDB.csproj" />
-      <ProjectReference Include="..\EncryptModule\EncryptModule.csproj" />
-      <ProjectReference Include="..\Exceptions\Exceptions.csproj" />
+        <ProjectReference Include="..\BashDataBaseModels\BashDataBaseModels.csproj"/>
+        <ProjectReference Include="..\BashLearningDB\BashLearningDB.csproj"/>
+        <ProjectReference Include="..\EncryptModule\EncryptModule.csproj"/>
+        <ProjectReference Include="..\Exceptions\Exceptions.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.12" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.24" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.24" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.24">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      </PackageReference>
-      <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
-      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.12"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.24"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.24"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.24">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16"/>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11"/>
     </ItemGroup>
 
     <ItemGroup>
-      <AdditionalFiles Include="Views\Authorization\Index.cshtml" />
-      <AdditionalFiles Include="Views\Register\index.cshtml" />
+        <AdditionalFiles Include="Views\Authorization\Index.cshtml"/>
+        <AdditionalFiles Include="Views\Register\index.cshtml"/>
     </ItemGroup>
 
     <ItemGroup>
-      <_ContentIncludedByDefault Remove="Views\CommandsTable\Create.cshtml" />
-      <_ContentIncludedByDefault Remove="Views\CommandsTable\Delete.cshtml" />
-      <_ContentIncludedByDefault Remove="Views\CommandsTable\Details.cshtml" />
-      <_ContentIncludedByDefault Remove="Views\CommandsTable\Edit.cshtml" />
-      <_ContentIncludedByDefault Remove="Views\CommandsTable\Index.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\CommandsTable\Create.cshtml"/>
+        <_ContentIncludedByDefault Remove="Views\CommandsTable\Delete.cshtml"/>
+        <_ContentIncludedByDefault Remove="Views\CommandsTable\Details.cshtml"/>
+        <_ContentIncludedByDefault Remove="Views\CommandsTable\Edit.cshtml"/>
+        <_ContentIncludedByDefault Remove="Views\CommandsTable\Index.cshtml"/>
     </ItemGroup>
 
 </Project>

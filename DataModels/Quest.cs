@@ -12,6 +12,6 @@ public class Quest : Entity
     [Required] public Guid ExerciseId { get; set; }
     [Required] public Guid CommandId { get; set; }
 
-    [JsonIgnore, InvisibleItem] public Command Command { get; set; }
-    [JsonIgnore, InvisibleItem] public Exercise Exercise { get; set; }
+    [JsonIgnore] [InvisibleItem] public Command Command { get; set; }
+    [JsonIgnore] [InvisibleItem] public Exercise Exercise { get; set; }
 }

@@ -8,13 +8,16 @@ public abstract class PermissionNeededController : SessionNeededController
 {
     protected readonly BashLearningContext _context;
 
-    public PermissionNeededController(BashLearningContext context,Session<User> session) : base(session)
+    public PermissionNeededController(BashLearningContext context, Session<User> session) : base(session)
     {
         _context = context;
     }
 
-    public bool isAdmin() => ValidatePermission(_session, _context);
-    
+    public bool isAdmin()
+    {
+        return ValidatePermission(_session, _context);
+    }
+
     private bool ValidatePermission(Session<User> session, BashLearningContext context)
     {
         if (session.Data == null)

@@ -6,13 +6,17 @@ namespace Site.Controllers.Abstract;
 public abstract class SessionNeededController : Controller
 {
     protected readonly Session<User> _session;
+
     public SessionNeededController(Session<User> session)
     {
         _session = session;
     }
-    
-    public bool isAuthorized() => _session.Data != null;
-    
+
+    public bool isAuthorized()
+    {
+        return _session.Data != null;
+    }
+
     public override ViewResult View()
     {
         var view = base.View();

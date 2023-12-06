@@ -19,12 +19,12 @@ public class Tests
     }
 
     [Test]
-    public void Test1()
+    public void TestEncrypt()
     {
         var sentence = "Hello world!";
         var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!?@#$%^&*()0123456789 ";
         var key = new[] { 1 };
-        var crypto = new Cryptograph(key: key, alphabet: alphabet);
+        var crypto = new Cryptograph(key, alphabet);
         var a = crypto.Coding(sentence);
         var b = crypto.DeCoding(a);
         Console.WriteLine($"{sentence}\n{a}\n{b}");
@@ -36,9 +36,8 @@ public class Tests
         var a = JsonSerializer.Serialize(new CryptographValues()
         {
             Key = new[] { 7, 5, 10, 32, 41 },
-            Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!?@#$%^&*()0123456789 ",
+            Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!?@#$%^&*()0123456789 "
         });
         //"{\"Key\":[7,5,10,32,41],\"Alphabet\":\"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!?@#$%^\u0026*()0123456789 \"}";
-
     }
 }

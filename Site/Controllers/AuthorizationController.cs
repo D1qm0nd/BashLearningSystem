@@ -10,7 +10,7 @@ namespace Site.Controllers;
 
 public class AuthorizationController : PermissionNeededController
 {
-    public AuthorizationController(BashLearningContext context, Session<User> session) : base(context: context, session: session)
+    public AuthorizationController(BashLearningContext context, Session<User> session) : base(context, session)
     {
     }
 
@@ -24,11 +24,11 @@ public class AuthorizationController : PermissionNeededController
         var env_val = Environment.GetEnvironmentVariable("BashLearningPrivateKey");
         if (env_val == null)
             throw new EnvironmentVariableExistingException("BashLearningPrivateKey");
-        
+
         var crypt_values = JsonSerializer.Deserialize<CryptographValues>(env_val);
-        var cryptograph = new Cryptograph(key: crypt_values.Key, alphabet: crypt_values.Alphabet);
+        var cryptograph = new Cryptograph(crypt_values.Key, crypt_values.Alphabet);
         login = cryptograph.Coding(login);
-        password = cryptograph.Coding(password); 
+        password = cryptograph.Coding(password);
         _session.Data = _context.Users.FirstOrDefault(user => user.Login == login && user.Password == password);
         return RedirectToAction("Index", "Home");
     }

@@ -31,30 +31,37 @@ public class ContainerDistributorApiController : ControllerBase
     #region HTTP Methods
 
     [HttpGet("generate-guid")]
-    public Guid GenerateGUID() => Guid.NewGuid();
+    public Guid GenerateGUID()
+    {
+        return Guid.NewGuid();
+    }
 
     [HttpPost("container-create")]
     public async Task<CreateContainerResponse?> CreateContainerForUser([FromBody] Guid id)
     {
         var containerResponse = await _dockerClient.Containers.CreateContainerAsync(
-            parameters: _containerParametersAgent.CreateParameters(_image,
+            _containerParametersAgent.CreateParameters(_image,
                 id.ToString()));
         if (containerResponse == null)
             _logger.LogError("Failed to create container for user {id}", id);
         return containerResponse;
     }
 
-    private Task<MultiplexedStream> AttachContainerAsync(string containerId) =>
-        _dockerClient.Containers.AttachContainerAsync(
-            id: containerId,
+    private Task<MultiplexedStream> AttachContainerAsync(string containerId)
+    {
+        return _dockerClient.Containers.AttachContainerAsync(
+            containerId,
             parameters: _containerParametersAgent.AttachParameters(),
             tty: true, //false - если true, то выводит то что ввели, но не выключает контейнер
             cancellationToken: new CancellationToken());
+    }
 
     [HttpPost("container-restart")]
-    public async Task RestartContainer([FromBody] Guid id) =>
+    public async Task RestartContainer([FromBody] Guid id)
+    {
         await _dockerClient.Containers.RestartContainerAsync($"{_image.Image}_{id}",
             _containerParametersAgent.RestartParameters(), new CancellationToken());
+    }
 
 
     [HttpPost("container-execute")]
@@ -81,11 +88,11 @@ public class ContainerDistributorApiController : ControllerBase
             var sendCommand = Encoding.UTF8.GetBytes($"{data.Command}");
 
             await containerInputOutputStream.WriteAsync(
-                buffer: sendCommand,
-                offset: 0,
-                count: sendCommand.Length,
-                cancellationToken: new CancellationToken());
-            
+                sendCommand,
+                0,
+                sendCommand.Length,
+                new CancellationToken());
+
             containerInputOutputStream.CloseWrite();
 
             var cancellationToken = new CancellationToken();
@@ -111,6 +118,7 @@ public class ContainerDistributorApiController : ControllerBase
                         _logger.LogInformation("READ ERROR");
                         break;
                 }
+
                 if (answ.EOF) break;
             }
 
@@ -131,6 +139,7 @@ public class ContainerDistributorApiController : ControllerBase
             catch
             {
             }
+
             return execResult;
         }
     }
@@ -140,11 +149,11 @@ public class ContainerDistributorApiController : ControllerBase
     {
         _logger.LogInformation("Container {id} start", id);
         var res = await _dockerClient.Containers.StartContainerAsync(
-            id: $"{_image.Image}_{id}",
-            parameters: new ContainerStartParameters
+            $"{_image.Image}_{id}",
+            new ContainerStartParameters
             {
             },
-            cancellationToken: new CancellationToken());
+            new CancellationToken());
         if (res) _logger.LogInformation("Container {id} start [SUCCESS]", id);
         else _logger.LogWarning("Container {id} start [FAILED]", id);
         return res;
@@ -156,9 +165,9 @@ public class ContainerDistributorApiController : ControllerBase
         try
         {
             await _dockerClient.Containers.RemoveContainerAsync(
-                id: $"{_image.Image}_{id}",
-                parameters: _containerParametersAgent.RemoveParameters(),
-                cancellationToken: new CancellationToken());
+                $"{_image.Image}_{id}",
+                _containerParametersAgent.RemoveParameters(),
+                new CancellationToken());
             return true;
         }
         catch
@@ -168,11 +177,14 @@ public class ContainerDistributorApiController : ControllerBase
     }
 
     [HttpPost("container-stop")]
-    public async Task<bool> StopContainerAsync([FromBody] Guid id) => await _dockerClient.Containers
-        .StopContainerAsync(
-            $"{_image.Image}_{id}",
-            _containerParametersAgent.StopParameters(),
-            new CancellationToken());
+    public async Task<bool> StopContainerAsync([FromBody] Guid id)
+    {
+        return await _dockerClient.Containers
+            .StopContainerAsync(
+                $"{_image.Image}_{id}",
+                _containerParametersAgent.StopParameters(),
+                new CancellationToken());
+    }
 
     #endregion
 }

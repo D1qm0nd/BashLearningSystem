@@ -24,7 +24,7 @@ public static class Program
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
-        
+
         builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
         {
             builder
@@ -35,17 +35,13 @@ public static class Program
 
         DockerClient dockerClient;
         if (OperatingSystem.IsLinux() || OperatingSystem.IsMacOS())
-        {
             dockerClient = new DockerClientConfiguration(
                     new Uri("unix:///var/run/docker.sock"))
                 .CreateClient();
-        }
         else if (OperatingSystem.IsWindows())
-        {
             dockerClient = new DockerClientConfiguration(
                     new Uri("npipe://./pipe/docker_engine"))
                 .CreateClient();
-        }
         else throw new NotImplementedException("Supported OS: Windows, Linux, MacOS");
 
         builder.Services.AddSingleton<DockerClient>(
@@ -73,11 +69,11 @@ public static class Program
                 AttachStderr = true, //true
                 StdinOnce = true, //true - без этого не работает, а с этим падает после одной команды?
                 OpenStdin = true,
-                Tty = false, //false - если true, то выводит то что ввели, но не выключает контейнер
+                Tty = false //false - если true, то выводит то что ввели, но не выключает контейнер
             }, () => new ContainerAttachParameters
             {
                 Stderr = true,
-                Stdin = true, 
+                Stdin = true,
                 Stdout = true,
                 Stream = true,
                 Logs = "1"

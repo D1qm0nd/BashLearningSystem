@@ -32,8 +32,8 @@ const sendData = (method, url, body, action) => {
 };
 
 const execute = (url, id) => {
-    let command = getDataFromTerminal().replace(lastRequest,"")
-    let data = {'id': id,'command': command}
+    let command = getDataFromTerminal().replace(lastRequest, "")
+    let data = {'id': id, 'command': command}
     if (data.command != "")
         sendData("POST", `${url}-execute`, data, (data) => {
             lastRequest += `${command}\n${data}\n`

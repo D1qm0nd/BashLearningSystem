@@ -1,5 +1,5 @@
 version: "3.9"
-  
+
 services:
 
   site:
@@ -8,7 +8,7 @@ services:
     build:
       context: .
       dockerfile: ./Site/Dockerfile
-    depends_on: 
+    depends_on:
       - db
     environment:
       ASPNETCORE_URLS: "http://+:12555"
@@ -16,20 +16,7 @@ services:
       BashLearningDB: "host=localhost;Port=5432;Database=SystemDb;User Id=postgres;Password=postgres;"
       COMMAND_EXECUTOR_URL: "http://localhost:55555/ContainerDistributorApi/container"
     network_mode: host
-    
-#  bash_executor_api:
-#    image: executor_api_image
-#    container_name: executor
-#    build:
-#      context: .
-#      dockerfile: ./BashExecutorAPI/Dockerfile
-#    restart: always
-#    environment:
-#      CURRENT_FOLDER: "/root"
-#      ASPNETCORE_URLS: "http://+:55555"
-##      COMMAND_EXECUTOR_PORT: "55555"
-#    network_mode: host
-   
+  
   db:
     image: postgres
     environment:
@@ -40,7 +27,7 @@ services:
     network_mode: host
     volumes:
       - /home/db
-        
+  
   db_init:
     image: bash_learning_db_init
     build:
@@ -48,7 +35,7 @@ services:
       dockerfile: InitialDataBase/Dockerfile
     environment:
       BashLearningDB: "host=localhost;Port=5432;Database=SystemDb;User Id=postgres;Password=postgres;"
-    depends_on: 
+    depends_on:
       - db
     network_mode: host
 

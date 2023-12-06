@@ -6,7 +6,8 @@ using Lib.DataBases;
 
 namespace DataModels;
 
-[Table("Attributes"), Serializable]
+[Table("Attributes")]
+[Serializable]
 public class CommandAttribute : Entity, IBashCommandAttribute
 {
     #region Properies
@@ -15,10 +16,10 @@ public class CommandAttribute : Entity, IBashCommandAttribute
     [Required] public string? Text { get; set; }
     [Required] public string? Description { get; set; }
     [Required] public Guid CommandId { get; set; }
-    
+
     #region Navigate properties
-    
-    [JsonIgnore, InvisibleItem] public Command Command { get; set; }
+
+    [JsonIgnore] [InvisibleItem] public Command Command { get; set; }
 
     #endregion
 
@@ -26,7 +27,10 @@ public class CommandAttribute : Entity, IBashCommandAttribute
 
     #region Methods
 
-    public string GetDescription() => Description;
+    public string GetDescription()
+    {
+        return Description;
+    }
 
     #endregion
 }

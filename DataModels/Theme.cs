@@ -5,11 +5,11 @@ using Lib.DataBases;
 
 namespace DataModels;
 
-[Table("Themes"), Serializable]
+[Table("Themes")]
+[Serializable]
 public class Theme : Entity
 {
-    [Key]
-    public Guid ThemeId { get; set; }
+    [Key] public Guid ThemeId { get; set; }
     [Required] public string Name { get; set; }
-    [JsonIgnore, InvisibleItem] public List<Command> Commands { get; set; }
+    [JsonIgnore] [InvisibleItem] public List<Command> Commands { get; set; }
 }

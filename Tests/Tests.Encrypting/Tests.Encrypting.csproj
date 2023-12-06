@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\EncryptModule\EncryptModule.csproj" />
+        <ProjectReference Include="..\..\EncryptModule\EncryptModule.csproj"/>
     </ItemGroup>
 
 </Project>

@@ -14,7 +14,8 @@ public class ContainerParametersAgent
 
     public ContainerParametersAgent(Func<ImageData, string, CreateContainerParameters> createFunc,
         Func<ContainerAttachParameters> attachFunc,
-        Func<ContainerStopParameters> stopFunc, Func<ContainerRemoveParameters> removeFunc, Func<ContainerRestartParameters> restartParameters, Func<ContainerLogsParameters> logsParameter)
+        Func<ContainerStopParameters> stopFunc, Func<ContainerRemoveParameters> removeFunc,
+        Func<ContainerRestartParameters> restartParameters, Func<ContainerLogsParameters> logsParameter)
     {
         CreateParameters = createFunc;
         AttachParameters = attachFunc;
@@ -23,5 +24,4 @@ public class ContainerParametersAgent
         RestartParameters = restartParameters;
         LogsParameter = logsParameter;
     }
-
 }

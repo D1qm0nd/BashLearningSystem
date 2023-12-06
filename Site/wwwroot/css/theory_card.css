@@ -148,13 +148,13 @@ a:hover {
     animation-timing-function: cubic-bezier(0, -0.02, .1, 1.13)
 }
 
-@keyframes ReadHover{
+@keyframes ReadHover {
     to {
         background: limegreen;
     }
 }
 
-@keyframes UnReadHover{
+@keyframes UnReadHover {
     to {
         background: orange;
     }

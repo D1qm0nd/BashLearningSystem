@@ -11,5 +11,8 @@ public class ImageData
         Tag = tag;
     }
 
-    public override string ToString() => $"{Image}:{Tag}";
+    public override string ToString()
+    {
+        return $"{Image}:{Tag}";
+    }
 }

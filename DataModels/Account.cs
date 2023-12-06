@@ -7,7 +7,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace DataModels;
 
-[Table("Accounts"), Serializable]
+[Table("Accounts")]
+[Serializable]
 public class Account : Entity, IValidatableObject
 {
     [Key] public Guid AccountId { get; set; }
@@ -16,10 +17,10 @@ public class Account : Entity, IValidatableObject
     [Required] public string? Surname { get; set; }
     [Required] public string? Name { get; set; }
     [Required] public string? MiddleName { get; set; }
-    
+
     [Required] public bool isAdmin { get; set; }
     public byte[]? Image { get; set; }
-    
+
     // [JsonIgnore, InvisibleItem] public List<Exercise> Exercises { get; set; }
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -38,7 +39,10 @@ public class Account : Entity, IValidatableObject
         return errors;
     }
 
-    public string FullName() => $"{this.Surname} {this.Name} {this.MiddleName}";
+    public string FullName()
+    {
+        return $"{Surname} {Name} {MiddleName}";
+    }
 
     #region May be later
 

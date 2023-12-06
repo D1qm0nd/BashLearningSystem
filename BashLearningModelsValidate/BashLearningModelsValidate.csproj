@@ -7,8 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\BashDataBaseModels\BashDataBaseModels.csproj" />
-      <ProjectReference Include="..\Lib.DataBases\Lib.DataBases.csproj" />
+        <ProjectReference Include="..\BashDataBaseModels\BashDataBaseModels.csproj"/>
+        <ProjectReference Include="..\Lib.DataBases\Lib.DataBases.csproj"/>
     </ItemGroup>
 
 </Project>

@@ -27,10 +27,10 @@ public class Tests
         var progress = new Progress<JSONMessage>(message => { Trace.WriteLine(message); });
         var cancellationToken = new CancellationToken();
         var task = _dockerClient.Images.CreateImageAsync(
-            parameters: new ImagesCreateParameters { FromImage = "ubuntu", Tag = "22.04" },
-            authConfig: null,
-            progress: progress,
-            cancellationToken: cancellationToken);
+            new ImagesCreateParameters { FromImage = "ubuntu", Tag = "22.04" },
+            null,
+            progress,
+            cancellationToken);
         task.Wait();
     }
 
@@ -38,12 +38,12 @@ public class Tests
     public async Task RemoveUbuntuContainer()
     {
         await _dockerClient.Containers.RemoveContainerAsync(
-            id: "ubuntu-22.04-container",
-            parameters: new ContainerRemoveParameters
+            "ubuntu-22.04-container",
+            new ContainerRemoveParameters
             {
                 RemoveVolumes = true
             },
-            cancellationToken: new CancellationToken());
+            new CancellationToken());
     }
 
     [Test]
@@ -61,7 +61,7 @@ public class Tests
 
 
         var container = await _dockerClient.Containers.CreateContainerAsync(
-            parameters: new CreateContainerParameters
+            new CreateContainerParameters
             {
                 Image = "ubuntu:22.04",
                 Name = $"ubuntu-22.04-container",
@@ -74,9 +74,9 @@ public class Tests
                 },
                 StopTimeout = null,
                 OpenStdin = true,
-                StdinOnce = true,
+                StdinOnce = true
             },
-            cancellationToken: new CancellationToken());
+            new CancellationToken());
         Trace.WriteLine(container.ID);
     }
 
@@ -85,11 +85,11 @@ public class Tests
     {
         var cancellationToken = new CancellationToken();
         var startResult = await _dockerClient.Containers.StartContainerAsync(
-            id: "ubuntu-22.04-container",
-            parameters: new ContainerStartParameters
+            "ubuntu-22.04-container",
+            new ContainerStartParameters
             {
             },
-            cancellationToken: cancellationToken);
+            cancellationToken);
     }
 
     [Test]
@@ -98,7 +98,7 @@ public class Tests
         await StartUbuntuContainer();
 
         var containerIOStream = await _dockerClient.Containers.AttachContainerAsync(
-            id: "ubuntu-22.04-container",
+            "ubuntu-22.04-container",
             parameters: new ContainerAttachParameters
             {
                 Stderr = true,
@@ -116,19 +116,21 @@ public class Tests
             var command = Encoding.UTF8.GetBytes("whoami && echo hello && ls -la");
 
             await containerIOStream.WriteAsync(
-                buffer: command,
-                offset: 0,
-                count: command.Length,
-                cancellationToken: new CancellationToken());
+                command,
+                0,
+                command.Length,
+                new CancellationToken());
 
             containerIOStream.CloseWrite();
 
             MultiplexedStream.ReadResult answ;
 
             do
+            {
                 answ = await containerIOStream.ReadOutputAsync(buffer, 0, buffer.Length, new CancellationToken());
-            while (answ.EOF == false);
-        } 
+            } while (answ.EOF == false);
+        }
+
         var answer = Encoding.UTF8.GetString(buffer).TrimStart(' ').TrimEnd(' ');
         Trace.WriteLine(answer);
     }

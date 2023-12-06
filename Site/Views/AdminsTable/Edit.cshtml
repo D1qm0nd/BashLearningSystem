@@ -7,12 +7,12 @@
 <h1>Edit</h1>
 
 <h4>Admin</h4>
-<hr />
+<hr/>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="AdminId" />
+            <input type="hidden" asp-for="AdminId"/>
             <div class="form-group">
                 <label asp-for="UserId" class="control-label"></label>
                 <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
@@ -20,21 +20,21 @@
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsActual" /> @Html.DisplayNameFor(model => model.IsActual)
+                    <input class="form-check-input" asp-for="IsActual"/> @Html.DisplayNameFor(model => model.IsActual)
                 </label>
             </div>
             <div class="form-group" hidden="hidden">
                 <label asp-for="CreatedUTC" class="control-label"></label>
-                <input asp-for="CreatedUTC" class="form-control" />
+                <input asp-for="CreatedUTC" class="form-control"/>
                 <span asp-validation-for="CreatedUTC" class="text-danger"></span>
             </div>
             <div class="form-group" hidden="hidden">
                 <label asp-for="UpdatedUTC" class="control-label"></label>
-                <input asp-for="UpdatedUTC" class="form-control" />
+                <input asp-for="UpdatedUTC" class="form-control"/>
                 <span asp-validation-for="UpdatedUTC" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary"/>
             </div>
         </form>
     </div>
@@ -43,4 +43,3 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-

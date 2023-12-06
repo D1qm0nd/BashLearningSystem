@@ -38,13 +38,12 @@
     margin-top: -40px;
 }
 
-.card-hyper-text:hover
-{
+.card-hyper-text:hover {
     animation-name: HoverText;
     animation-play-state: running;
     animation-duration: 1s;
     animation-fill-mode: backwards;
-    animation-timing-function: cubic-bezier(0,-0.02,.1,1.13)
+    animation-timing-function: cubic-bezier(0, -0.02, .1, 1.13)
 }
 
 @keyframes HoverText {
