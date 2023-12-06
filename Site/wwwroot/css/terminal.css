@@ -23,10 +23,20 @@
     width: inherit;
     height: 40px;
     color: black;
+    font-family: monospace;
+    font-weight: bold;
     font-size: 16pt;
     background-color: darkgray;
     border-radius: 0px 0px 10px 10px;
     border-color: gray;
     border-width: 3px;
     padding: 0px 10px;
+}
+
+.terminal-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: stretch;
+    justify-content: space-around;
 }
