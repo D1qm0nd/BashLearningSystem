@@ -16,6 +16,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\BashLearningDB\BashLearningDB.csproj" />
+      <ProjectReference Include="..\Exceptions\Exceptions.csproj" />
     </ItemGroup>
 
     <ItemGroup>

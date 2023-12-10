@@ -7,10 +7,12 @@ namespace Site.Controllers.Abstract;
 public abstract class PermissionNeededController : SessionNeededController
 {
     protected readonly BashLearningContext _context;
-
-    public PermissionNeededController(BashLearningContext context,Session<User> session) : base(session)
+    protected readonly AuthorizationService _authorizationService;
+    
+    public PermissionNeededController(BashLearningContext context,Session<User> session, AuthorizationService authorizationService) : base(session)
     {
         _context = context;
+        _authorizationService = authorizationService;
     }
 
     public bool isAdmin() => ValidatePermission(_session, _context);
@@ -19,7 +21,7 @@ public abstract class PermissionNeededController : SessionNeededController
     {
         if (session.Data == null)
             return false;
-        return context.IsAdmin(session.Data);
+        return _authorizationService.IsAdmin(session.Data).Result;
     }
 
     protected virtual IActionResult KickAction()

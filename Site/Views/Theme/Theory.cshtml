@@ -2,6 +2,7 @@
 @model Session<BashDataBaseModels.User>
 @{
     var theme = ViewData["Theme"] as Theme;
+    ViewData["Title"] = theme.Name;
     ViewData["MarkAsRead"] = "Пометить прочитанным";
     ViewData["MarkAsUnRead"] = "Пометить не прочитанным";
 }
@@ -27,31 +28,34 @@ else
             </form>
         }
     }
+
     <div class="content-container">
         <div class="theme-container">
             <h1 class="theory_theme_header">@theme.Name</h1>
             <div class="theory_card">
-                @foreach (var command in theme.Commands)
+                @foreach (var command in theme.Commands.OrderBy(command => command.Text))
                 {
-                    <h2 class="theory_command_header">@command.Text</h2>
-                    <div class="theory_description_container">
-                        <p>@command.Description</p>
-                    </div>
-                    @if (command.Attributes.Any())
-                    {
-                        <div class="theory_attributes_container ">
-                            <h3 class="theory_attributes_header">Атрибуты</h3>
-                            @foreach (var attr in command.Attributes)
-                            {
-                                <div class="theory_attribute_container">
-                                    <h2 class="theory_attribute_header">@attr.Text</h2>
-                                    <div class="theory_description_container">
-                                        <p>@attr.Description</p>
-                                    </div>
-                                </div>
-                            }
+                    <div class="theory-command-container">
+                        <h2 class="theory_command_header">@command.Text</h2>
+                        <div class="theory_description_container">
+                            <p>@command.Description</p>
                         </div>
-                    }
+                        @if (command.Attributes.Any())
+                        {
+                            <div class="theory_attributes_container ">
+                                <h3 class="theory_attributes_header">Атрибуты</h3>
+                                @foreach (var attr in command.Attributes.OrderBy(attr => attr.Text))
+                                {
+                                    <div class="theory_attribute_container">
+                                        <h2 class="theory_attribute_header">@attr.Text</h2>
+                                        <div class="theory_description_container">
+                                            <p>@attr.Description</p>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
                 }
             </div>
         </div>
@@ -59,7 +63,7 @@ else
             @if ((bool)ViewData["isAuthorized"])
             {
                 <script src="/js/site.js"></script>
-                        @* <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script> *@
+                @* <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script> *@
                 <script src="/lib/jquery/dist/jquery.js"></script>
                 <div class="terminal">
                     @{

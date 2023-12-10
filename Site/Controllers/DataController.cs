@@ -63,7 +63,7 @@ public class DataController : ControllerBase
 
     private IEnumerable<Theme> GetAllThemes() => _context.Themes
         .Include(theme => theme.Commands)
-        .ThenInclude(command => command.Attributes);
+        .ThenInclude(command => command.Attributes).Where(e => e.IsActual);
 
     private IEnumerable<Theme> GetReadThemes(Guid userId) =>
         _context.Themes

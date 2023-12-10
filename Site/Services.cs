@@ -1,5 +1,8 @@
+using System.Text.Json;
 using BashDataBaseModels;
 using BashLearningDB;
+using EncryptModule;
+using Exceptions;
 
 namespace Site;
 
@@ -21,6 +24,15 @@ public static partial class Program
                 .AllowAnyHeader();
         }));
         
+        var env_val = Environment.GetEnvironmentVariable("BashLearningPrivateKey");
+        if (env_val == null)
+            throw new EnvironmentVariableExistingException("BashLearningPrivateKey");
+        var crypt_values = JsonSerializer.Deserialize<CryptographValues>(env_val);
+        if (crypt_values == null)
+            throw new ArgumentException("BashLearningPrivateKey: Check input data for correct");
+        
+        builder.Services.AddSingleton<Cryptograph>(new Cryptograph(key: crypt_values.Key, alphabet: crypt_values.Alphabet));
+
     }
 }
 

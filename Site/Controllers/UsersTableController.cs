@@ -7,15 +7,18 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BashDataBaseModels;
 using BashLearningDB;
+using EncryptModule;
 using Site.Controllers.Abstract;
 
 namespace Site.Controllers
 {
     public class UsersTableController : PermissionNeededController
     {
+        private readonly Cryptograph _cryptoGraph;
 
-        public UsersTableController(BashLearningContext context, Session<User> session) : base(context,session)
+        public UsersTableController(BashLearningContext context, Session<User> session, Cryptograph cryptoGraph) : base(context,session, new AuthorizationService(context,cryptoGraph))
         {
+            _cryptoGraph = cryptoGraph;
         }
 
         // GET: UsersTable
@@ -26,7 +29,7 @@ namespace Site.Controllers
 
             if (_context.Users != null)
             {
-                var view = View(await _context.Users.ToListAsync());
+                var view = View(await _context.Users.Where(c =>  c.IsActual == true).ToListAsync());
                 view.ViewData["isAuthorized"] = _session.Data != null;
                 return view;
             } 
@@ -77,6 +80,7 @@ namespace Site.Controllers
                 var time = DateTime.UtcNow;
                 user.CreatedUTC = time;
                 user.UpdatedUTC = time;
+                user.Password = _cryptoGraph.Coding(user.Password);
                 _context.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -122,6 +126,7 @@ namespace Site.Controllers
             {
                 try
                 {
+                    
                     user.CreatedUTC = user.CreatedUTC.ToUniversalTime();
                     user.UpdatedUTC = DateTime.UtcNow;
                     _context.Update(user);
@@ -179,7 +184,10 @@ namespace Site.Controllers
             var user = await _context.Users.FindAsync(id);
             if (user != null)
             {
-                _context.Users.Remove(user);
+                user.IsActual = false;
+                await _context.Admins.Where(admin => admin.UserId == user.UserId && admin.IsActual)
+                    .ExecuteUpdateAsync(admin => admin.SetProperty(e => e.IsActual, false));
+                _context.Users.Update(user);
             }
             
             await _context.SaveChangesAsync();
@@ -188,7 +196,7 @@ namespace Site.Controllers
 
         private bool UserExists(Guid id)
         {
-          return (_context.Users?.Any(e => e.UserId == id)).GetValueOrDefault();
+          return (_context.Users?.Any(e => e.UserId == id && e.IsActual == true)).GetValueOrDefault();
         }
     }
 }

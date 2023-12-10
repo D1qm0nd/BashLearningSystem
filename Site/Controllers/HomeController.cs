@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using BashDataBaseModels;
 using BashLearningDB;
+using EncryptModule;
 using Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -15,8 +16,8 @@ public class HomeController : PermissionNeededController
 
     private readonly string? _data_api_url;
 
-    public HomeController(ILogger<HomeController> logger, BashLearningContext context, Session<User> session) : base(
-        context: context, session: session)
+    public HomeController(ILogger<HomeController> logger, BashLearningContext context, Session<User> session, Cryptograph cryptoGraph) : base(
+        context: context, session: session, new AuthorizationService(context,cryptoGraph))
     {
         _logger = logger;
         _data_api_url = Environment.GetEnvironmentVariable("DATA_API_URL");

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BashDataBaseModels;
 using BashLearningDB;
+using EncryptModule;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Site.Controllers.Abstract;
 
@@ -15,8 +16,8 @@ namespace Site.Controllers
     public class ThemesTableController : PermissionNeededController
     {
         
-        public ThemesTableController(BashLearningContext context, Session<User> session) : base(context: context,
-            session: session)
+        public ThemesTableController(BashLearningContext context, Session<User> session, Cryptograph cryptoGraph) : base(context: context,
+            session: session, new AuthorizationService(context, cryptoGraph))
         {
         }
 
@@ -28,7 +29,7 @@ namespace Site.Controllers
             
             if (_context.Themes != null)
             {
-                return View(await _context.Themes.ToListAsync());
+                return View(await _context.Themes.Where(c =>  c.IsActual == true).ToListAsync());
             }
             else return Problem("Entity set 'BashLearningContext.Themes'  is null.");
         }
@@ -182,7 +183,8 @@ namespace Site.Controllers
             var theme = await _context.Themes.FindAsync(id);
             if (theme != null)
             {
-                _context.Themes.Remove(theme);
+                theme.IsActual = false;
+                _context.Themes.Update(theme);
             }
 
             await _context.SaveChangesAsync();
@@ -191,7 +193,7 @@ namespace Site.Controllers
 
         private bool ThemeExists(Guid id)
         {
-            return (_context.Themes?.Any(e => e.ThemeId == id)).GetValueOrDefault();
+            return (_context.Themes?.Any(e => e.ThemeId == id && e.IsActual == true)).GetValueOrDefault();
         }
     }
 }

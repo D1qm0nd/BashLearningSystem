@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BashDataBaseModels;
 using BashLearningDB;
+using EncryptModule;
 using Site.Controllers.Abstract;
 
 namespace Site.Controllers
@@ -14,7 +15,7 @@ namespace Site.Controllers
     public class AttributesTableController : PermissionNeededController
     {
 
-        public AttributesTableController(BashLearningContext context, Session<User> session) : base(context: context, session: session)
+        public AttributesTableController(BashLearningContext context, Session<User> session, Cryptograph cryptoGraph) : base(context: context, session: session, new AuthorizationService(context,cryptoGraph))
         {
         }
 
@@ -24,7 +25,7 @@ namespace Site.Controllers
         {
             if (!isAdmin()) return KickAction();
             
-            var bashLearningContext = _context.Attributes.Include(c => c.Command);
+            var bashLearningContext = _context.Attributes.Include(c => c.Command).Where(c =>  c.IsActual == true);;
             return View(await bashLearningContext.ToListAsync());
         }
 
@@ -94,7 +95,7 @@ namespace Site.Controllers
             {
                 return NotFound();
             }
-            ViewData["CommandId"] = new SelectList(_context.Commands, "CommandId", "Description", commandAttribute.CommandId);
+            ViewData["CommandId"] = new SelectList(_context.Commands.Where(e => e.IsActual), "CommandId", "Description", commandAttribute.CommandId);
             return View(commandAttribute);
         }
 
@@ -173,16 +174,16 @@ namespace Site.Controllers
             var commandAttribute = await _context.Attributes.FindAsync(id);
             if (commandAttribute != null)
             {
-                _context.Attributes.Remove(commandAttribute);
+                commandAttribute.IsActual = false;
+                _context.Attributes.Update(commandAttribute);
             }
-            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CommandAttributeExists(Guid id)
         {
-          return (_context.Attributes?.Any(e => e.AttributeId == id)).GetValueOrDefault();
+          return (_context.Attributes?.Any(e => e.AttributeId == id && e.IsActual == true)).GetValueOrDefault();
         }
     }
 }

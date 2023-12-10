@@ -35,7 +35,7 @@ CreateSearchField();
 
 
 const CommandsCount = (theme) => {
-    if (theme.commands != null && theme.commands.isArray)
+    if (theme.commands != null)
         return theme.commands.length
     else return 0;
 }
@@ -92,9 +92,9 @@ const GetUnreadThemes = (action) => {
 const search = () => {
     let field = document.getElementById("search-field");
     let query = field?.value.toLowerCase();
-    if (query.includes("не прочитанное"))
+    if (query.includes("непрочитано"))
         GetUnreadThemes(CreateCards);
-    else if (query.includes("прочитанное"))
+    else if (query.includes("прочитано"))
         GetReadThemes(CreateCards);
     else {
         GetAllThemes((themes => {

@@ -1,5 +1,6 @@
 using BashDataBaseModels;
 using BashLearningDB;
+using EncryptModule;
 using Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,8 +10,7 @@ namespace Site.Controllers;
 
 public class ThemeController : PermissionNeededController
 {
-    public ThemeController(BashLearningContext context, Session<User> session) : base(context: context,
-        session: session)
+    public ThemeController(BashLearningContext context, Session<User> session, Cryptograph cryptoGraph) : base(context: context, session: session, new AuthorizationService(context, cryptoGraph))
     {
     }
 
@@ -20,7 +20,6 @@ public class ThemeController : PermissionNeededController
         var theme = _context.Themes
             .Include(t => t.Commands)
             .ThenInclude(c => c.Attributes)
-            .Include(t => t.Questions)
             .FirstOrDefault(t => t.ThemeId == id);
         var view = View(_session);
         // view.ViewData["AccountData"] = _session?.Data?.FullName();

@@ -23,12 +23,5 @@ namespace Lib.DataBases
             }
             return null;
         }
-        
-        public int SaveRepositoryChanges();
-
-        public void Migrate();
-
-        public void Drop();
     }
-
 }

@@ -1,19 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BashDataBaseModels;
 using BashLearningDB;
+using EncryptModule;
 using Site.Controllers.Abstract;
 
 namespace Site.Controllers
 {
     public class AdminsTableController : PermissionNeededController
     {
-        public AdminsTableController(BashLearningContext context, Session<User> session) : base(context, session)
+        public AdminsTableController(BashLearningContext context, Session<User> session, Cryptograph cryptoGraph) : base(context, session, new AuthorizationService(context, cryptoGraph))
         {
         }
 
@@ -22,7 +19,7 @@ namespace Site.Controllers
         public async Task<IActionResult> Index()
         {
             if (!isAdmin()) return KickAction();
-            var bashLearningContext = _context.Admins.Include(a => a.User);
+            var bashLearningContext = _context.Admins.Include(a => a.User).Where(c =>  c.IsActual == true);;
             return View(await bashLearningContext.ToListAsync());
         }
 
@@ -53,7 +50,7 @@ namespace Site.Controllers
         {
             if (!isAdmin()) return KickAction();
 
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Login");
+            ViewData["UserId"] = new SelectList(_context.Users.Where(e => e.IsActual), "UserId", "Login");
             return View();
         }
 
@@ -98,7 +95,7 @@ namespace Site.Controllers
                 return NotFound();
             }
 
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Login", admin.UserId);
+            ViewData["UserId"] = new SelectList(_context.Users.Where(e => e.IsActual), "UserId", "Login", admin.UserId);
             return View(admin);
         }
 
@@ -157,7 +154,7 @@ namespace Site.Controllers
 
             var admin = await _context.Admins
                 .Include(a => a.User)
-                .FirstOrDefaultAsync(m => m.AdminId == id);
+                .FirstOrDefaultAsync(m => m.AdminId == id );
             if (admin == null)
             {
                 return NotFound();
@@ -181,7 +178,8 @@ namespace Site.Controllers
             var admin = await _context.Admins.FindAsync(id);
             if (admin != null)
             {
-                _context.Admins.Remove(admin);
+                admin.IsActual = false;
+                _context.Admins.Update(admin);
             }
 
             await _context.SaveChangesAsync();
@@ -190,7 +188,7 @@ namespace Site.Controllers
 
         private bool AdminExists(Guid id)
         {
-            return (_context.Admins?.Any(e => e.AdminId == id)).GetValueOrDefault();
+            return (_context.Admins?.Any(e => e.AdminId == id && e.IsActual == true)).GetValueOrDefault();
         }
     }
 }

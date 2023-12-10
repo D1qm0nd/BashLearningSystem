@@ -18,6 +18,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\BashLearningDB\BashLearningDB.csproj" />
       <ProjectReference Include="..\..\EncryptModule\EncryptModule.csproj" />
+      <ProjectReference Include="..\..\Site\Site.csproj" />
     </ItemGroup>
 
 </Project>

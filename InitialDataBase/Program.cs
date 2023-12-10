@@ -1,5 +1,8 @@
-﻿using BashLearningDB;
-using Lib.DataBases;
+﻿using System.Globalization;
+using BashLearningDB;
+using CsvHelper.Configuration;
+using Exceptions;
+using Microsoft.EntityFrameworkCore;
 
 namespace db_init
 {
@@ -7,8 +10,20 @@ namespace db_init
     {
         public static void Main()
         {
-            // new BashLearningContext().Drop();
-            new BashLearningContext().Migrate();
+            var action = Environment.GetEnvironmentVariable("ACTION");
+            if (action == null)
+                throw new EnvironmentVariableExistingException("ACTION: INIT/DROP");
+            
+            var context = new BashLearningContext();
+            switch (action)
+            {
+                case "INIT": 
+                    context.Database.Migrate();
+                    break;
+                case "DROP":
+                    context.Database.EnsureDeleted();
+                    break;
+            }
             // DbContextFactory<BashLearningContext>.CreateContext().Migrate();
         }
     }

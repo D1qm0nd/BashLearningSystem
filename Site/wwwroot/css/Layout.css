@@ -161,7 +161,6 @@ table {
     color: black;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
-
 }
 
 thead tr {
@@ -214,7 +213,19 @@ td a:hover {
 .table-container {
     font-family: monospace;
     margin: auto;
+    overflow-y: scroll;
+    max-height: 700px;
 }
+
+.table-container::-webkit-scrollbar {
+    background: transparent;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(0deg , white, transparent);
+    border-radius: 10px;
+}
+
 
 .create {
     margin: 10px;

@@ -18,7 +18,7 @@ namespace Lib.DataBases
 
         #region Properties
 
-        [Required] public bool IsActual { get; set; }
+        [Required] public bool IsActual { get; set; } = true;
         
         [JsonIgnore]
         [DisplayName(nameof(CreatedUTC))]

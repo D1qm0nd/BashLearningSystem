@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BashDataBaseModels;
 using BashLearningDB;
+using EncryptModule;
 using Site.Controllers.Abstract;
 
 namespace Site.Controllers
@@ -14,7 +15,7 @@ namespace Site.Controllers
     public class CommandsTableController : PermissionNeededController
     {
 
-        public CommandsTableController(BashLearningContext context, Session<User> session) : base(context: context, session: session) 
+        public CommandsTableController(BashLearningContext context, Session<User> session, Cryptograph cryptoGraph) : base(context: context, session: session, new AuthorizationService(context,cryptoGraph))
         {
         }
 
@@ -24,7 +25,7 @@ namespace Site.Controllers
         {
             if (!isAdmin()) return KickAction();
             
-            var bashLearningContext = _context.Commands.Include(c => c.Theme);
+            var bashLearningContext = _context.Commands.Include(c => c.Theme).Where(c =>  c.IsActual == true);
             return View(await bashLearningContext.ToListAsync());
         }
 
@@ -172,7 +173,8 @@ namespace Site.Controllers
             var command = await _context.Commands.FindAsync(id);
             if (command != null)
             {
-                _context.Commands.Remove(command);
+                command.IsActual = false;
+                _context.Commands.Update(command);
             }
             
             await _context.SaveChangesAsync();
@@ -181,7 +183,7 @@ namespace Site.Controllers
 
         private bool CommandExists(Guid id)
         {
-          return (_context.Commands?.Any(e => e.CommandId == id)).GetValueOrDefault();
+          return (_context.Commands?.Any(e => e.CommandId == id && e.IsActual == true)).GetValueOrDefault();
         }
     }
 }

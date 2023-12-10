@@ -14,7 +14,6 @@ public class BashLearningContext : DbContext, IDataContext
     public DbSet<Theme> Themes { get; set; }
     public DbSet<Command> Commands { get; set; }
     public DbSet<CommandAttribute> Attributes { get; set; }
-    public DbSet<Question> Questions { get; set; }
     public DbSet<Read> Reads { get; set; }
     
     public BashLearningContext()
@@ -44,21 +43,4 @@ public class BashLearningContext : DbContext, IDataContext
         }
 
     }
-
-    public int SaveRepositoryChanges()
-    {
-        this.SaveChanges();
-        return 0;
-    }
-
-    public void Migrate()
-    {
-        this.Database.Migrate();
-    }
-
-    public void Drop()
-    {
-        this.Database.EnsureDeleted();
-    }
-
 }

@@ -35,6 +35,7 @@ services:
       context: .
       dockerfile: InitialDataBase/Dockerfile
     environment:
+      ACTION: "INIT"
       BashLearningDB: "host=localhost;Port=5432;Database=SystemDb;User Id=postgres;Password=postgres;"
     depends_on: 
       - db
