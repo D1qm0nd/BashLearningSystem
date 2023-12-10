@@ -13,7 +13,7 @@
 
 body {
     min-width: min-content;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: monospace, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-weight: bold;
     font-size: 20px;
     color: black;
@@ -108,8 +108,8 @@ ul {
 
 .layout-a:hover {
     background: linear-gradient(-15deg, blue, #6565ff, skyblue);
-
 }
+
 
 .layout-navigation-admin .layout-a {
     padding: 10px 20px;
@@ -120,8 +120,35 @@ ul {
     /*margin-right: 1px;*/
 }
 
+.layout-navigation-admin .layout-b {
+    padding: 10px 20px;
+    background: linear-gradient(-15deg, orangered, red);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+    /*margin-right: 1px;*/
+}
+
+.layout-b {
+    padding: 10px 20px;
+    background: linear-gradient(-15deg, orangered, orange, yellow);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+    box-shadow: 2px 2px 3px 1px #5f676e;
+    /*margin-right: 1px;*/
+}
+
+.layout-a:hover {
+    background: linear-gradient(-15deg, blue, #6565ff, skyblue);
+}
+
 .layout-navigation-admin .layout-a:hover {
     background: linear-gradient(-15deg, orangered, orange, yellow);
+}
+
+.layout-navigation-admin .layout-b:hover {
+    background: linear-gradient(-15deg, red, orange, yellow);
 }
 
 table {
@@ -221,4 +248,14 @@ td a:hover {
     font-weight: bold;
     font-family: monospace;
     border-radius: 10px;
+}
+
+.user-info {
+    background: linear-gradient(180deg,snow,deepskyblue);
+    color: darkblue;
+    padding: 10px;
+    border-radius: 10px;
+    border: 3px gray outset;
+    text-align: center;
+    min-width: max-content;
 }

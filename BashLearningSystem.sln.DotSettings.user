@@ -99,6 +99,7 @@
       &lt;TestId&gt;NUnit3x::0C348C5C-A08A-4482-97BA-9BACA60A6A2E::net6.0::Docker.DotNet.BashLearningTests.Tests.StartUbuntuContainer&lt;/TestId&gt;
       &lt;TestId&gt;NUnit3x::0C348C5C-A08A-4482-97BA-9BACA60A6A2E::net6.0::Docker.DotNet.BashLearningTests.Tests.ExecuteUbuntuCommand&lt;/TestId&gt;
       &lt;TestId&gt;NUnit3x::0C348C5C-A08A-4482-97BA-9BACA60A6A2E::net6.0::Docker.DotNet.BashLearningTests.Tests&lt;/TestId&gt;
+      &lt;TestId&gt;NUnit3x::F6C2A569-0152-4EAF-9025-117B17B7BD6F::net6.0::Tests.BashLearningDataBase.Tests.CreateBaseAdmin&lt;/TestId&gt;
     &lt;/TestAncestor&gt;
     &lt;Project Location="/home/d1qm0nd/RiderProjects/Docker.DotNet/test/Docker.DotNet.Tests" Presentation="&amp;lt;Tests&amp;gt;\&amp;lt;Docker.DotNet.Tests&amp;gt;" /&gt;
     &lt;Project Location="/home/d1qm0nd/RiderProjects/BashLearningSystem/DockerAPI/test/Docker.DotNet.Tests" Presentation="&amp;lt;DockerAPI&amp;gt;\&amp;lt;test&amp;gt;\&amp;lt;Docker.DotNet.Tests&amp;gt;" /&gt;

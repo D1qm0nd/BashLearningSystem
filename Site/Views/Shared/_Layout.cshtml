@@ -1,6 +1,4 @@
 ﻿<!doctype html>
-
-
 @{
     var image = "'/Images/Background/arctic.jpg'";
     if (DateTime.Now.Day % 2 == 0 || true)
@@ -18,15 +16,15 @@
     <link rel="stylesheet" href="/css/Auth.css"/>
     <link rel="stylesheet" href="/css/theory_card.css"/>
     <link rel="stylesheet" href="/css/terminal.css"/>
-
-    <title>Document</title>
+     <link rel="icon" href="/Images/Logo/Logo.png" type="image/x-icon">
+    <title>@ViewData["Title"]</title>
 </head>
-@* <script src="/js/site.js"></script> *@
 <body>
 @if ((bool)ViewData["isAuthorized"] == false)
 {
     <header class="layout-header">
         <img src="/Images/Logo/Logo.png" alt="Логотип" class="layout-logo">
+        <div class="search-container-place"></div>
         <nav class="layout-navigation">
             <a class="layout-a" href="/Home">Главная</a>
             <a class="layout-a" href="/Register">Регистрация</a>
@@ -38,13 +36,15 @@ else if ((bool)ViewData["isAuthorized"] == true)
 {
     <header class="layout-header">
         <img src="/Images/Logo/Logo.png" alt="Логотип" class="layout-logo">
+        <p class="user-info">@ViewData["CurrentUser"]</p>
+        <div class="search-container-place"></div>
         @if (ViewData["isAdmin"] != null)
         {
             <nav class="layout-navigation-admin">
                 @if ((bool)ViewData["isAdmin"] == true)
                 {
+                    <a class="layout-b" href="/data/admins">Администраторы</a>
                     <a class="layout-a" href="/data/users">Пользователи</a>
-                    <a class="layout-a" href="/data/admins">Администраторы</a>
                     <a class="layout-a" href="/data/themes">Темы</a>
                     <a class="layout-a" href="/data/commands">Команды</a>
                     <a class="layout-a" href="/data/attributes">Атрибуты</a>

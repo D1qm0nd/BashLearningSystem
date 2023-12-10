@@ -1,31 +1,17 @@
-﻿@using System.Globalization
-@using BashDataBaseModels
+﻿@using BashDataBaseModels
 @model Session<User>
 
 @{
     ViewData["Title"] = "Главная";
-    var themes = ViewData["ThemeList"] as List<Theme>;
-    var themesHistory = ViewData["ThemeHistory"] as List<Read>;
 }
-@if (themes != null)
-{
-    <div class="cards-container">
-        @foreach (var theme in themes)
-        {
-            <form method="get" class="card" id="@theme.ThemeId">
-                @if (themesHistory != null)
-                {
-                    var readed = themesHistory.FirstOrDefault(read => read.ThemeId == theme.ThemeId);
-                    if (readed != null)
-                    {
-                        <img class="card-verifier" src="~/Images/verifyIcon.png" alt="verifyIcon">
-                    }
-                }
-                <h2>@theme.Name</h2>
-                <a>Количество команд: @theme.Commands.Count</a>
-                <p>Изменено: @theme.UpdatedUTC.ToLocalTime().ToString(CultureInfo.GetCultureInfo("ru-RU"))</p>
-                <a class="card-hyper-text" asp-route-id="@theme.ThemeId" asp-controller="Theme" asp-action="Theory">Читать</a>
-            </form>
-        }
-    </div>
-}
+<label hidden="hidden" id="data-api-url" title="@ViewData["DATA_API_URL"]"></label>
+<label hidden="hidden" id="user-id" title="@{@Model.Data?.UserId;}"></label>
+
+<div class="cards-container"></div>
+
+<script src="/js/site.js"></script>
+<script src="/js/themes.js"></script>
+<script>
+    Source = document.getElementById("data-api-url").title;
+    UserId = document.getElementById("user-id").title;
+</script>

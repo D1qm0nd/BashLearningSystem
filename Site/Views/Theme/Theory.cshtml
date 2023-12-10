@@ -68,9 +68,10 @@ else
                     <textarea class="terminal-textarea" id="terminalConsole"></textarea>
                     <button class="terminal-execute-button"
                             id="terminalButton"
-                            onclick="(execute('@ExecutorIP','@Model.Id'))">
+                            onclick="(execute('@ExecutorIP','@Model.Data.UserId'))">
                         Выполнить
                     </button>
+                    <script src="/js/exec.js"></script>
                     <script>
                         getConsole().addEventListener("input", function (e) { textEdit(e) })
                     </script>

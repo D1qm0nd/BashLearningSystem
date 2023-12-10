@@ -12,5 +12,15 @@ public static partial class Program
         builder.Services
             .AddDbContext<BashLearningContext>()
             .AddSingleton(new Session<User>());
+        
+        builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+        {
+            builder
+                .AllowAnyMethod()
+                .AllowAnyOrigin()
+                .AllowAnyHeader();
+        }));
+        
     }
 }
+

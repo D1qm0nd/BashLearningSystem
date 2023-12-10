@@ -19,6 +19,11 @@
     padding: 10px;
 }
 
+.terminal-textarea::selection {
+    color: black;
+    background: white;
+}
+
 .terminal-execute-button {
     width: inherit;
     height: 40px;

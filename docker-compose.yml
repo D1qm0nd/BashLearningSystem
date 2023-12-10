@@ -15,6 +15,7 @@ services:
       BashLearningPrivateKey: "{\"Key\":[7,5,10,32,41],\"Alphabet\":\"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!?@#$$%^\u0026*()0123456789 \"}"
       BashLearningDB: "host=localhost;Port=5432;Database=SystemDb;User Id=postgres;Password=postgres;"
       COMMAND_EXECUTOR_URL: "http://localhost:55555/ContainerDistributorApi/container"
+      DATA_API_URL: "http://localhost:12555"
     network_mode: host
     
   db:

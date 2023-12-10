@@ -2,11 +2,13 @@
     margin: 5px;
     width: 400px;
     height: min-content;
+    display: flex;
     background: linear-gradient(-45deg, lightblue, transparent);
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
     text-align: center;
+    flex-direction: column;
 }
 
 .card h2 {
@@ -34,7 +36,7 @@
 .card-verifier {
     height: 75px;
     position: absolute;
-    margin-left: -240px;
+    margin-left: -40px;
     margin-top: -40px;
 }
 

@@ -5,6 +5,7 @@ using Lib.DataBases;
 
 namespace BashDataBaseModels;
 
+[Serializable]
 [Table("Themes")]
 public class Theme : Entity
 {
@@ -12,4 +13,6 @@ public class Theme : Entity
     [Required] public string Name { get; set; }
     [JsonIgnore] public List<Command> Commands { get; set; }
     [JsonIgnore] public List<Question> Questions { get; set; }
+    [JsonIgnore] public List<Read> Reads { get; set; }
+    
 }

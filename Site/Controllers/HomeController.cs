@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using BashDataBaseModels;
 using BashLearningDB;
+using Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Site.Controllers.Abstract;
@@ -12,26 +13,21 @@ public class HomeController : PermissionNeededController
 {
     private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger, BashLearningContext context, Session<User> session) : base(context: context, session: session)
+    private readonly string? _data_api_url;
+
+    public HomeController(ILogger<HomeController> logger, BashLearningContext context, Session<User> session) : base(
+        context: context, session: session)
     {
         _logger = logger;
+        _data_api_url = Environment.GetEnvironmentVariable("DATA_API_URL");
+        if (_data_api_url == null)
+            throw new EnvironmentVariableExistingException("DATA_API_URL");
     }
 
     public IActionResult Index()
     {
         var view = View(_session);
-        var themes = _context.Themes
-            .Include(nameof(Theme.Commands)).OrderBy(e => e.Name).ToList();
-        if (_session.Data != null)
-        {
-            view.ViewData["AccountData"] = _session.Data.FullName();
-            var history = _context.Reads
-                .Include(nameof(Read.Theme)).Where(read => read.UserId == _session.Data.UserId).ToList();
-            view.ViewData["ThemeHistory"] = history;
-        }
-        else
-            view.ViewData["ThemeHistory"] = null;
-        view.ViewData["ThemeList"] = themes;
+        view.ViewData["DATA_API_URL"] = _data_api_url;
         return view;
     }
 
@@ -42,4 +38,3 @@ public class HomeController : PermissionNeededController
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
-

@@ -116,10 +116,10 @@ a:hover {
 
 .theme-mark-button {
     color: snow;
-    font-size: 11pt;
+    font-size: 14pt;
     font-weight: bold;
-    padding: 6px;
-    border: 0;
+    padding: 10px;
+    border: 3px snow outset;
     border-radius: 10px;
     font-family: monospace;
 }
@@ -167,3 +167,18 @@ a:hover {
 .content-container {
     width: 100%;
 }
+
+.search-container {
+    display: flex;
+    flex-direction: row;
+    height: 40px;
+}
+
+.search-field {
+    height: 114%;
+}
+
+.search-button {
+    height: inherit;
+}
+
