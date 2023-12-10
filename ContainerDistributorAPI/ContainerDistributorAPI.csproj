@@ -8,6 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Docker.DotNet" Version="3.125.15" />
+        <PackageReference Include="Docker.DotNet.BasicAuth" Version="3.125.15" />
+        <PackageReference Include="Docker.DotNet.X509" Version="3.125.15" />
+        <PackageReference Include="Docker.Registry.DotNet" Version="1.2.1" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
     </ItemGroup>
 
@@ -18,7 +22,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\TrapTech.Docker.DotNet\src\Docker.DotNet\Docker.DotNet.csproj" />
       <ProjectReference Include="..\Exceptions\Exceptions.csproj" />
     </ItemGroup>
 

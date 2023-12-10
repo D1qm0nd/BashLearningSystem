@@ -56,7 +56,7 @@
     &lt;Project Location="/home/d1qm0nd/RiderProjects/TrapTech.Docker.DotNet/test/Docker.DotNet.Tests" Presentation="&amp;lt;DockerAPI&amp;gt;\&amp;lt;test&amp;gt;\&amp;lt;Docker.DotNet.Tests&amp;gt;" /&gt;
   &lt;/Or&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9e0a72ba_002Dce2b_002D4d21_002D84e0_002D9dfe5b9a44ed/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CreateUbuntuContainer" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9e0a72ba_002Dce2b_002D4d21_002D84e0_002D9dfe5b9a44ed/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="CreateUbuntuContainer" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;Or&gt;
     &lt;TestAncestor&gt;
       &lt;TestId&gt;NUnit3x::0C348C5C-A08A-4482-97BA-9BACA60A6A2E::net6.0::Docker.DotNet.BashLearningTests.Tests&lt;/TestId&gt;
@@ -66,7 +66,7 @@
 &lt;/SessionState&gt;</s:String>
 	
 	
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f0e1ff6a_002D6f4e_002D424f_002D9980_002D0d84326ca654/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="AccountValidate #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f0e1ff6a_002D6f4e_002D424f_002D9980_002D0d84326ca654/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="AccountValidate #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;Or&gt;
     &lt;TestAncestor&gt;
       &lt;TestId&gt;NUnit3x::5E529A46-5F27-48B9-921A-B2C5D66530BC::net6.0::Tests.DataModels.Tests.AccountValidate&lt;/TestId&gt;

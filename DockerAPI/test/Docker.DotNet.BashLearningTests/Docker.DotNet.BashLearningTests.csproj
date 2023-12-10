@@ -8,17 +8,14 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Docker.DotNet" Version="3.125.15" />
+        <PackageReference Include="Docker.DotNet.BasicAuth" Version="3.125.15" />
+        <PackageReference Include="Docker.DotNet.X509" Version="3.125.15" />
+        <PackageReference Include="Docker.Registry.DotNet" Version="1.2.1" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0"/>
         <PackageReference Include="NUnit" Version="3.13.2"/>
         <PackageReference Include="NUnit3TestAdapter" Version="4.0.0"/>
         <PackageReference Include="coverlet.collector" Version="3.1.0"/>
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\..\..\..\TrapTech.Docker.DotNet\src\Docker.DotNet.BasicAuth\Docker.DotNet.BasicAuth.csproj" />
-      <ProjectReference Include="..\..\..\..\TrapTech.Docker.DotNet\src\Docker.DotNet.SSH\Docker.DotNet.SSH.csproj" />
-      <ProjectReference Include="..\..\..\..\TrapTech.Docker.DotNet\src\Docker.DotNet.X509\Docker.DotNet.X509.csproj" />
-      <ProjectReference Include="..\..\..\..\TrapTech.Docker.DotNet\src\Docker.DotNet\Docker.DotNet.csproj" />
     </ItemGroup>
 
 </Project>
