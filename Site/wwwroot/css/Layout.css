@@ -214,7 +214,7 @@ td a:hover {
     font-family: monospace;
     margin: auto;
     overflow-y: scroll;
-    max-height: 700px;
+    max-height: 850px;
 }
 
 .table-container::-webkit-scrollbar {
@@ -243,7 +243,6 @@ td a:hover {
     padding: 1pt 5pt 1pt 5pt;
 }
 
-
 .btn.btn-danger {
     font-size: 20pt;
     font-family: monospace;
@@ -258,6 +257,27 @@ td a:hover {
     padding: 1pt 5pt 1pt 5pt;
     font-weight: bold;
     font-family: monospace;
+    border-radius: 10px;
+}
+
+select {
+    background: deepskyblue;
+    color: snow;
+    font-weight: bold;
+}
+
+select option {
+    background: transparent;
+    color: snow;
+    font-weight: bold;
+}
+
+select::-webkit-scrollbar {
+    background: transparent;
+}
+
+select::-webkit-scrollbar-thumb {
+    background: snow;
     border-radius: 10px;
 }
 

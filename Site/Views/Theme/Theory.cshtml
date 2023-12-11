@@ -44,7 +44,7 @@ else
                         {
                             <div class="theory_attributes_container ">
                                 <h3 class="theory_attributes_header">Атрибуты</h3>
-                                @foreach (var attr in command.Attributes.OrderBy(attr => attr.Text))
+                                @foreach (var attr in command.Attributes.Where(e => e.IsActual).OrderBy(attr => attr.Text))
                                 {
                                     <div class="theory_attribute_container">
                                         <h2 class="theory_attribute_header">@attr.Text</h2>

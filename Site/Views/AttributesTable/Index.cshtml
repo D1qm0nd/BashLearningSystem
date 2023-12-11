@@ -21,6 +21,9 @@
                 @Html.DisplayNameFor(model => model.Command)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Command.Theme)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.CreatedUTC)
             </th>
             <th>
@@ -40,7 +43,10 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Command.Description)
+                    @Html.DisplayFor(modelItem => item.Command.Text)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Command.Theme.Name)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CreatedUTC)

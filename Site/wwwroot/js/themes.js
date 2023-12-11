@@ -13,25 +13,19 @@ const RemoveCards = () => {
 }
 
 
-
 const CreateSearchField = () => {
-    field = document.createElement("div", {is: {height: "inherit"}});
-    field.innerHTML = `
-        <div class="search-container">
+    let searchContainer = document.createElement("div");
+    searchContainer.className = "search-container"
+    searchContainer.innerHTML = `
             <input class="search-field" type="text" value="" id="search-field">
             <button class="search-button" onclick="search()">
                 <img src="Images/glass.png" alt="Поиск" style="height: inherit;"/>
             </button>
-        </div>
     `
-    searchPlace.appendChild(field)
+    searchPlace.appendChild(searchContainer)
 }
 
 CreateSearchField();
-
-
-
-
 
 
 const CommandsCount = (theme) => {
@@ -46,23 +40,22 @@ const CreateThemeCard = (theme) => {
         let isRead = data.response;
         let commandsCount = CommandsCount(theme);
         let card = document.createElement("div");
+        card.className = "card";
+        card.id = theme.id;
         let img = "";
         if (isRead)
             img = `<img class="card-verifier" src="/Images/verifyIcon.png" alt="verifyIcon">`;
         let html = `
-            <form method="get" class="card" id="${theme.id}">
                 ${img}
                 <h2>${theme.name}</h2>
                 <a>Количество команд: ${commandsCount}</a>
                 <p>Изменено: ${Date(theme.updatedUTC).toString('ru-RU')}</p>
                 <a class="card-hyper-text" href="Theme/${theme.id}">Читать</a
-            </form>
         `;
         card.innerHTML = html;
         cardContainer.appendChild(card);
     })
 }
-
 
 
 const CreateCards = (themes) => {
@@ -102,8 +95,6 @@ const search = () => {
         }))
     }
 }
-
-
 
 
 GetAllThemes(CreateCards) //Начальная загрузка контента

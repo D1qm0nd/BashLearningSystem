@@ -25,7 +25,7 @@ namespace Site.Controllers
         {
             if (!isAdmin()) return KickAction();
             
-            var bashLearningContext = _context.Commands.Include(c => c.Theme).Where(c =>  c.IsActual == true);
+            var bashLearningContext = _context.Commands.Include(c => c.Theme).Include(c => c.Attributes).Where(c =>  c.IsActual == true).OrderBy(c => c.Theme.ThemeId);
             return View(await bashLearningContext.ToListAsync());
         }
 

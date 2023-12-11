@@ -39,8 +39,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContainerDistributorAPI", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docker.DotNet.BashLearningTests", "DockerAPI\test\Docker.DotNet.BashLearningTests\Docker.DotNet.BashLearningTests.csproj", "{0C348C5C-A08A-4482-97BA-9BACA60A6A2E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{75B284FF-3C92-4AB4-9A9F-D25F2F1D95BE}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,7 +55,6 @@ Global
 		{2ACFC6F0-7DB3-47D5-A585-092F19366C2E} = {26C71EAA-F25B-4F12-AB2B-3D5E4B864D9C}
 		{F6C2A569-0152-4EAF-9025-117B17B7BD6F} = {5F83E643-2D5A-4B9F-84CE-7C088E71CC23}
 		{0C348C5C-A08A-4482-97BA-9BACA60A6A2E} = {5F83E643-2D5A-4B9F-84CE-7C088E71CC23}
-		{75B284FF-3C92-4AB4-9A9F-D25F2F1D95BE} = {5F83E643-2D5A-4B9F-84CE-7C088E71CC23}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C1110707-7D68-4C3C-9DEE-621C1F86C8BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

@@ -25,7 +25,7 @@ namespace Site.Controllers
         {
             if (!isAdmin()) return KickAction();
             
-            var bashLearningContext = _context.Attributes.Include(c => c.Command).Where(c =>  c.IsActual == true);;
+            var bashLearningContext = _context.Attributes.Include(c => c.Command).ThenInclude(c => c.Theme).Where(c =>  c.IsActual == true).OrderBy(e => e.Command.CommandId);
             return View(await bashLearningContext.ToListAsync());
         }
 
@@ -54,7 +54,7 @@ namespace Site.Controllers
         // GET: AttributesTable/Create
         public IActionResult Create()
         {
-            ViewData["CommandId"] = new SelectList(_context.Commands, "CommandId", "Text");
+            ViewData["CommandId"] = new SelectList(_context.Commands.Where(e => e.IsActual).OrderBy(e => e.Text), "CommandId", "Text");
             return View();
         }
 
@@ -95,7 +95,7 @@ namespace Site.Controllers
             {
                 return NotFound();
             }
-            ViewData["CommandId"] = new SelectList(_context.Commands.Where(e => e.IsActual), "CommandId", "Description", commandAttribute.CommandId);
+            ViewData["CommandId"] = new SelectList(_context.Commands.Where(e => e.IsActual).OrderBy(e => e.Text), "CommandId", "Text", commandAttribute.CommandId);
             return View(commandAttribute);
         }
 
