@@ -1,6 +1,4 @@
-﻿var lastRequest = ""
-
-const getConsole = () => document.getElementById("terminalConsole")
+﻿
 
 const sendHttpRequest = (method, url, data) => {
     const promise = new Promise((resolve, reject) => {

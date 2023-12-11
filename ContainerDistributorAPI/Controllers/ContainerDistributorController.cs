@@ -67,7 +67,18 @@ public class ContainerDistributorApiController : ControllerBase
         catch (Exception e)
         {
             await CreateContainerForUser(data.ID);
-            await StartContainer(data.ID);
+            try
+            {
+                await StartContainer(data.ID);
+
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                await RemoveContainer(data.ID);
+                await CreateContainerForUser(data.ID);
+                await StartContainer(data.ID);
+            }
         }
 
         var execResult = new ExecData(data.ID, data.Command);

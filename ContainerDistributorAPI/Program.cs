@@ -63,9 +63,9 @@ public static class Program
             {
                 Image = image.ToString(),
                 Name = $"{image.Image}_{id}",
-                Shell = new List<string> //без этого контейнер просто вырубится после запуска
+                Shell = new List<string> 
                 {
-                    "tail -f /etc/hosname"
+                    "tail -f /etc/hosname" //без этого контейнер просто вырубится после запуска
                 },
                 ArgsEscaped = true,
                 AttachStdin = true, //false - долго подключается, вероятна утечка памяти

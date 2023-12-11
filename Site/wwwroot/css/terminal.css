@@ -45,3 +45,9 @@
     align-items: stretch;
     justify-content: space-around;
 }
+
+.terminal-description {
+    font-family: monospace;
+    font-size: 8pt;
+    color: black;
+}

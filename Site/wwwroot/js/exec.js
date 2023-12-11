@@ -1,3 +1,6 @@
+var lastRequest = ""
+
+const getConsole = () => document.getElementById("terminalConsole")
 const execute = (url, id) => {
     let command = getDataFromTerminal().replace(lastRequest,"")
     let data = {'id': id,'command': command}
