@@ -6,6 +6,7 @@ const sendHttpRequest = (method, url, data) => {
         xhr.open(method, url);
         xhr.responseType = 'json';
         xhr.setRequestHeader("Content-Type", "text/json")
+        xhr.setRequestHeader("Access-Control-Allow-Origin", "*")
         xhr.onload = () => {
             resolve(xhr.response)
         }

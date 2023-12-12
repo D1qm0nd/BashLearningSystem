@@ -1,7 +1,10 @@
 version: "3.9"
   
+networks:
+  main-connection:
+    driver: bridge
+  
 services:
-
   site:
     image: web_site
     container_name: site
@@ -13,11 +16,15 @@ services:
     environment:
       ASPNETCORE_URLS: "http://+:12555"
       BashLearningPrivateKey: "{\"Key\":[7,5,10,32,41],\"Alphabet\":\"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!?@#$$%^\u0026*()0123456789 \"}"
-      BashLearningDB: "host=localhost;Port=5432;Database=SystemDb;User Id=postgres;Password=postgres;"
-      COMMAND_EXECUTOR_URL: "http://localhost:55555/ContainerDistributorApi/container"
-      DATA_API_URL: "http://localhost:12555"
-    network_mode: host
-    
+      BashLearningDB: "host=gateway.docker.internal;Port=5432;Database=SystemDb;User Id=postgres;Password=postgres;"
+      COMMAND_EXECUTOR_URL: "http://gateway.docker.internal:55555/ContainerDistributorApi/container"
+      DATA_API_URL: "http://127.0.0.1:12555"
+#    network_mode: host
+    ports:
+      - '12555:12555'
+    networks: 
+      - main-connection
+  
   db:
     image: postgres
     environment:
@@ -25,9 +32,13 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     restart: always
-    network_mode: host
     volumes:
       - /home/db
+    ports:
+      - "5432:5432"
+    
+    networks:
+      - main-connection
         
   db_init:
     image: bash_learning_db_init
@@ -36,7 +47,8 @@ services:
       dockerfile: InitialDataBase/Dockerfile
     environment:
       ACTION: "INIT"
-      BashLearningDB: "host=localhost;Port=5432;Database=SystemDb;User Id=postgres;Password=postgres;"
+      BashLearningDB: "host=gateway.docker.internal;Port=5432;Database=SystemDb;User Id=postgres;Password=postgres;"
     depends_on: 
       - db
-    network_mode: host
+    networks:
+      - main-connection

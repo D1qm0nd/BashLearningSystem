@@ -1,4 +1,6 @@
-﻿namespace Exceptions;
+﻿using System;
+
+namespace Exceptions;
 
 public class EnvironmentVariableExistingException : Exception
 {

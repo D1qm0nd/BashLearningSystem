@@ -1,4 +1,5 @@
-﻿using BashDataBaseModels;
+﻿using System;
+using BashDataBaseModels;
 using Lib.DataBases;
 using Lib.DataBases.Exceptions;
 using Microsoft.EntityFrameworkCore;

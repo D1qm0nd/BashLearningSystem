@@ -1,4 +1,7 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.IO;
+using System.Linq;
 using System.Reflection;
 using BashDataBaseModels;
 using BashDataBaseModels.CSV;
