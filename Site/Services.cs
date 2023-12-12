@@ -16,12 +16,13 @@ public static partial class Program
             .AddDbContext<BashLearningContext>()
             .AddSingleton(new Session<User>());
         
-        builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+        builder.Services.AddCors(o => o.AddPolicy("MyPolicy", policy =>
         {
-            builder
+            policy
                 .AllowAnyMethod()
                 .AllowAnyOrigin()
-                .AllowAnyHeader();
+                .AllowAnyHeader()
+                .AllowCredentials();
         }));
         
         var env_val = Environment.GetEnvironmentVariable("BashLearningPrivateKey");
